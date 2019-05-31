@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<zxing:ZXingScannerPage xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        x:Class="ElderApp.Views.ScannerPage"
+                        xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+                        Title="Full screen" Result="{Binding Result, Mode=TwoWay}" ScanResultCommand="{Binding QRScanResultCommand}" IsScanning="true">
+                        OnScanResult="Handle_OnScanResult"
+</zxing:ZXingScannerPage>-->
+
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             x:Class="ElderApp.Views.ScannerPage">
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <BoxView Grid.Row="0" BackgroundColor="Chocolate"/>
+        <zxing:ZXingScannerView Grid.Row="1" x:Name="_scanView" Result="{Binding Result, Mode=TwoWay}" ScanResultCommand="{Binding QRScanResultCommand}" IsScanning="true"
+                                WidthRequest="200" HeightRequest="200" />
+        <BoxView Grid.Row="2" BackgroundColor="Blue" />
+    </Grid>
+    
+    
+</ContentPage>

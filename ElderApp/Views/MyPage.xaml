@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="ElderApp.Views.MyPage"
+             Title="銀髮學院">
+    
+    
+    <ContentPage.Content>
+        <StackLayout>
+            
+            <ContentView BackgroundColor="#47ADE8"
+                         Padding="8"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Start">
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="130" />
+                    </Grid.RowDefinitions>
+                    
+                    
+                    
+                    <Image x:Name="UserImage" 
+                           Source="{Binding Image_url,Mode=TwoWay}"
+                           Grid.Row="0" 
+                           Grid.Column="0" 
+                           Aspect="AspectFill"/>
+                    
+                    
+                   <StackLayout
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Padding="8">
+                        <Label Text="{Binding User.Name,Mode=TwoWay}" FontSize="Large" TextColor="White"/>
+                        <Label Text="{Binding User.Email,Mode=TwoWay}" TextColor="White"/>
+                        <Label Text="{Binding User.Rank}" TextColor="White"/>
+                        <Label Text="{Binding User.Wallet}" TextColor="White"/>
+                    </StackLayout>
+                
+                </Grid>
+                
+            </ContentView>
+            
+            
+            
+            
+            <Grid Padding="8,0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <Button Text="收紅包"  Grid.Row="0" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding TakeMoney}"/>
+                <Button Text="送紅包"  Grid.Row="0" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding GiveMoney}"/>
+                <Button Text="我的帳簿"  Grid.Row="0" Grid.Column="2" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding TransHistory}"/>
+                <Button Text="我的活動"  Grid.Row="1" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
+                <Button Text="活動行事曆"  Grid.Row="1" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
+                <Button Text="-"  Grid.Row="1" Grid.Column="2" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
+                <Button Text="-"  Grid.Row="2" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
+                <Button Text="上傳大頭貼"  Grid.Row="2" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding SelectImage}"/>
+                <Button Text="登出"  Grid.Row="2" Grid.Column="2" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding Logout}"/>
+            
+            </Grid>
+            
+            
+            
+            
+            
+        </StackLayout>
+            
+        
+    </ContentPage.Content>
+</ContentPage>

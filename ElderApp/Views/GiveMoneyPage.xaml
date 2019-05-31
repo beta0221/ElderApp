@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="ElderApp.Views.GiveMoneyPage"
+             Padding="20">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="支付對象：" Margin="0,10,0,10"/>
+            <Label Text="{Binding User_name,Mode=TwoWay}" Margin="0,10,0,10"/>
+            
+            <Label Text="支付金額：" Margin="0,10,0,10"/>
+            <Entry Margin="0,10,0,10" Keyboard="Numeric" Text="{Binding Amount,Mode=TwoWay}"/>
+            
+            <Button Text="確定支付" BackgroundColor="#47ADE8" TextColor="White" Margin="0,10,0,10" 
+                    Command="{Binding SubmitTransaction}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

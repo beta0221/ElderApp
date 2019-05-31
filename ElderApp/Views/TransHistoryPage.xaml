@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="ElderApp.Views.TransHistoryPage">
+    <ContentPage.Content>
+         <ListView ItemsSource="{Binding Transactions}">
+            
+           <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Event}" TextColor="{Binding Text_color}"
+                              Detail="{Binding Amount}"/>
+                </DataTemplate>
+                    
+            </ListView.ItemTemplate>
+            
+        </ListView>
+        
+        
+    </ContentPage.Content>
+</ContentPage>
