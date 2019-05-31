@@ -5,14 +5,12 @@ using System.Windows.Input;
 using ElderApp.Helpers;
 using ElderApp.Interface;
 using ElderApp.Models;
-using Foundation;
 using Newtonsoft.Json.Linq;
 using Plugin.Media;
 using Prism.Commands;
 using Prism.Navigation;
 using RestSharp;
 using SQLite;
-using UIKit;
 using Xamarin.Forms;
 
 namespace ElderApp.ViewModels
