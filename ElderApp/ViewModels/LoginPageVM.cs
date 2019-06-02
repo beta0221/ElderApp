@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using ElderApp.Models;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
@@ -78,7 +80,11 @@ namespace ElderApp.ViewModels
                         }
                         catch (Exception ex)
                         {
-
+                            var properties = new Dictionary<string, string>
+                            {
+                                {"error","Delete from UserModel fail"}
+                            };
+                            Crashes.TrackError(ex, properties);
                         }
 
 

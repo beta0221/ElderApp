@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using ElderApp.Models;
 using ElderApp.ViewModels;
 using ElderApp.Views;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Crashes;
 using Prism;
 using Prism.Ioc;
 using Prism.Unity;
@@ -26,10 +29,6 @@ namespace ElderApp
         {
             DatabasePath = databasePath;
 
-
-
-            //NavigationService.NavigateAsync("NavigationPage/MyPage");
-
             using (SQLiteConnection conn = new SQLiteConnection(DatabasePath))
             {
                 try
@@ -53,6 +52,12 @@ namespace ElderApp
                 catch (Exception ex)
                 {
                     NavigationService.NavigateAsync("/LoginPage");
+
+                    var properties = new Dictionary<string, string>
+                    {
+                        {"error","No User in Sqlite"}
+                    };
+                    Crashes.TrackError(ex, properties);
                 }
 
             }
@@ -80,6 +85,13 @@ namespace ElderApp
 
         }
 
+
+        protected override void OnStart()
+        {
+            string androidAppSecret = "1a282c36-cd4e-42a5-902e-c0e660ca2151";
+            string iOSAppSecret = "ebf97172-1b0d-4728-ad56-5d17c5abf99d";
+            AppCenter.Start($"android={androidAppSecret};ios={iOSAppSecret}", typeof(Crashes));
+        }
 
     }
 }
