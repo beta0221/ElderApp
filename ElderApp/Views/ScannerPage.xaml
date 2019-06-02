@@ -21,10 +21,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
-        <BoxView Grid.Row="0" BackgroundColor="Chocolate"/>
+        <BoxView Grid.Row="0" BackgroundColor="Black"/>
         <zxing:ZXingScannerView Grid.Row="1" x:Name="_scanView" Result="{Binding Result, Mode=TwoWay}" ScanResultCommand="{Binding QRScanResultCommand}" IsScanning="true"
-                                WidthRequest="200" HeightRequest="200" />
-        <BoxView Grid.Row="2" BackgroundColor="Blue" />
+                                WidthRequest="200" HeightRequest="300" />
+        <BoxView Grid.Row="2" BackgroundColor="Black" />
     </Grid>
     
     

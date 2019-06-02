@@ -37,8 +37,8 @@ namespace ElderApp.ViewModels
 
         private void GetTransHistory()
         {
-            //var client = new RestClient($"http://61.66.218.12/api/trans-history/{App.CurrentUser.User_id}");
-            var client = new RestClient($"http://127.0.0.1:8000/api/trans-history/{App.CurrentUser.User_id}");
+            var client = new RestClient($"http://61.66.218.12/api/trans-history/{App.CurrentUser.User_id}");
+            //var client = new RestClient($"http://127.0.0.1:8000/api/trans-history/{App.CurrentUser.User_id}");
             var request = new RestRequest(Method.GET);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddHeader("Accept", "application/json");

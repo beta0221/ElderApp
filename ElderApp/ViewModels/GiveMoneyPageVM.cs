@@ -71,7 +71,8 @@ namespace ElderApp.ViewModels
 
         private async void SubmitTransactionRequest()
         {
-            var client = new RestClient("http://127.0.0.1:8000/api/transaction");
+            var client = new RestClient("http://61.66.218.12/api/transaction");
+            //var client = new RestClient("http://127.0.0.1:8000/api/transaction");
             var request = new RestRequest(Method.POST);
 
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");

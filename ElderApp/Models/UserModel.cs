@@ -9,6 +9,7 @@ namespace ElderApp.Models
         public int Id { get; set; }
         public int User_id { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
         public string Name { get; set; }
         public int Wallet { get; set; }
         public int Rank { get; set; }

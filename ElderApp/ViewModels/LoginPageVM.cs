@@ -52,9 +52,10 @@ namespace ElderApp.ViewModels
         private async void LoginRequest()
         {
 
+            System.Diagnostics.Debug.WriteLine("Login");
 
-            //var client = new RestClient("http://61.66.218.12/api/auth/login");
-            var client = new RestClient("http://127.0.0.1:8000/api/auth/login");
+            var client = new RestClient("http://61.66.218.12/api/auth/login");
+            //var client = new RestClient("http://127.0.0.1:8000/api/auth/login");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddHeader("Accept", "application/json");
@@ -62,62 +63,68 @@ namespace ElderApp.ViewModels
             request.AddParameter("password", Password);
             IRestResponse response = client.Execute(request);
 
-            JObject res = JObject.Parse(response.Content);
-
-
-
-            //System.Diagnostics.Debug.WriteLine(res["access_token"]);
-
-            if (res.ContainsKey("access_token"))
+            if (response.Content!=null)
             {
+                JObject res = JObject.Parse(response.Content);
 
-                using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                if (res.ContainsKey("access_token"))
                 {
-                    try
+
+                    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                     {
-                        conn.Execute("DELETE FROM UserModel");
-                    }
-                    catch (Exception ex)
-                    {
+                        try
+                        {
+                            conn.Execute("DELETE FROM UserModel");
+                        }
+                        catch (Exception ex)
+                        {
 
-                    }
+                        }
 
 
-                    conn.CreateTable<UserModel>();
-                    //string image_url = $"http://61.66.218.12/images/users/{res["name"]}/{res["img"]}";
-                    string image_url = $"http://127.0.0.1:8000/images/users/{res["name"]}/{res["img"]}";
+                        conn.CreateTable<UserModel>();
+                        string image_url = $"http://61.66.218.12/images/users/{res["name"]}/{res["img"]}";
+                        //string image_url = $"http://127.0.0.1:8000/images/users/{res["name"]}/{res["img"]}";
 
-                    var newUser = new UserModel()
-                    {
-                        User_id = Convert.ToInt32(res["user_id"]),
-                        Email = res["email"].ToString(),
-                        Name = res["name"].ToString(),
-                        Wallet = Convert.ToInt32(res["wallet"]),
-                        Rank = Convert.ToInt32(res["rank"]),
-                        Img = image_url,
-                        Token = res["access_token"].ToString(),
+                        var newUser = new UserModel()
+                        {
+                            User_id = Convert.ToInt32(res["user_id"]),
+                            Email = res["email"].ToString(),
+                            Name = res["name"].ToString(),
+                            Password = Password,
+                            Wallet = Convert.ToInt32(res["wallet"]),
+                            Rank = Convert.ToInt32(res["rank"]),
+                            Img = image_url,
+                            Token = res["access_token"].ToString(),
 
-                    };
+                        };
 
-                    int inserted = conn.Insert(newUser);
+                        int inserted = conn.Insert(newUser);
 
-                    if (inserted >= 1)
-                    {
-                        App.CurrentUser = newUser;
-                        await _navigationService.NavigateAsync("NavigationPage/MyPage");
-                    }
-                    else
-                    {
-                        await App.Current.MainPage.DisplayAlert("Failure", "An error occured", "OK");
+                        if (inserted >= 1)
+                        {
+                            App.CurrentUser = newUser;
+                            await _navigationService.NavigateAsync("NavigationPage/MyPage");
+                        }
+                        else
+                        {
+                            await App.Current.MainPage.DisplayAlert("Failure", "An error occured", "OK");
+                        }
+
                     }
 
                 }
-
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("登入失敗", "帳號密碼錯誤", "OK");
+                }
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("登入失敗", "帳號密碼錯誤", "OK");
+                await App.Current.MainPage.DisplayAlert("登入失敗", "伺服器連線異常", "OK");
             }
+
+
 
 
 

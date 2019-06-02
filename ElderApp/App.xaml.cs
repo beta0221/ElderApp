@@ -43,29 +43,12 @@ namespace ElderApp
                     }
                     else
                     {
-
-                        //UserModel createUser = new UserModel()
-                        //{
-                        //    Id = 1,
-                        //    Name = "user",
-                        //    Email = "user@user.com",
-                        //    Wallet = 10000,
-                        //    Rank = 1,
-                        //    Img = "http://127.0.0.1:8000/images/users/user/1557835651.png",
-                        //    Token = "blablabla"
-                        //};
-
-                        //conn.CreateTable<UserModel>();
-
-                        //int insertedd = conn.Insert(createUser);
-                        //if(insertedd >= 1)
-                        //{
-                        //    App.CurrentUser = createUser;
-                        //    NavigationService.NavigateAsync("NavigationPage/MyPage");
-                        //}
-
                         NavigationService.NavigateAsync("/LoginPage");
                     }
+
+
+                    //conn.Execute("DELETE FROM UserModel");
+                    //NavigationService.NavigateAsync("/LoginPage");
                 }
                 catch (Exception ex)
                 {
