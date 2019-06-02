@@ -174,7 +174,7 @@ namespace ElderApp.ViewModels
                         {
                             conn.Execute("DELETE FROM UserModel");
 
-                            await _navigationService.NavigateAsync("/LoginPage");
+                            await _navigationService.NavigateAsync("LoginPage");
 
                         }
                     }

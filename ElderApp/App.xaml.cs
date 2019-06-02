@@ -42,7 +42,7 @@ namespace ElderApp
                     }
                     else
                     {
-                        NavigationService.NavigateAsync("/LoginPage");
+                        NavigationService.NavigateAsync("LoginPage");
                     }
 
 
@@ -51,7 +51,7 @@ namespace ElderApp
                 }
                 catch (Exception ex)
                 {
-                    NavigationService.NavigateAsync("/LoginPage");
+                    NavigationService.NavigateAsync("LoginPage");
 
                     var properties = new Dictionary<string, string>
                     {
