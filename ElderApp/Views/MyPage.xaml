@@ -6,6 +6,9 @@
     
     
     <ContentPage.Content>
+        <AbsoluteLayout>
+            
+            
         <StackLayout>
             
             <ContentView BackgroundColor="#47ADE8"
@@ -15,7 +18,7 @@
                 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="130" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -68,7 +71,7 @@
                 <Button Text="活動行事曆"  Grid.Row="1" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
                 <Button Text="-"  Grid.Row="1" Grid.Column="2" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
                 <Button Text="-"  Grid.Row="2" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
-                <Button Text="上傳大頭貼"  Grid.Row="2" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding SelectImage}"/>
+                <Button Text="-"  Grid.Row="2" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
                 <Button Text="登出"  Grid.Row="2" Grid.Column="2" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding Logout}"/>
             
             </Grid>
@@ -78,7 +81,8 @@
             
             
         </StackLayout>
-            
-        
+            <Button BackgroundColor="Gray"
+                    AbsoluteLayout.LayoutBounds="10,105,30,30" BorderRadius="15" Text="+" TextColor="White" FontSize="Large" Command="{Binding SelectImage}"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

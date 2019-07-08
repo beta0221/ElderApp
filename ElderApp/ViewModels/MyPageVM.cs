@@ -110,21 +110,31 @@ namespace ElderApp.ViewModels
 
             if (response.Content != null)
             {
-                JObject res = JObject.Parse(response.Content);
-
-                if (res.ContainsKey("image_name"))
+                System.Diagnostics.Debug.WriteLine(response.Content);
+                try
                 {
-                    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                    JObject res = JObject.Parse(response.Content);
+                    if (res.ContainsKey("image_name"))
                     {
-                        var _user = conn.Table<UserModel>().FirstOrDefault();
-                        string image_url = $"http://61.66.218.12/images/users/{_user.Name}/{res["image_name"].ToString()}";
-                        //string image_url = $"http://127.0.0.1:8000/images/users/{_user.Name}/{res["image_name"].ToString()}";
-                        conn.Execute($"UPDATE UserModel SET Img = '{image_url}' WHERE Id = {_user.Id}");
+                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                        {
+                            var _user = conn.Table<UserModel>().FirstOrDefault();
+                            string image_url = $"http://61.66.218.12/images/users/{_user.Name}/{res["image_name"].ToString()}";
+                            //string image_url = $"http://127.0.0.1:8000/images/users/{_user.Name}/{res["image_name"].ToString()}";
+                            conn.Execute($"UPDATE UserModel SET Img = '{image_url}' WHERE Id = {_user.Id}");
 
-                        Image_url = image_url.ToString();
+                            Image_url = image_url.ToString();
+                        }
+
                     }
-
                 }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("發生錯誤", ex.ToString(), "OK");
+                }
+
+
+
             }
 
 
@@ -137,7 +147,8 @@ namespace ElderApp.ViewModels
 
         private async void GiveMoneyRequest()
         {
-            await _navigationService.NavigateAsync("ScannerPage");
+            //await _navigationService.NavigateAsync("ScannerPage");
+            await _navigationService.NavigateAsync("GiveMoneyPage");
         }
 
         private async void TransHistoryRequest()
@@ -166,18 +177,26 @@ namespace ElderApp.ViewModels
 
                 if (response.Content != null)
                 {
-                    JObject res = JObject.Parse(response.Content);
-
-                    if (res["message"].ToString() == "Successfully logged out")
+                    try
                     {
-                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                        JObject res = JObject.Parse(response.Content);
+
+                        if (res["message"].ToString() == "Successfully logged out")
                         {
-                            conn.Execute("DELETE FROM UserModel");
+                            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                            {
+                                conn.Execute("DELETE FROM UserModel");
 
-                            await _navigationService.NavigateAsync("LoginPage");
+                                await _navigationService.NavigateAsync("/LoginPage");
 
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
+                    }
+
                 }
 
                 
@@ -201,6 +220,7 @@ namespace ElderApp.ViewModels
 
             if (response.Content != null)
             {
+
                 JObject res = JObject.Parse(response.Content);
                 if (res.ContainsKey("error"))
                 {

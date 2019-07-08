@@ -63,9 +63,9 @@ namespace ElderApp.ViewModels
             SubmitTransaction = new DelegateCommand(SubmitTransactionRequest);
 
 
-            //User_email = "test@test.com";
-            //User_id = 2;
-            //User_name = "test";
+            User_email = "test@test.com";
+            User_id = 2;
+            User_name = "test";
         }
 
 
