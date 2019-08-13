@@ -196,6 +196,14 @@ namespace ElderApp.ViewModels
                     catch (Exception ex)
                     {
                         await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
+
+                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                        {
+                            conn.Execute("DELETE FROM UserModel");
+
+                            await _navigationService.NavigateAsync("/LoginPage");
+
+                        }
                     }
 
                 }

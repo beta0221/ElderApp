@@ -89,8 +89,8 @@ namespace ElderApp.ViewModels
 
 
                         conn.CreateTable<UserModel>();
-                        string image_url = $"http://128.199.197.142/images/users/{res["name"]}/{res["img"]}";
-                        //string image_url = $"http://127.0.0.1:8000/images/users/{res["name"]}/{res["img"]}";
+                        string image_url = $"http://128.199.197.142/images/users/{res["user_id"]}/{res["img"]}";
+                        //string image_url = $"http://127.0.0.1:8000/images/users/{res["user_id"]}/{res["img"]}";
 
                         var newUser = new UserModel()
                         {

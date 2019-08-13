@@ -42,7 +42,7 @@
                         <Label Text="{Binding User.Email,Mode=TwoWay}" TextColor="White"/>
                         <Label Text="{Binding User.Rank}" TextColor="White"/>
                         <Label Text="{Binding User.Wallet}" TextColor="White"/>
-                        <Label Text="{Binding User.User_id}" TextColor="White"/>
+                        
                     </StackLayout>
                 
                 </Grid>
