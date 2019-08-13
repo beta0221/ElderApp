@@ -56,7 +56,7 @@ namespace ElderApp.ViewModels
 
             System.Diagnostics.Debug.WriteLine("Login");
 
-            var client = new RestClient("http://61.66.218.12/api/auth/login");
+            var client = new RestClient("http://128.199.197.142/api/auth/login");
             //var client = new RestClient("http://127.0.0.1:8000/api/auth/login");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -89,7 +89,7 @@ namespace ElderApp.ViewModels
 
 
                         conn.CreateTable<UserModel>();
-                        string image_url = $"http://61.66.218.12/images/users/{res["name"]}/{res["img"]}";
+                        string image_url = $"http://128.199.197.142/images/users/{res["name"]}/{res["img"]}";
                         //string image_url = $"http://127.0.0.1:8000/images/users/{res["name"]}/{res["img"]}";
 
                         var newUser = new UserModel()
