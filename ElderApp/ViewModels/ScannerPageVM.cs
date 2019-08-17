@@ -12,6 +12,8 @@ namespace ElderApp.ViewModels
 
         INavigationService _navigationService;
 
+        public bool isScanning { get; set; }
+
         public Command QRScanResultCommand
         {
             get
@@ -25,6 +27,7 @@ namespace ElderApp.ViewModels
                         //do your job here - Result.Text contains QR CODE
                         //await App.Current.MainPage.DisplayAlert("Result", Result.Text, "OK");
 
+                        isScanning = false;
 
                         string[] a = Result.Text.Split(',');
 
@@ -45,6 +48,7 @@ namespace ElderApp.ViewModels
         public ScannerPageVM(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            isScanning = true;
         }
 
 
