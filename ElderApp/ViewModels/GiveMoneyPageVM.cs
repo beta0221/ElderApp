@@ -57,11 +57,13 @@ namespace ElderApp.ViewModels
 
         public ICommand SubmitTransaction { get; set; }
 
+        public ICommand CancelTransaction { get; set; }
+
         public GiveMoneyPageVM(INavigationService navigationService)
         {
             _navigationService = navigationService;
             SubmitTransaction = new DelegateCommand(SubmitTransactionRequest);
-
+            CancelTransaction = new DelegateCommand(CancelTransactionRequest);
 
             User_email = "user@user.com";
             User_id = 1;
@@ -103,6 +105,10 @@ namespace ElderApp.ViewModels
 
         }
 
+        private async void CancelTransactionRequest()
+        {
+            await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

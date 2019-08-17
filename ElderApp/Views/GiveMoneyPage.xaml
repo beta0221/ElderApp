@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="ElderApp.Views.GiveMoneyPage"
@@ -13,6 +13,9 @@
             
             <Button Text="確定支付" BackgroundColor="#47ADE8" TextColor="White" Margin="0,10,0,10" 
                     Command="{Binding SubmitTransaction}"/>
+            
+            <Button Text="取消支付" BackgroundColor="Gray" TextColor="White" Margin="0,10,0,10" 
+                    Command="{Binding CancelTransaction}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

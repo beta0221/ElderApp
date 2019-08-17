@@ -148,8 +148,8 @@ namespace ElderApp.ViewModels
 
         private async void GiveMoneyRequest()
         {
-            await _navigationService.NavigateAsync("ScannerPage");
-            //await _navigationService.NavigateAsync("GiveMoneyPage");
+            //await _navigationService.NavigateAsync("ScannerPage");
+            await _navigationService.NavigateAsync("GiveMoneyPage");
         }
 
         private async void TransHistoryRequest()
