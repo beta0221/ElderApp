@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Navigation;
@@ -7,12 +8,28 @@ using ZXing;
 
 namespace ElderApp.ViewModels
 {
-    public class ScannerPageVM
+    public class ScannerPageVM : INotifyPropertyChanged
     {
 
         INavigationService _navigationService;
 
-        public bool isScanning { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool isScanning;
+        public bool IsScanning
+        {
+            get { return isScanning; }
+            set
+            {
+                isScanning = value;
+                OnPropertyChanged("IsScanning");
+            }
+        }
 
         public Command QRScanResultCommand
         {
@@ -27,7 +44,7 @@ namespace ElderApp.ViewModels
                         //do your job here - Result.Text contains QR CODE
                         //await App.Current.MainPage.DisplayAlert("Result", Result.Text, "OK");
 
-                        isScanning = false;
+                        IsScanning = false;
 
                         string[] a = Result.Text.Split(',');
 
@@ -48,7 +65,7 @@ namespace ElderApp.ViewModels
         public ScannerPageVM(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            isScanning = true;
+            IsScanning = true;
         }
 
 
