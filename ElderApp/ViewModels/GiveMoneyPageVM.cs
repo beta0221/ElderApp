@@ -89,13 +89,13 @@ namespace ElderApp.ViewModels
             {
                 await App.Current.MainPage.DisplayAlert("支付成功", "回首頁", "OK");
                 //await _navigationService.GoBackAsync();
-                await _navigationService.NavigateAsync("/MyPage");
+                await _navigationService.NavigateAsync("/NavigationPage/MyPage");
             }
             else
             {
                 await App.Current.MainPage.DisplayAlert("失敗", "不明原因", "OK");
                 //await _navigationService.GoBackAsync();
-                await _navigationService.NavigateAsync("/MyPage");
+                await _navigationService.NavigateAsync("/NavigationPage/MyPage");
             }
 
 
