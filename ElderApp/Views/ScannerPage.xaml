@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         
         <BoxView Grid.Row="0" BackgroundColor="Black"/>
-        <zxing:ZXingScannerView Grid.Row="1" x:Name="_scanView" Result="{Binding Result, Mode=TwoWay}" ScanResultCommand="{Binding QRScanResultCommand}" IsScanning="{Binding isScanning,Mode=TwoWay}"
+        <zxing:ZXingScannerView Grid.Row="1" x:Name="_scanView" Result="{Binding Result, Mode=TwoWay}" ScanResultCommand="{Binding QRScanResultCommand}" IsScanning="{Binding IsScanning,Mode=TwoWay}"
                                 WidthRequest="200" HeightRequest="300" />
         <BoxView Grid.Row="2" BackgroundColor="Black" />
     </Grid>
