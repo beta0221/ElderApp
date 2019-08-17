@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using Prism.AppModel;
+
 using Prism.Commands;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -9,7 +9,7 @@ using ZXing;
 
 namespace ElderApp.ViewModels
 {
-    public class ScannerPageVM : INotifyPropertyChanged, IPageLifecycleAware
+    public class ScannerPageVM : INotifyPropertyChanged
     {
 
         INavigationService _navigationService;
@@ -57,7 +57,7 @@ namespace ElderApp.ViewModels
                         paremeter.Add("User_name", a[1]);
                         paremeter.Add("User_email", a[2]);
 
-                        await _navigationService.NavigateAsync("GiveMoneyPage", paremeter);
+                        await _navigationService.NavigateAsync("/NavigationPage/GiveMoneyPage", paremeter);
                     });
                 });
             }
@@ -71,14 +71,6 @@ namespace ElderApp.ViewModels
             IsScanning = true;
         }
 
-        public void OnAppearing()
-        {
-            IsScanning = true;
-        }
-
-        public void OnDisappearing()
-        {
-            
-        }
+        
     }
 }
