@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using Prism.AppModel;
 using Prism.Commands;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -8,7 +9,7 @@ using ZXing;
 
 namespace ElderApp.ViewModels
 {
-    public class ScannerPageVM : INotifyPropertyChanged
+    public class ScannerPageVM : INotifyPropertyChanged, IPageLifecycleAware
     {
 
         INavigationService _navigationService;
@@ -19,6 +20,8 @@ namespace ElderApp.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        
 
         private bool isScanning;
         public bool IsScanning
@@ -68,6 +71,14 @@ namespace ElderApp.ViewModels
             IsScanning = true;
         }
 
+        public void OnAppearing()
+        {
+            IsScanning = true;
+        }
 
+        public void OnDisappearing()
+        {
+            
+        }
     }
 }
