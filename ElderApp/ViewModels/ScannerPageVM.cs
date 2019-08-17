@@ -37,7 +37,7 @@ namespace ElderApp.ViewModels
                         paremeter.Add("User_name", a[1]);
                         paremeter.Add("User_email", a[2]);
 
-                        await _navigationService.NavigateAsync("/MyPage/GiveMoneyPage", paremeter);
+                        await _navigationService.NavigateAsync("/NavigationPage/GiveMoneyPage", paremeter);
                     });
                 });
             }
