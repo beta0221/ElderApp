@@ -82,7 +82,7 @@ namespace ElderApp
             containerRegistry.RegisterForNavigation<ScannerPage, ScannerPageVM>();
             containerRegistry.RegisterForNavigation<TransHistoryPage, TransHistoryPageVM>();
             containerRegistry.RegisterForNavigation<GiveMoneyPage, GiveMoneyPageVM>();
-
+            containerRegistry.RegisterForNavigation<AccountPage, AccountPageVM>();
         }
 
 

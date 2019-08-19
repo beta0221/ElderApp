@@ -50,6 +50,8 @@ namespace ElderApp.ViewModels
 
         public ICommand TransHistory { get; set; }
 
+        public ICommand Account { get; set; }
+
         public MyPageVM(INavigationService navigationService)
         {
             User = App.CurrentUser;
@@ -60,6 +62,7 @@ namespace ElderApp.ViewModels
             TakeMoney = new DelegateCommand(TakeMoneyRequest);
             GiveMoney = new DelegateCommand(GiveMoneyRequest);
             TransHistory= new DelegateCommand(TransHistoryRequest);
+            Account = new DelegateCommand(AccountRequest);
             _navigationService = navigationService;
 
             UpdateRequest();
@@ -157,6 +160,10 @@ namespace ElderApp.ViewModels
             await _navigationService.NavigateAsync("TransHistoryPage");
         }
 
+        private async void AccountRequest()
+        {
+            await _navigationService.NavigateAsync("AccountPage");
+        }
 
         private async void LogoutRequest()
         {
