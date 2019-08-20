@@ -40,8 +40,8 @@
                         Padding="8">
                         <Label Text="{Binding User.Name,Mode=TwoWay}" FontSize="Large" TextColor="White"/>
                         <Label Text="{Binding User.Email,Mode=TwoWay}" TextColor="White"/>
-                        <Label Text="{Binding User.Rank}" TextColor="White"/>
-                        <Label Text="{Binding User.Wallet}" TextColor="White"/>
+                        <Label Text="{Binding User.Rank,Mode=TwoWay}" TextColor="White"/>
+                        <Label Text="{Binding User.Wallet,Mode=TwoWay}" TextColor="White"/>
                         
                     </StackLayout>
                 

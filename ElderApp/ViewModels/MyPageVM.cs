@@ -114,8 +114,8 @@ namespace ElderApp.ViewModels
             byte[] byteArray = ImageConverter.StreamToByteArray(stream);
             string image_string = Convert.ToBase64String(byteArray);
 
-            //var client = new RestClient("http://128.199.197.142/api/uploadImage");
-            var client = new RestClient("http://127.0.0.1:8000/api/uploadImage");
+            var client = new RestClient("http://128.199.197.142/api/uploadImage");
+            //var client = new RestClient("http://127.0.0.1:8000/api/uploadImage");
             var request = new RestRequest(Method.POST);
 
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
