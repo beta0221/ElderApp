@@ -39,6 +39,9 @@ namespace ElderApp.ViewModels
         //    }
         //}
 
+
+
+
         //private string birthdate;
         //public string Birthdate
         //{
