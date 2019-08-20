@@ -50,7 +50,11 @@ namespace ElderApp.ViewModels
 
         public ICommand TransHistory { get; set; }
 
+<<<<<<< HEAD
         public ICommand Events { get; set; }        //活動
+=======
+        public ICommand Account { get; set; }
+>>>>>>> 570bf117b36266218b0eaa6fc3ed053f30b84761
 
         public MyPageVM(INavigationService navigationService)
         {
@@ -62,9 +66,13 @@ namespace ElderApp.ViewModels
             TakeMoney = new DelegateCommand(TakeMoneyRequest);
             GiveMoney = new DelegateCommand(GiveMoneyRequest);
             TransHistory= new DelegateCommand(TransHistoryRequest);
+<<<<<<< HEAD
 
             Events = new DelegateCommand(EventsRequest);        //活動
 
+=======
+            Account = new DelegateCommand(AccountRequest);
+>>>>>>> 570bf117b36266218b0eaa6fc3ed053f30b84761
             _navigationService = navigationService;
 
             UpdateRequest();
@@ -162,6 +170,10 @@ namespace ElderApp.ViewModels
             await _navigationService.NavigateAsync("TransHistoryPage");
         }
 
+        private async void AccountRequest()
+        {
+            await _navigationService.NavigateAsync("AccountPage");
+        }
 
 
 

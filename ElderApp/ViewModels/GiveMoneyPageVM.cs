@@ -57,11 +57,13 @@ namespace ElderApp.ViewModels
 
         public ICommand SubmitTransaction { get; set; }
 
+        public ICommand CancelTransaction { get; set; }
+
         public GiveMoneyPageVM(INavigationService navigationService)
         {
             _navigationService = navigationService;
             SubmitTransaction = new DelegateCommand(SubmitTransactionRequest);
-
+            CancelTransaction = new DelegateCommand(CancelTransactionRequest);
 
             User_email = "user@user.com";
             User_id = 1;
@@ -88,12 +90,14 @@ namespace ElderApp.ViewModels
             if (response.Content.ToString() == "success")
             {
                 await App.Current.MainPage.DisplayAlert("支付成功", "回首頁", "OK");
-                await _navigationService.GoBackAsync();
+                //await _navigationService.GoBackAsync();
+                await _navigationService.NavigateAsync("/NavigationPage/MyPage");
             }
             else
             {
                 await App.Current.MainPage.DisplayAlert("失敗", "不明原因", "OK");
-                await _navigationService.GoBackAsync();
+                //await _navigationService.GoBackAsync();
+                await _navigationService.NavigateAsync("/NavigationPage/MyPage");
             }
 
 
@@ -101,6 +105,10 @@ namespace ElderApp.ViewModels
 
         }
 
+        private async void CancelTransactionRequest()
+        {
+            await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
