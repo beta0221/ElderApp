@@ -177,15 +177,17 @@ namespace ElderApp.ViewModels
             if (eve_data.Participate == true)
             {
                 result = await App.Current.MainPage.DisplayAlert("取消參加活動確認", $"是否確認取消參加活動:{eve_data.title}？", "是", "否");
+
+                client = new RestClient($"http://128.199.197.142/api/cancelevent/{eve_data.slug}");
+                //client = new RestClient($"http://127.0.0.1:8000/api/cancelevent/{eve_data.slug}");
                 
-                //var client = new RestClient($"http://61.66.218.12/api/cancelevent/{eve_data.slug}");
-                client = new RestClient($"http://127.0.0.1:8000/api/cancelevent/{eve_data.slug}");
             }else
             {
                 result = await App.Current.MainPage.DisplayAlert("參加活動確認", $"是否確認參加活動:{eve_data.title}?", "是", "否");
-               
-                //var client = new RestClient($"http://61.66.218.12/api/joinevent/{eve_data.slug}");
-                client = new RestClient($"http://127.0.0.1:8000/api/joinevent/{eve_data.slug}");
+
+                client = new RestClient($"http://128.199.197.142/api/joinevent/{eve_data.slug}");
+                //client = new RestClient($"http://127.0.0.1:8000/api/joinevent/{eve_data.slug}");
+                
             }
 
             
@@ -203,6 +205,7 @@ namespace ElderApp.ViewModels
                 {
                     GetUserEvent();
                     GetEvents();
+
                     HandledSearchItem(SearchEvent);
                 }
             }
@@ -218,8 +221,8 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("GetEvents");
 
-            //var client = new RestClient("http://61.66.218.12/api/event");
-            var client = new RestClient("http://127.0.0.1:8000/api/event");
+            var client = new RestClient("http://128.199.197.142/api/event");
+            //var client = new RestClient("http://127.0.0.1:8000/api/event");
 
             var request = new RestRequest(Method.GET);
 
@@ -260,8 +263,8 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("GetUserEvent");
 
-            //var client = new RestClient("http://61.66.218.12/api/myevent");
-            var client = new RestClient("http://127.0.0.1:8000/api/myevent");
+            var client = new RestClient("http://128.199.197.142/api/myevent");
+            //var client = new RestClient("http://127.0.0.1:8000/api/myevent");
 
             var request = new RestRequest(Method.POST);
 

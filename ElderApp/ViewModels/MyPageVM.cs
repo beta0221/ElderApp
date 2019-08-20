@@ -50,11 +50,11 @@ namespace ElderApp.ViewModels
 
         public ICommand TransHistory { get; set; }
 
-<<<<<<< HEAD
+
         public ICommand Events { get; set; }        //活動
-=======
+
         public ICommand Account { get; set; }
->>>>>>> 570bf117b36266218b0eaa6fc3ed053f30b84761
+
 
         public MyPageVM(INavigationService navigationService)
         {
@@ -66,13 +66,13 @@ namespace ElderApp.ViewModels
             TakeMoney = new DelegateCommand(TakeMoneyRequest);
             GiveMoney = new DelegateCommand(GiveMoneyRequest);
             TransHistory= new DelegateCommand(TransHistoryRequest);
-<<<<<<< HEAD
+
 
             Events = new DelegateCommand(EventsRequest);        //活動
 
-=======
+
             Account = new DelegateCommand(AccountRequest);
->>>>>>> 570bf117b36266218b0eaa6fc3ed053f30b84761
+
             _navigationService = navigationService;
 
             UpdateRequest();
@@ -133,8 +133,8 @@ namespace ElderApp.ViewModels
                         using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                         {
                             var _user = conn.Table<UserModel>().FirstOrDefault();
-                            //string image_url = $"http://128.199.197.142/images/users/{_user.User_id}/{res["image_name"].ToString()}";
-                            string image_url = $"http://127.0.0.1:8000/images/users/{_user.User_id}/{res["image_name"].ToString()}";
+                            string image_url = $"http://128.199.197.142/images/users/{_user.User_id}/{res["image_name"].ToString()}";
+                            //string image_url = $"http://127.0.0.1:8000/images/users/{_user.User_id}/{res["image_name"].ToString()}";
                             conn.Execute($"UPDATE UserModel SET Img = '{image_url}' WHERE Id = {_user.Id}");
 
                             Image_url = image_url.ToString();
@@ -193,8 +193,8 @@ namespace ElderApp.ViewModels
                 //System.Diagnostics.Debug.WriteLine(App.CurrentUser.Token.ToString());
                 System.Diagnostics.Debug.WriteLine("Logout");
 
-                //var client = new RestClient("http://128.199.197.142/api/auth/logout");
-                var client = new RestClient("http://127.0.0.1:8000/api/auth/logout");
+                var client = new RestClient("http://128.199.197.142/api/auth/logout");
+                //var client = new RestClient("http://127.0.0.1:8000/api/auth/logout");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 request.AddHeader("Accept", "application/json");
@@ -243,8 +243,8 @@ namespace ElderApp.ViewModels
 
             System.Diagnostics.Debug.WriteLine("UpdateRequest");
 
-            //var client = new RestClient("http://128.199.197.142/api/auth/me");
-            var client = new RestClient("http://127.0.0.1:8000/api/auth/me");
+            var client = new RestClient("http://128.199.197.142/api/auth/me");
+            //var client = new RestClient("http://127.0.0.1:8000/api/auth/me");
             var request = new RestRequest(Method.POST);
 
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -255,7 +255,7 @@ namespace ElderApp.ViewModels
             if (response.Content != null)
             {
 
-                JObject res = JObject.Parse(response.Content);
+                JObject res = JObject.Parse(response.Content);                      //
                 if (res.ContainsKey("error"))
                 {
                     AutoReLogin();
@@ -282,8 +282,8 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("AutoReLogin");
 
-            //var client = new RestClient("http://128.199.197.142/api/auth/login");
-            var client = new RestClient("http://127.0.0.1:8000/api/auth/login");
+            var client = new RestClient("http://128.199.197.142/api/auth/login");
+            //var client = new RestClient("http://127.0.0.1:8000/api/auth/login");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddHeader("Accept", "application/json");

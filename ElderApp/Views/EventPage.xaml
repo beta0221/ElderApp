@@ -29,13 +29,13 @@
                             <Image Source="{Binding image_url}"></Image>
                             <StackLayout HorizontalOptions="StartAndExpand">
                                 <Label Text="{Binding title}"/>
-                                <Label Text="{Binding participate_text}" TextColor="{Binding participate_color}"/>
+                                <Label Text="{Binding participate_text,Mode=TwoWay}" TextColor="{Binding participate_color,Mode=TwoWay}"/>
                             </StackLayout>
 
                             <Button 
                                     x:Name="myButton"
-                                    Text="{Binding btn_text}"
-                                    TextColor="{Binding btn_color}"
+                                    Text="{Binding btn_text,Mode=TwoWay}"
+                                    TextColor="{Binding btn_color,Mode=TwoWay}"
                                     Command="{Binding Source={x:Reference listview}, Path=BindingContext.ButtonClick}"
                                     CommandParameter="{Binding . }"
                                     />
