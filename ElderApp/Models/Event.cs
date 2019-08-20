@@ -46,8 +46,7 @@ namespace ElderApp.Models
         public string deadline { get; set; }
         public string created_at { get; set; }
         public string slug { get; set; }
-
-
+        public int category_id { get; set; }
 
         public Event()
         {
