@@ -7,6 +7,7 @@ using ElderApp.Interface;
 using ElderApp.Models;
 using Newtonsoft.Json.Linq;
 using Plugin.Media;
+using Prism.AppModel;
 using Prism.Commands;
 using Prism.Navigation;
 using RestSharp;
@@ -15,7 +16,7 @@ using Xamarin.Forms;
 
 namespace ElderApp.ViewModels
 {
-    public class MyPageVM : INotifyPropertyChanged
+    public class MyPageVM : INotifyPropertyChanged , IPageLifecycleAware , IApplicationLifecycleAware
     {
         INavigationService _navigationService;
 
@@ -75,7 +76,11 @@ namespace ElderApp.ViewModels
 
             _navigationService = navigationService;
 
-            UpdateRequest();
+            //if (Device.RuntimePlatform == Device.Android)
+            //{
+                //UpdateRequest();
+            //}
+
 
         }
 
@@ -310,7 +315,32 @@ namespace ElderApp.ViewModels
                 
         }
 
+        public void OnAppearing()
+        {
+            //if (Device.RuntimePlatform == Device.iOS)
+            //{
+                UpdateRequest();
+            //}
+                
+        }
 
+        public void OnDisappearing()
+        {
+            
+        }
 
+        public void OnResume()
+        {
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                UpdateRequest();
+            }
+                
+        }
+
+        public void OnSleep()
+        {
+            
+        }
     }
 }

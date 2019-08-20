@@ -94,7 +94,7 @@ namespace ElderApp.ViewModels
                 catch (Exception ex)
                 {
                     await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
-                    await _navigationService.GoBackAsync();
+                    await _navigationService.NavigateAsync("/NavigationPage/MyPage");
                 }
             }
 
