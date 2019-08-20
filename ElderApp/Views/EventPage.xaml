@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+
+    x:Class="ElderApp.Views.EventPage">
+    
+    <!--xmlns:local="clr-namespace:ElderApp.ViewModels"-->
+    
+
+    <ContentPage.Content>
+        <StackLayout>
+           
+            <SearchBar Placeholder="搜尋活動" Text="{Binding SearchEvent,Mode=TwoWay}"/>
+            <ListView x:Name="listview" ItemsSource="{Binding Events}"
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
+                      >
+
+                
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="5" x:Name="item">
+                            <Image Source="{Binding image_url}"></Image>
+                            <StackLayout HorizontalOptions="StartAndExpand">
+                                <Label Text="{Binding title}"/>
+                                <Label Text="{Binding participate_text}" TextColor="{Binding participate_color}"/>
+                            </StackLayout>
+
+                            <Button 
+                                    x:Name="myButton"
+                                    Text="{Binding btn_text}"
+                                    TextColor="{Binding btn_color}"
+                                    Command="{Binding Source={x:Reference listview}, Path=BindingContext.ButtonClick}"
+                                    CommandParameter="{Binding . }"
+                                    />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>
