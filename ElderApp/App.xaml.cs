@@ -85,11 +85,11 @@ namespace ElderApp
 
             containerRegistry.RegisterForNavigation<EventPage, EventPageVM>();
             containerRegistry.RegisterForNavigation<EventDetailPage, EventDetailPageVM>();
-
+            containerRegistry.RegisterForNavigation<MyEventPage, MyEventPageVM>();
 
             containerRegistry.RegisterForNavigation<AccountPage, AccountPageVM>();
             containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageVM>();
-
+            
         }
 
 

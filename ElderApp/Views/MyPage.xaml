@@ -68,7 +68,7 @@
                 <Button Text="收紅包"  Grid.Row="0" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding TakeMoney}"/>
                 <Button Text="送紅包"  Grid.Row="0" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding GiveMoney}"/>
                 <Button Text="我的帳簿"  Grid.Row="0" Grid.Column="2" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding TransHistory}"/>
-                <Button Text="我的活動"  Grid.Row="1" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
+                <Button Text="我的活動"  Grid.Row="1" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding My_events}"/>
                 <Button Text="活動行事曆"  Grid.Row="1" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding Events}"/>
                 <Button Text="-"  Grid.Row="1" Grid.Column="2" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
                 <Button Text="-"  Grid.Row="2" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>

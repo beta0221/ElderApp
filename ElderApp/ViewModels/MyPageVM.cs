@@ -54,6 +54,8 @@ namespace ElderApp.ViewModels
 
         public ICommand Events { get; set; }        //活動
 
+        public ICommand My_events { get; set; }     //我的活動
+
         public ICommand Account { get; set; }
 
 
@@ -70,7 +72,7 @@ namespace ElderApp.ViewModels
 
 
             Events = new DelegateCommand(EventsRequest);        //活動
-
+            My_events = new DelegateCommand(My_eventsRequest);
 
             Account = new DelegateCommand(AccountRequest);
 
@@ -186,7 +188,11 @@ namespace ElderApp.ViewModels
         {
             await _navigationService.NavigateAsync("EventPage");
         }
-
+        
+         private async void My_eventsRequest()                      //我的活動
+        {
+            await _navigationService.NavigateAsync("MyEventPage");
+        }
 
         private async void LogoutRequest()
         {
