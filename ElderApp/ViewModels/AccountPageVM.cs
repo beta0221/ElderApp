@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Windows.Input;
 using Newtonsoft.Json.Linq;
+using Prism.Commands;
 using Prism.Navigation;
 using RestSharp;
 
@@ -29,11 +31,19 @@ namespace ElderApp.ViewModels
 
         public string Expriedate { get; set; }
 
+        public ICommand Edit { get; set; }
+
 
         public AccountPageVM(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            Edit = new DelegateCommand(EditRequest);
             MyAccountRequest();
+        }
+
+        private async void EditRequest()
+        {
+            await _navigationService.NavigateAsync("EditAccountPage");
         }
 
         private async void MyAccountRequest()
@@ -89,5 +99,6 @@ namespace ElderApp.ViewModels
             }
 
         }
+
     }
 }

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="ElderApp.Views.EditAccountPage"
+             Padding="20">
+    <ContentPage.Content>
+        <StackLayout>
+       
+            
+            
+                <Label HeightRequest="20" Text="姓名："></Label>
+            <Entry Text="{Binding Name,Mode=TwoWay}"></Entry>
+            
+                <!--<Label HeightRequest="20" Text="帳號："></Label>
+            <Entry Text="{Binding Account}"></Entry>-->
+            
+                <!--<Label HeightRequest="20" Text="性別："></Label>
+            <Picker Title="性別" ItemsSource="{Binding GenderList}" ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding GenderItem,Mode=TwoWay}" />-->
+            
+                <!--<Label HeightRequest="20" Text="生日："></Label>
+            <Entry Text="{Binding Birthdate}"></Entry>-->
+            
+                <Label HeightRequest="20" Text="手機："></Label>
+            <Entry Text="{Binding Phone,Mode=TwoWay}"></Entry>
+            
+                <Label HeightRequest="20" Text="住家電話："></Label>
+            <Entry Text="{Binding Tel,Mode=TwoWay}"></Entry>
+            
+                <Label HeightRequest="20" Text="地址："></Label>
+            <Entry Text="{Binding Address,Mode=TwoWay}"></Entry>
+            
+                <Label HeightRequest="20" Text="身分證號："></Label>
+            <Entry Text="{Binding Id_number,Mode=TwoWay}"></Entry>
+            
+            
+            <Button Text="確定修改" BackgroundColor="Green" TextColor="White" Margin="0,5,0,5" Command="{Binding Submit}"/>
+            <Button Text="取消" BackgroundColor="Gray" TextColor="White" Margin="0,5,0,5" Command="{Binding Cancel}"/>
+            
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

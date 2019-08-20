@@ -88,6 +88,7 @@ namespace ElderApp
 
 
             containerRegistry.RegisterForNavigation<AccountPage, AccountPageVM>();
+            containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageVM>();
 
         }
 
