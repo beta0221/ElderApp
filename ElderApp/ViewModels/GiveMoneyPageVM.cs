@@ -55,6 +55,17 @@ namespace ElderApp.ViewModels
             }
         }
 
+        private string _event;
+        public string Event
+        {
+            get { return _event; }
+            set
+            {
+                _event = value;
+                OnPropertyChanged("Event");
+            }
+        }
+
         public ICommand SubmitTransaction { get; set; }
 
         public ICommand CancelTransaction { get; set; }
@@ -84,7 +95,7 @@ namespace ElderApp.ViewModels
             request.AddParameter("take_id", User_id);
             request.AddParameter("take_email", User_email);
             request.AddParameter("amount", Amount);
-            request.AddParameter("event", "test 123");
+            request.AddParameter("event", Event);
             IRestResponse response = client.Execute(request);
 
             if (response.Content.ToString() == "success")
