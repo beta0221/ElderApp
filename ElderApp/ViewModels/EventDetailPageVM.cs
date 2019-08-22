@@ -31,7 +31,7 @@ namespace ElderApp.ViewModels
 
         public EventDetailPageVM(Event eve)
         {
-            Select_event = eve;
+
         }
 
 

@@ -18,11 +18,12 @@ namespace ElderApp.ViewModels
 {
 
 
-    public class EventPageVM : INotifyPropertyChanged
+    public class EventPageVM : INotifyPropertyChanged, INavigationAware
     {
         INavigationService _navigationService;
 
         private ObservableCollection<Event> temp_events { get; set; }
+        public Category This_category;
 
         private ObservableCollection<Event> events ;
         public ObservableCollection<Event> Events
@@ -56,6 +57,7 @@ namespace ElderApp.ViewModels
             }
         }
 
+       
         //---------------------------------------------------------------------------------------------------
         private String searchEvent { get; set; }
         public String SearchEvent
@@ -159,10 +161,8 @@ namespace ElderApp.ViewModels
             My_events_id = new List<int>();
             temp_events = new ObservableCollection<Event>();
             ButtonClick = new Command(ButtonClickFunction);
-
-
             GetUserEvent();
-            GetEvents();
+            //GetEvents();
         }
 
         private async void ButtonClickFunction(object sender)
@@ -180,14 +180,15 @@ namespace ElderApp.ViewModels
 
                 client = new RestClient($"http://128.199.197.142/api/cancelevent/{eve_data.slug}");
                 //client = new RestClient($"http://127.0.0.1:8000/api/cancelevent/{eve_data.slug}");
-                
-            }else
+
+            }
+            else
             {
                 result = await App.Current.MainPage.DisplayAlert("參加活動確認", $"是否確認參加活動:{eve_data.title}?", "是", "否");
 
                 client = new RestClient($"http://128.199.197.142/api/joinevent/{eve_data.slug}");
                 //client = new RestClient($"http://127.0.0.1:8000/api/joinevent/{eve_data.slug}");
-                
+
             }
 
             
@@ -203,10 +204,19 @@ namespace ElderApp.ViewModels
                 IRestResponse response = client.Execute(request);
                 if(response.Content!=null)
                 {
-                    GetUserEvent();
-                    GetEvents();
+                    JObject res = JObject.Parse(response.Content);
+                    if (res["s"].ToString()=="1")
+                    {
+                        GetUserEvent();
+                        GetEvents();
 
-                    HandledSearchItem(SearchEvent);
+                        HandledSearchItem(SearchEvent);
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("訊息", $"{res["m"].ToString()}","OK" );
+                    }
+                    
                 }
             }
             
@@ -219,44 +229,81 @@ namespace ElderApp.ViewModels
 
         private void GetEvents()
         {
-            System.Diagnostics.Debug.WriteLine("GetEvents");
 
-            var client = new RestClient("http://128.199.197.142/api/event");
-            //var client = new RestClient("http://127.0.0.1:8000/api/event");
-
-            var request = new RestRequest(Method.GET);
-
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-
-            IRestResponse response = client.Execute(request);
-            System.Diagnostics.Debug.WriteLine(response.Content);
-
-            if (response.Content != null)
+            if (This_category.slug == "all")
             {
+                var client = new RestClient("http://128.199.197.142/api/event");
+                //var client = new RestClient("http://127.0.0.1:8000/api/event");
 
-                //JObject res = JObject.Parse(response.Content);              //錯誤
+                var request = new RestRequest(Method.GET);
+
+                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                request.AddHeader("Accept", "application/json");
+
+                IRestResponse response = client.Execute(request);
                 if (response.Content != null)
                 {
-                    List<Event> _events = JsonConvert.DeserializeObject<List<Event>>(response.Content);
 
-                    Events.Clear();                         
-                    foreach (var eve in _events)
+                    if (response.Content != null)
                     {
-                        int ind = My_events_id.IndexOf(eve.id);
-                        if (ind < 0)
+                        List<Event> _events = JsonConvert.DeserializeObject<List<Event>>(response.Content);
+
+                        Events.Clear();
+                        foreach (var eve in _events)
                         {
-                            eve.Participate = false;
+                            int ind = My_events_id.IndexOf(eve.id);
+                            if (ind < 0)
+                            {
+                                eve.Participate = false;
+                            }
+                            else
+                            {
+                                eve.Participate = true;
+                            }
+                            Events.Add(eve);
                         }
-                        else
-                        {
-                            eve.Participate = true;
-                        }
-                        Events.Add(eve);
+                        temp_events = Events;
                     }
-                    temp_events = Events;
                 }
             }
+            else
+            {
+                var client = new RestClient($"http://128.199.197.142/api/which_category_event/{This_category.name}");
+                //var client = new RestClient($"http://127.0.0.1:8000/api/which_category_event/{This_category.name}");
+
+                var request = new RestRequest(Method.GET);
+
+                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                request.AddHeader("Accept", "application/json");
+
+                IRestResponse response = client.Execute(request);
+                if (response.Content != null)
+                {
+
+                    if (response.Content != null)
+                    {
+                        List<Event> _events = JsonConvert.DeserializeObject<List<Event>>(response.Content);
+
+                        Events.Clear();
+                        foreach (var eve in _events)
+                        {
+                            int ind = My_events_id.IndexOf(eve.id);
+                            if (ind < 0)
+                            {
+                                eve.Participate = false;
+                            }
+                            else
+                            {
+                                eve.Participate = true;
+                            }
+                            Events.Add(eve);
+                        }
+                        temp_events = Events;
+                    }
+                }
+            }
+
+            
         }
 
         private void GetUserEvent()
@@ -300,7 +347,25 @@ namespace ElderApp.ViewModels
             }
         }
 
-       
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters["cat"]!=null)
+            {
+                This_category = parameters["cat"] as Category;
+                GetEvents();
+            }
+            
+        }
+
+        public void OnNavigatingTo(INavigationParameters parameters)
+        {
+            //This_category = parameters["cat"] as Category;
+        }
+
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            //This_category = parameters["cat"] as Category;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)

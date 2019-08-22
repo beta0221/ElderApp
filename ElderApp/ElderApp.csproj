@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="ViewModels\EventPageVM.xaml" />
+    <EmbeddedResource Remove="Views\EventCategoryPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ViewModels\EventPageVM.xaml.cs" />

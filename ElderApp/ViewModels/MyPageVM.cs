@@ -215,7 +215,7 @@ namespace ElderApp.ViewModels
 
         private async void EventsRequest()                      //活動
         {
-            await _navigationService.NavigateAsync("EventPage");
+            await _navigationService.NavigateAsync("CategoryPage");
         }
         
          private async void My_eventsRequest()                      //我的活動
