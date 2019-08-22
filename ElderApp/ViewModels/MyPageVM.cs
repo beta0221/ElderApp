@@ -173,6 +173,7 @@ namespace ElderApp.ViewModels
                             conn.Execute($"UPDATE UserModel SET Img = '{image_url}' WHERE Id = {_user.Id}");
 
                             Image_url = image_url.ToString();
+                            App.CurrentUser.Img = image_url.ToString();
                         }
 
                     }
