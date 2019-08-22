@@ -76,9 +76,6 @@ namespace ElderApp.ViewModels
             SubmitTransaction = new DelegateCommand(SubmitTransactionRequest);
             CancelTransaction = new DelegateCommand(CancelTransactionRequest);
 
-            User_email = "user@user.com";
-            User_id = 1;
-            User_name = "user";
         }
 
 
