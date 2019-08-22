@@ -351,6 +351,9 @@ namespace ElderApp.ViewModels
                         var _user = conn.Table<UserModel>().FirstOrDefault();
                         conn.Execute($"UPDATE UserModel SET Token = '{res["access_token"].ToString()}' WHERE Id = {_user.Id}");
                         App.CurrentUser.Token = res["access_token"].ToString();
+                        
+                        Rank = Int32.Parse(res["rank"].ToString());
+                        Wallet = Int32.Parse(res["wallet"].ToString());
                     }
                 }
                 else
