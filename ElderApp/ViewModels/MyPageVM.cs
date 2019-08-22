@@ -41,6 +41,34 @@ namespace ElderApp.ViewModels
             }
         }
 
+        private int rank;
+        public int Rank
+        {
+            get
+            {
+                return rank;
+            }
+            set
+            {
+                rank = value;
+                OnPropertyChanged("Rank");
+            }
+        }
+
+        private int wallet;
+        public int Wallet
+        {
+            get
+            {
+                return wallet;
+            }
+            set
+            {
+                wallet = value;
+                OnPropertyChanged("Wallet");
+            }
+        }
+
         public ICommand Logout { get; set; }
 
         public ICommand SelectImage { get; set; }
@@ -231,7 +259,7 @@ namespace ElderApp.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
+                        //await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
 
                         using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                         {
@@ -265,26 +293,37 @@ namespace ElderApp.ViewModels
 
             if (response.Content != null)
             {
+                try
+                {
+                    JObject res = JObject.Parse(response.Content);                      //
+                    if (res.ContainsKey("error"))
+                    {
+                        AutoReLogin();
+                    }
+                    else
+                    {
+                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                        {
+                            var _user = conn.Table<UserModel>().FirstOrDefault();
 
-                JObject res = JObject.Parse(response.Content);                      //
-                if (res.ContainsKey("error"))
+                            conn.Execute($"UPDATE UserModel SET Wallet = '{Int32.Parse(res["rank"].ToString())}',Rank = '{Int32.Parse(res["wallet"].ToString())}' WHERE Id = {_user.Id}");
+
+                            User.Rank = Int32.Parse(res["rank"].ToString());
+                            User.Wallet = Int32.Parse(res["wallet"].ToString());
+
+                            Rank = Int32.Parse(res["rank"].ToString());
+                            Wallet = Int32.Parse(res["wallet"].ToString());
+                        }
+
+                    }
+
+                }
+                catch (Exception ex)
                 {
                     AutoReLogin();
                 }
-                else
-                {
-                    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-                    {
-                        var _user = conn.Table<UserModel>().FirstOrDefault();
 
-                        conn.Execute($"UPDATE UserModel SET Wallet = '{Int32.Parse(res["rank"].ToString())}',Rank = '{Int32.Parse(res["wallet"].ToString())}' WHERE Id = {_user.Id}");
-
-                        User.Rank = Int32.Parse(res["rank"].ToString());
-                        User.Wallet = Int32.Parse(res["wallet"].ToString());
-                    }
-
-                        
-                }
+                
 
             }
         }
