@@ -17,11 +17,21 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="5" x:Name="item">
-                            <Image Source="{Binding image_url}"></Image>
+                        <StackLayout Orientation="Horizontal" Padding="5" x:Name="item" BackgroundColor="#47ADE8">
+                            <Image Source="http://127.0.0.1:8000/images/users/3/1565881035.png"
+                                   HeightRequest="100"
+                                   WidthRequest="100"
+                                   HorizontalOptions="Start"
+                                   Aspect="AspectFill"/>
                             <StackLayout HorizontalOptions="StartAndExpand">
-                                <Label Text="{Binding title}"/>
-                                <Label Text="{Binding dateTime}" TextColor="Blue"/>
+                                <Label Text="{Binding title}" />
+                               
+                                <Label Text="活動時間:"/>
+                                    <Label Text="{Binding dateTime}"/>
+                                <Label Text="活動地點:"/>
+                                    <Label Text="{Binding location}"/>
+                                <Label Text="報名截止時間:"/>
+                                    <Label Text="{Binding deadline}"/>
                             </StackLayout>
 
                             <Button 

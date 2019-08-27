@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace ElderApp.ViewModels
 {
-    public class MyEventPageVM : INotifyPropertyChanged
+    public class MyEventPageVM : INotifyPropertyChanged, INavigationAware
 
     {
 
@@ -72,7 +72,7 @@ namespace ElderApp.ViewModels
             _navigationService = navigationService;
             My_Events = new ObservableCollection<Event>();
             ButtonClick = new Command(ButtonClickFunction);
-            GetMyEvents();
+            
         }
 
 
@@ -146,6 +146,22 @@ namespace ElderApp.ViewModels
                     temp_my_events = My_Events;
                 }
             }
+        }
+
+
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            GetMyEvents();
+        }
+
+        public void OnNavigatingTo(INavigationParameters parameters)
+        {
+            
+        }
+
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
