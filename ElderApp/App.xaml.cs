@@ -38,7 +38,8 @@ namespace ElderApp
                     {
                         CurrentUser = user;
 
-                        NavigationService.NavigateAsync("NavigationPage/MyPage");
+                        //NavigationService.NavigateAsync("NavigationPage/MyPage");
+                        NavigationService.NavigateAsync("FirstPage");
                     }
                     else
                     {
@@ -90,6 +91,9 @@ namespace ElderApp
             containerRegistry.RegisterForNavigation<AccountPage, AccountPageVM>();
             containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageVM>();
             containerRegistry.RegisterForNavigation<CategoryPage, CategoryPageVM>();
+            containerRegistry.RegisterForNavigation<FirstPage>();
+
+
         }
 
 

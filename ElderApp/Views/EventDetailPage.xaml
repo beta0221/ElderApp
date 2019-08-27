@@ -2,47 +2,95 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="ElderApp.Views.EventDetailPage">
+    x:Class="ElderApp.Views.EventDetailPage"
+    Title="123"
+    >
+
+    
     <ContentPage.Content>
-        <TableView>
+        
+            <TableView HasUnevenRows="True" Intent="Form">
             <TableRoot>
-                <TableSection Title="title">
-                    <ViewCell>
-                        <StackLayout>
-                            <Image Source="{Binding Select_event.image_url}"/>
+                <TableSection Title="活動">
+                    <ViewCell Height="200">
+                        <StackLayout BackgroundColor="#47ADE8">
+                            <!--<Image Source="{Binding Select_event.image_url}" />-->
+                            <Image Source="http://127.0.0.1:8000/images/users/3/1565881035.png"
+                                HeightRequest="200"
+                                WidthRequest="200"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Aspect="AspectFill"/>
+                            
                         </StackLayout>
                     </ViewCell>
 
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Select_event.title}"/>
-                        </StackLayout>
-                    </ViewCell>
+                    
                 </TableSection>
 
-                <TableSection Title="body">
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Select_event.body}"/>
+                <TableSection Title="活動內容">
+                    <ViewCell Height="500">
+                        <StackLayout BackgroundColor="#47ADE8">
+                            <Label Text="{Binding Select_event.title}"
+                                   FontAttributes="Bold"
+                                   FontSize="50"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   />
+                            <StackLayout Orientation="Horizontal" BackgroundColor="#47ADE8">
+                                <Label Text="活動介紹:"/>
+                                <Label Text="{Binding Select_event.body}"
+                                />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" BackgroundColor="#47ADE8">
+                                <Label Text="活動地點:"/>
+                                <Label Text="{Binding Select_event.location}"
+                                   />
+                            </StackLayout>
+                            
+
+                            <StackLayout Orientation="Horizontal" BackgroundColor="#47ADE8">
+                                <Label Text="報名期限"/>
+                                <Label Text="{Binding Select_event.deadline}"
+                                   />
+                            </StackLayout>
+                            
+
+                            <StackLayout Orientation="Horizontal" BackgroundColor="#47ADE8">
+                                <Label Text="活動時間"/>
+                                <Label Text="{Binding Select_event.dateTime}"
+                                   />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Button 
+                                    Text="參加"
+                                    TextColor="Green"
+                                    Command="{Binding ButtonClick1}"
+                                    BackgroundColor="#47ADE8"
+                                    IsVisible="{Binding Par_show}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    />
+                                <Button 
+                                    Text="取消參加"
+                                    TextColor="Red"
+                                    Command="{Binding ButtonClick2}"
+                                    BackgroundColor="#47ADE8"
+                                    IsVisible="{Binding Cal_show}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    />
+                                
+                            </StackLayout>
+                            
                         </StackLayout>
                     </ViewCell>
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Select_event.location}"/>
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Select_event.deadline}"/>
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Select_event.dateTime}"/>
-                        </StackLayout>
-                    </ViewCell>
+                    
                 </TableSection>
             </TableRoot>
         </TableView>
+       
+        
     </ContentPage.Content>
 </ContentPage>

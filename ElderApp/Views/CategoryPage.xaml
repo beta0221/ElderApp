@@ -14,16 +14,17 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="5" x:Name="item">
-                            <Image Source="{Binding image_url}"></Image>
-                            <StackLayout HorizontalOptions="StartAndExpand">
-                                <Label Text="{Binding name}"/>
-                                <Label Text="{Binding name}"/>
-                                <Label Text="{Binding name}"/>
-                                <Label Text="{Binding name}"/>
-                                <Label Text="{Binding name}"/>
-                                <Label Text="{Binding name}"/>
-                            </StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="5"
+                                     x:Name="item"
+                                     BackgroundColor="#47ADE8"
+                                     >
+                            <Label Text="{Binding name}"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="50"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
 
                         </StackLayout>
                     </ViewCell>

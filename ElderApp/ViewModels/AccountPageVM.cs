@@ -51,6 +51,7 @@ namespace ElderApp.ViewModels
             System.Diagnostics.Debug.WriteLine("MyAccount");
 
             var client = new RestClient("http://128.199.197.142/api/auth/myAccount");
+            //var client = new RestClient("http://127.0.0.1:8000/api/auth/myAccount");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddHeader("Accept", "application/json");
@@ -94,7 +95,8 @@ namespace ElderApp.ViewModels
                 catch (Exception ex)
                 {
                     await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
-                    await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+                    //await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+                    await _navigationService.NavigateAsync("/FirstPage?selectedTab=AccountPage");
                 }
             }
 

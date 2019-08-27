@@ -25,24 +25,30 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="5" x:Name="item">
-                            <Image Source="{Binding image_url}"></Image>
-                            <StackLayout HorizontalOptions="StartAndExpand">
-                                <Label Text="{Binding title}"/>
-                                <Label Text="{Binding body}"/>
-                                <Label Text="{Binding dateTime}"/>
-                                <Label Text="{Binding location}"/>
-                                <Label Text="{Binding deadline}"/>
-                                <Label Text="{Binding participate_text,Mode=TwoWay}" TextColor="{Binding participate_color,Mode=TwoWay}"/>
+                        <StackLayout Orientation="Horizontal" Padding="5" x:Name="item" BackgroundColor="#47ADE8">
+                            <!--<Image Source="{Binding image_url}"></Image>-->
+                            <Image Source="http://127.0.0.1:8000/images/users/3/1565881035.png"
+                                   HeightRequest="100"
+                                   WidthRequest="100"
+                                   HorizontalOptions="Start"
+                                   Aspect="AspectFill"/>
+                            <StackLayout VerticalOptions="Center" BackgroundColor="#47ADE8">
+                                <Label Text="{Binding title}" />
+                               
+                                <Label Text="活動時間:"/>
+                                    <Label Text="{Binding dateTime}"/>
+                                <Label Text="活動地點:"/>
+                                    <Label Text="{Binding location}"/>
+                                <Label Text="報名截止時間:"/>
+                                    <Label Text="{Binding deadline}"/>
+                                
                             </StackLayout>
 
-                            <Button 
-                                    x:Name="myButton"
-                                    Text="{Binding btn_text,Mode=TwoWay}"
-                                    TextColor="{Binding btn_color,Mode=TwoWay}"
-                                    Command="{Binding Source={x:Reference listview}, Path=BindingContext.ButtonClick}"
-                                    CommandParameter="{Binding . }"
-                                    />
+                            <Label Text="{Binding participate_text,Mode=TwoWay}"
+                                       TextColor="{Binding participate_color,Mode=TwoWay}"
+                                   HorizontalOptions="EndAndExpand"
+                                   VerticalOptions="Center"/>
+                            
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

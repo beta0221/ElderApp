@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:ElderApp.Views"
+             x:Class="ElderApp.Views.FirstPage"
+            >
+
+  <!--Pages can be added as references or inline-->
+  <NavigationPage IconImageSource="user.png"
+                  Title="使用者"
+                  >
+        <x:Arguments>
+            <local:MyPage />
+        </x:Arguments>
+    </NavigationPage>
+
+
+    <ContentPage  Title="第二頁" IconImageSource="user" />
+    <ContentPage  Title="第三頁" IconImageSource="user" />
+
+    <NavigationPage IconImageSource="user.png"
+                  Title="使用者"
+                  >
+        <x:Arguments>
+            <local:AccountPage />
+        </x:Arguments>
+    </NavigationPage>
+</TabbedPage>
+    

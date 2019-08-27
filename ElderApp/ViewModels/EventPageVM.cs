@@ -161,8 +161,9 @@ namespace ElderApp.ViewModels
             My_events_id = new List<int>();
             temp_events = new ObservableCollection<Event>();
             ButtonClick = new Command(ButtonClickFunction);
-            GetUserEvent();
+            //GetUserEvent();
             //GetEvents();
+            
         }
 
         private async void ButtonClickFunction(object sender)
@@ -352,19 +353,20 @@ namespace ElderApp.ViewModels
             if (parameters["cat"]!=null)
             {
                 This_category = parameters["cat"] as Category;
-                GetEvents();
+                
             }
-            
+            GetUserEvent();
+            GetEvents();
         }
 
         public void OnNavigatingTo(INavigationParameters parameters)
         {
-            //This_category = parameters["cat"] as Category;
+            //GetEvents();
         }
 
         public void OnNavigatedFrom(INavigationParameters parameters)
         {
-            //This_category = parameters["cat"] as Category;
+            //GetEvents();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -38,12 +38,17 @@
   <ItemGroup>
     <EmbeddedResource Remove="ViewModels\EventPageVM.xaml" />
     <EmbeddedResource Remove="Views\EventCategoryPage.xaml" />
+    <EmbeddedResource Remove="Views\MyTabbedPage.xaml" />
+    <EmbeddedResource Remove="Views\TabbedPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ViewModels\EventPageVM.xaml.cs" />
     <Compile Remove="Views\EventCategoryPage.xaml.cs" />
     <Compile Remove="ViewModels\EventCategoryPageVM.cs" />
     <Compile Remove="Views\MyEventPage.cs" />
+    <Compile Remove="Views\TabbedPage.xaml.cs" />
+    <Compile Remove="Views\MyTabbedPage.xaml.cs" />
+    <Compile Remove="ViewModels\MyTabbedPageVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\MyEventPage.xaml.cs">
