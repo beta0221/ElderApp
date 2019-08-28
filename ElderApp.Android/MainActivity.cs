@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Android.Content;
 using Android.Provider;
 using Android.Database;
+using ImageCircle.Forms.Plugin.Droid;
 
 
 namespace ElderApp.Droid
@@ -101,6 +102,10 @@ namespace ElderApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            //image circle
+            ImageCircleRenderer.Init();
+            //image circle
 
             //ZXing
             ZXing.Net.Mobile.Forms.Android.Platform.Init();

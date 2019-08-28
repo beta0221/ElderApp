@@ -343,24 +343,45 @@ namespace ElderApp.ViewModels
             IRestResponse response = client.Execute(request);
             if (response.Content != null)
             {
-                JObject res = JObject.Parse(response.Content);
-                if (res.ContainsKey("access_token"))
+                try
                 {
-                    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                    JObject res = JObject.Parse(response.Content);
+                    if (res.ContainsKey("access_token"))
                     {
-                        var _user = conn.Table<UserModel>().FirstOrDefault();
-                        conn.Execute($"UPDATE UserModel SET Token = '{res["access_token"].ToString()}' WHERE Id = {_user.Id}");
-                        App.CurrentUser.Token = res["access_token"].ToString();
-                        
-                        Rank = Int32.Parse(res["rank"].ToString());
-                        Wallet = Int32.Parse(res["wallet"].ToString());
+                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                        {
+                            var _user = conn.Table<UserModel>().FirstOrDefault();
+                            conn.Execute($"UPDATE UserModel SET Token = '{res["access_token"].ToString()}' WHERE Id = {_user.Id}");
+                            App.CurrentUser.Token = res["access_token"].ToString();
+
+                            Rank = Int32.Parse(res["rank"].ToString());
+                            Wallet = Int32.Parse(res["wallet"].ToString());
+                        }
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("登入失敗", "帳號密碼錯誤", "OK");
+                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                        {
+                            conn.Execute("DELETE FROM UserModel");
+
+                            await _navigationService.NavigateAsync("/LoginPage");
+
+                        }
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    await App.Current.MainPage.DisplayAlert("登入失敗", "帳號密碼錯誤", "OK");
-                    await _navigationService.NavigateAsync("/LoginPage");
+
+                    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                    {
+                        conn.Execute("DELETE FROM UserModel");
+
+                        await _navigationService.NavigateAsync("/LoginPage");
+
+                    }
                 }
+                
             }
                 
         }
@@ -369,9 +390,9 @@ namespace ElderApp.ViewModels
         {
             //if (Device.RuntimePlatform == Device.iOS)
             //{
-                UpdateRequest();
+            UpdateRequest();
             //}
-                
+
         }
 
         public void OnDisappearing()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
@@ -7,9 +8,28 @@ using RestSharp;
 
 namespace ElderApp.ViewModels
 {
-    public class AccountPageVM
+    public class AccountPageVM : INotifyPropertyChanged
     {
         INavigationService _navigationService;
+
+        private string image_url;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public string Image_url
+        {
+            get { return image_url; }
+            set
+            {
+                image_url = value;
+                OnPropertyChanged("Image_url");
+            }
+        }
 
         public string Name { get; set; }
 
@@ -63,6 +83,12 @@ namespace ElderApp.ViewModels
                 try
                 {
                     JObject res = JObject.Parse(response.Content);
+
+                    var userId = App.CurrentUser.User_id;
+                    string image_url = $"http://128.199.197.142/images/users/{userId}/{res["img"].ToString()}";
+                    Image_url = image_url.ToString();
+
+
                     Name = res["name"].ToString();
                     Account = res["email"].ToString();
                     if (res["gender"].ToString() == "1")
@@ -89,6 +115,7 @@ namespace ElderApp.ViewModels
                         Valid = "過期";
                     }
 
+                    
 
 
                 }

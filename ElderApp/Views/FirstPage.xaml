@@ -6,24 +6,27 @@
             >
 
   <!--Pages can be added as references or inline-->
+    
+    
   <NavigationPage IconImageSource="user.png"
-                  Title="使用者"
+                  Title="首頁"
                   >
         <x:Arguments>
             <local:MyPage />
         </x:Arguments>
     </NavigationPage>
 
-
-    <ContentPage  Title="第二頁" IconImageSource="user" />
-    <ContentPage  Title="第三頁" IconImageSource="user" />
-
+    
+    <ContentPage  Title="銀髮學院" IconImageSource="user" />
+    
     <NavigationPage IconImageSource="user.png"
-                  Title="使用者"
+                  Title="我的帳戶"
                   >
         <x:Arguments>
             <local:AccountPage />
         </x:Arguments>
     </NavigationPage>
+    
+    
 </TabbedPage>
     
