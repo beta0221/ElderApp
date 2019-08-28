@@ -23,8 +23,62 @@ namespace ElderApp.ViewModels
         INavigationService _navigationService;
 
         private ObservableCollection<Event> temp_events { get; set; }
-        public Category This_category;
 
+        private ObservableCollection<Category> categories;
+        public ObservableCollection<Category> Categories
+        {
+            get { return categories; }
+            set
+            {
+                categories = value;
+                OnPropertyChanged(nameof(Categories));
+            }
+        }
+        public Category This_category;
+        //---------------------------------------------------------------------------------------------------
+        private Category selectCategory { get; set; }
+        public Category SelectCategory
+        {
+            get { return selectCategory; }
+            set
+            {
+                selectCategory = value;
+                if (selectCategory != null)
+                {
+                    HandledSelectItem(selectCategory);
+                }
+                OnPropertyChanged(nameof(SelectCategory));
+
+            }
+        }
+        public async void HandledSelectItem(Category cat)
+        {
+            This_category = cat;
+            GetEvents();
+        }
+        //---------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------
+        private Category selectLocation { get; set; }
+        public Category SelectLocation
+        {
+            get { return selectLocation; }
+            set
+            {
+                selectLocation = value;
+                if (selectLocation != null)
+                {
+                    HandledSelectLocation(selectLocation);
+                }
+                OnPropertyChanged(nameof(SelectLocation));
+
+            }
+        }
+        public async void HandledSelectLocation(Category loc)
+        {
+
+
+        }
+        //---------------------------------------------------------------------------------------------------
         private ObservableCollection<Event> events ;
         public ObservableCollection<Event> Events
         {
@@ -139,20 +193,6 @@ namespace ElderApp.ViewModels
             }
         }
 
-        public Command ButtonClick { get; set; }
-        //public ICommand ButtonClick
-        //{
-        //    get
-        //    {
-        //        return new Command<int>((x) => ButtonClickFunction(x));
-        //    }
-        //}
-        //public void ButtonClickFunction(int x)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(x);
-        //}                                                   //按鈕command
-
-
 
         public EventPageVM(INavigationService navigationService)
         {
@@ -160,72 +200,10 @@ namespace ElderApp.ViewModels
             Events = new ObservableCollection<Event>();
             My_events_id = new List<int>();
             temp_events = new ObservableCollection<Event>();
-            ButtonClick = new Command(ButtonClickFunction);
-            //GetUserEvent();
-            //GetEvents();
-            
+            Categories = new ObservableCollection<Category>();
         }
 
-        private async void ButtonClickFunction(object sender)
-        {
-            var eve_data = sender as Event;
-            
-                
-            //System.Diagnostics.Debug.WriteLine(eve_data.id);
 
-            RestClient client;
-            bool result;
-            if (eve_data.Participate == true)
-            {
-                result = await App.Current.MainPage.DisplayAlert("取消參加活動確認", $"是否確認取消參加活動:{eve_data.title}？", "是", "否");
-
-                client = new RestClient($"http://128.199.197.142/api/cancelevent/{eve_data.slug}");
-                //client = new RestClient($"http://127.0.0.1:8000/api/cancelevent/{eve_data.slug}");
-
-            }
-            else
-            {
-                result = await App.Current.MainPage.DisplayAlert("參加活動確認", $"是否確認參加活動:{eve_data.title}?", "是", "否");
-
-                client = new RestClient($"http://128.199.197.142/api/joinevent/{eve_data.slug}");
-                //client = new RestClient($"http://127.0.0.1:8000/api/joinevent/{eve_data.slug}");
-
-            }
-
-            
-            if(result==true)
-            {
-                var request = new RestRequest(Method.POST);
-
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddHeader("Accept", "application/json");
-                request.AddParameter("id", App.CurrentUser.User_id);
-                request.AddParameter("token", App.CurrentUser.Token.ToString());
-
-                IRestResponse response = client.Execute(request);
-                if(response.Content!=null)
-                {
-                    JObject res = JObject.Parse(response.Content);
-                    if (res["s"].ToString()=="1")
-                    {
-                        GetUserEvent();
-                        GetEvents();
-
-                        HandledSearchItem(SearchEvent);
-                    }
-                    else
-                    {
-                        await App.Current.MainPage.DisplayAlert("訊息", $"{res["m"].ToString()}","OK" );
-                    }
-                    
-                }
-            }
-            
-
-            
-
-        }
-        
 
 
         private void GetEvents()
@@ -325,18 +303,11 @@ namespace ElderApp.ViewModels
 
             if (response.Content != null)
             {
-
-                //JObject res = JObject.Parse(response.Content);
-
-                //foreach(var re in res)
-                //{
-                //    my_events_id.Add(res["id"].ToString());
-                //}
                 if (response.Content != null)
                 {
                     System.Diagnostics.Debug.WriteLine(response.Content);
 
-                    List<Event> _events = JsonConvert.DeserializeObject<List<Event>>(response.Content);     //錯誤
+                    List<Event> _events = JsonConvert.DeserializeObject<List<Event>>(response.Content);     
 
                     My_events_id.Clear();
                     foreach (var eve in _events)
@@ -348,15 +319,55 @@ namespace ElderApp.ViewModels
             }
         }
 
+
+
+        private void GetCategory()
+        {
+            var client = new RestClient("http://128.199.197.142/api/category");
+            //var client = new RestClient("http://127.0.0.1:8000/api/category");
+
+            var request = new RestRequest(Method.GET);
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+
+            IRestResponse response = client.Execute(request);
+            //System.Diagnostics.Debug.WriteLine(response.Content);
+
+            if (response.Content != null)
+            {
+                if (response.Content != null)
+                {
+                    List<Category> _categories = JsonConvert.DeserializeObject<List<Category>>(response.Content);
+
+                    Categories.Clear();
+                    foreach (var cat in _categories)
+                    {
+                        Categories.Add(cat);
+                    }
+                    Categories.Add(new Category
+                    {
+                        id = 0,
+                        name = "所有活動",
+                        slug = "all",
+                        created_at = "now"
+                    });
+                }
+            }
+        }
+
+
         public void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (parameters["cat"]!=null)
-            {
-                This_category = parameters["cat"] as Category;
-                
-            }
+          
+            GetCategory();
+            SelectCategory = (Categories.Where(c => c.slug == "all").ToList())[0];
+            This_category = SelectCategory;
+            
+
             GetUserEvent();
             GetEvents();
+            
         }
 
         public void OnNavigatingTo(INavigationParameters parameters)

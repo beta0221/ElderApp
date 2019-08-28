@@ -70,8 +70,6 @@ namespace ElderApp.ViewModels
 
         private void GetCategory()
         {
-            //System.Diagnostics.Debug.WriteLine("GetCategory");
-
             var client = new RestClient("http://128.199.197.142/api/category");
             //var client = new RestClient("http://127.0.0.1:8000/api/category");
 

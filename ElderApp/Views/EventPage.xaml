@@ -10,7 +10,23 @@
 
     <ContentPage.Content>
         <StackLayout>
-           
+            <StackLayout Orientation="Horizontal" BackgroundColor="#47ADE8">
+                <Label Text="活動地區:" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Picker Title="篩選地區" BackgroundColor="#47ADE8">
+                    <Picker.Items>
+                        <x:String>桃園</x:String>
+                        <x:String>中壢</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="活動類別:" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Picker Title="篩選類別"
+                        BackgroundColor="#47ADE8"
+                        ItemsSource="{Binding Categories}"
+                        ItemDisplayBinding="{Binding name}"
+                        SelectedItem="{Binding SelectCategory}"/>
+                    
+            </StackLayout>
+            
             <SearchBar Placeholder="搜尋活動" Text="{Binding SearchEvent,Mode=TwoWay}"/>
             <ListView x:Name="listview" ItemsSource="{Binding Events}"
                       HasUnevenRows="True"

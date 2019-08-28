@@ -90,7 +90,7 @@ namespace ElderApp
 
             containerRegistry.RegisterForNavigation<AccountPage, AccountPageVM>();
             containerRegistry.RegisterForNavigation<EditAccountPage, EditAccountPageVM>();
-            containerRegistry.RegisterForNavigation<CategoryPage, CategoryPageVM>();
+            //containerRegistry.RegisterForNavigation<CategoryPage, CategoryPageVM>();
             containerRegistry.RegisterForNavigation<FirstPage>();
 
 
