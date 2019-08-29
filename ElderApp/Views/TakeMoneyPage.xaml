@@ -5,6 +5,7 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              xmlns:zx="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable"
+             BackgroundColor="#F6A723"
              >
     
     <ContentPage.ToolbarItems>
@@ -25,10 +26,11 @@
                 WidthRequest="300"
                 BarcodeValue="-1">
                 <zx:ZXingBarcodeImageView.BarcodeOptions>
-                    <zxcm:EncodingOptions Width="300" Height="300" />
+                    <zxcm:EncodingOptions Width="300" Height="300"/>
                 </zx:ZXingBarcodeImageView.BarcodeOptions>
             </zxing:ZXingBarcodeImageView>
                 
+            <Label WidthRequest="300" FontSize="Large" Margin="0,40,0,0" XAlign="Center" Text="對方只需要使用HappyBi的行動條碼掃瞄器，並對準行動條碼，即可發送樂幣。" TextColor="White"/>
             </StackLayout>    
         
         </ScrollView>

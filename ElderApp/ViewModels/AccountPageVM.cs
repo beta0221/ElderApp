@@ -2,17 +2,18 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using Newtonsoft.Json.Linq;
+using Prism.AppModel;
 using Prism.Commands;
 using Prism.Navigation;
 using RestSharp;
 
 namespace ElderApp.ViewModels
 {
-    public class AccountPageVM : INotifyPropertyChanged
+    public class AccountPageVM : INotifyPropertyChanged, IPageLifecycleAware
     {
         INavigationService _navigationService;
 
-        private string image_url;
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
@@ -21,6 +22,7 @@ namespace ElderApp.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private string image_url;
         public string Image_url
         {
             get { return image_url; }
@@ -31,25 +33,115 @@ namespace ElderApp.ViewModels
             }
         }
 
-        public string Name { get; set; }
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                OnPropertyChanged("Name");
+            }
+        }
 
-        public string Account { get; set; }
+        private string account;
+        public string Account
+        {
+            get { return account; }
+            set
+            {
+                account = value;
+                OnPropertyChanged("Account");
+            }
+        }
 
-        public string Gender { get; set; }
+        private string gender;
+        public string Gender
+        {
+            get { return gender; }
+            set
+            {
+                gender = value;
+                OnPropertyChanged("Gender");
+            }
+        }
 
-        public string Birthdate { get; set; }
+        private string birthdate;
+        public string Birthdate
+        {
+            get { return birthdate; }
+            set
+            {
+                birthdate = value;
+                OnPropertyChanged("Birthdate");
+            }
+        }
 
-        public string Phone { get; set; }
+        private string phone;
+        public string Phone
+        {
+            get { return phone; }
+            set
+            {
+                phone = value;
+                OnPropertyChanged("Phone");
+            }
+        }
 
-        public string Tel { get; set; }
+        private string tel;
+        public string Tel
+        {
+            get { return tel; }
+            set
+            {
+                tel = value;
+                OnPropertyChanged("Tel");
+            }
+        }
 
-        public string Address { get; set; }
+        private string address;
+        public string Address
+        {
+            get { return address; }
+            set
+            {
+                address = value;
+                OnPropertyChanged("Address");
+            }
+        }
 
-        public string Id_number { get; set; }
+        private string id_number;
+        public string Id_number
+        {
+            get { return id_number; }
+            set
+            {
+                id_number = value;
+                OnPropertyChanged("Id_number");
+            }
+        }
 
-        public string Valid { get; set; }
+        private string valid;
+        public string Valid
+        {
+            get { return valid; }
+            set
+            {
+                valid = value;
+                OnPropertyChanged("Valid");
+            }
+        }
 
-        public string Expriedate { get; set; }
+        //private string expriedate;
+        //public string Expriedate
+        //{
+        //    get { return expriedate; }
+        //    set
+        //    {
+        //        expriedate = value;
+        //        OnPropertyChanged("Expriedate");
+        //    }
+        //}
 
         public ICommand Edit { get; set; }
 
@@ -58,7 +150,7 @@ namespace ElderApp.ViewModels
         {
             _navigationService = navigationService;
             Edit = new DelegateCommand(EditRequest);
-            MyAccountRequest();
+            
         }
 
         private async void EditRequest()
@@ -83,37 +175,45 @@ namespace ElderApp.ViewModels
                 try
                 {
                     JObject res = JObject.Parse(response.Content);
-
-                    var userId = App.CurrentUser.User_id;
-                    string image_url = $"http://128.199.197.142/images/users/{userId}/{res["img"].ToString()}";
-                    Image_url = image_url.ToString();
-
-
-                    Name = res["name"].ToString();
-                    Account = res["email"].ToString();
-                    if (res["gender"].ToString() == "1")
+                    if (res.ContainsKey("img"))
                     {
-                        Gender = "男";
+                        var userId = App.CurrentUser.User_id;
+                        string image_url = $"http://128.199.197.142/images/users/{userId}/{res["img"].ToString()}";
+                        Image_url = image_url.ToString();
+                        Name = res["name"].ToString();
+                        Account = res["email"].ToString();
+                        if (res["gender"].ToString() == "1")
+                        {
+                            Gender = "男";
+                        }
+                        else
+                        {
+                            Gender = "女";
+                        }
+
+                        Birthdate = res["birthdate"].ToString();
+                        Phone = res["phone"].ToString();
+                        Tel = res["tel"].ToString();
+                        Address = res["address"].ToString();
+                        Id_number = res["id_number"].ToString();
+
+                        if (res["valid"].ToString() == "1")
+                        {
+                            Valid = "有效";
+                        }
+                        else
+                        {
+                            Valid = "過期";
+                        }
                     }
                     else
                     {
-                        Gender = "女";
+                        //update token here
                     }
                     
-                    Birthdate = res["birthdate"].ToString();
-                    Phone = res["phone"].ToString();
-                    Tel = res["tel"].ToString();
-                    Address = res["address"].ToString();
-                    Id_number = res["id_number"].ToString();
 
-                    if (res["valid"].ToString() == "1")
-                    {
-                        Valid = "有效";
-                    }
-                    else
-                    {
-                        Valid = "過期";
-                    }
+
+                    
 
                     
 
@@ -123,11 +223,20 @@ namespace ElderApp.ViewModels
                 {
                     await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
                     //await _navigationService.NavigateAsync("/NavigationPage/MyPage");
-                    await _navigationService.NavigateAsync("/FirstPage?selectedTab=AccountPage");
+                    await _navigationService.NavigateAsync("/FirstPage?selectedTab=MyPage");
                 }
             }
 
         }
 
+        public void OnAppearing()
+        {
+            MyAccountRequest();
+        }
+
+        public void OnDisappearing()
+        {
+            
+        }
     }
 }
