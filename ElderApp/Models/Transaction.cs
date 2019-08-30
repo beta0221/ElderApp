@@ -13,25 +13,44 @@ namespace ElderApp.Models
 
         public int Amount { get; set; }
 
+        public string AmountString { get { return $"{Sign}{Amount}"; } }
+
         public string Text_color { get; set; }
 
+        public string Sign { get; set; }
+
         private bool give_take;
-        public bool Give_take {
+        public bool Give_take
+        {
             get { return give_take; }
             set { 
                 give_take = value;
                 if (value == true)
                 {
                     Text_color = "Green";
+                    Sign = "+";
                 }
                 else
                 {
                     Text_color = "Red";
+                    Sign = "-";
                 }
             }
         }
+        public string Target_name { get; set; }
 
-        public string Created_at { get; set; }
+        private string created_at;
+        public string Created_at
+        {
+            get
+            {
+                return created_at.Substring(0,10);
+            }
+            set
+            {
+                created_at = value;
+            }
+        }
 
         public Transaction()
         {

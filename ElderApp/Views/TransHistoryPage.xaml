@@ -1,19 +1,73 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="ElderApp.Views.TransHistoryPage">
+             x:Class="ElderApp.Views.TransHistoryPage"
+             BackgroundColor="#F6A723"
+             Padding="20">
     <ContentPage.Content>
-         <ListView ItemsSource="{Binding Transactions}">
+        
+        
+        
+        
+        <StackLayout>
             
-           <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Event}" TextColor="{Binding Text_color}"
-                              Detail="{Binding Amount}"/>
-                </DataTemplate>
-                    
-            </ListView.ItemTemplate>
+            <Label Margin="0,20,0,0" Text="我的帳簿" TextColor="White" FontSize="Large" HorizontalOptions="Center"/> 
             
-        </ListView>
+            
+            <ListView Margin="0,20,0,20" ItemsSource="{Binding Transactions}" BackgroundColor="#F6A723" SeparatorVisibility="None" RowHeight="120">
+                
+               <ListView.ItemTemplate>
+                    <DataTemplate>
+                        
+                        <ViewCell IsEnabled="false">
+                            <ContentView Margin="0,5,0,5" Padding="8" HeightRequest="120">
+                                
+                                
+                                
+                                
+                                <AbsoluteLayout>
+                                    
+                                    <BoxView BackgroundColor="White" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5,.5,1,1" CornerRadius="4"/>
+                                
+                                    <Grid Padding="12,0,12,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height=".5*"></RowDefinition>
+                                            <RowDefinition Height=".5*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width=".7*"></ColumnDefinition>
+                                            <ColumnDefinition Width=".3*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding Event}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding Target_name}" HorizontalOptions="Start" VerticalOptions="Center"/>    
+                                        
+                                            
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Created_at}" HorizontalOptions="End" VerticalOptions="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding AmountString}" TextColor="{Binding Text_color}" FontSize="Large" HorizontalOptions="End" VerticalOptions="Center"/>
+                                        
+                                    </Grid>
+                                    
+                                <!--<Label Text="{Binding Event}" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="10,10,.7,.4"/>
+                                <Label Text="{Binding Event}" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="10,10,.7,.4"/>
+                                    
+                                <Label Text="{Binding Amount}" TextColor="{Binding Text_color}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".9,.9,.3,.4"/>    
+                                <Label Text="{Binding Amount}" TextColor="{Binding Text_color}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".9,.9,.3,.4"/>    -->
+                                    
+                                </AbsoluteLayout>
+                                
+                                
+                            </ContentView>
+                        </ViewCell>
+                        
+                        <!--<TextCell Text="{Binding Event}" TextColor="{Binding Text_color}"
+                                  Detail="{Binding Amount}"/>-->
+                    </DataTemplate>
+                        
+                </ListView.ItemTemplate>
+                
+            </ListView>
+        </StackLayout>
         
         
     </ContentPage.Content>
