@@ -122,7 +122,7 @@
                                         
                                         <Label Text="{Binding title}" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0" FontSize="Large"/>
                                         <Label Text="{Binding location}" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0"/>
-                                        <Label Text="{Binding dateTime}" Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0"/>
+                                        <Label Text="{Binding dateTime}" Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0" FontSize="Small" TextColor="Gray"/>
                                         
                                         <Label Text="＞" TextColor="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
                                     </Grid>

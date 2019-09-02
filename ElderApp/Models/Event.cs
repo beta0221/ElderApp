@@ -10,7 +10,18 @@ namespace ElderApp.Models
 
         public string body { get; set; }
 
-        public string dateTime { get; set; }
+        private string _dateTime;
+        public string dateTime
+        {
+            get
+            {
+                return $"活動時間:{_dateTime}";
+            }
+            set
+            {
+                _dateTime = value;
+            }
+        }
 
         private bool participate;
         public bool Participate
@@ -43,7 +54,19 @@ namespace ElderApp.Models
         public string btn_color { get; set; }
 
         public string location { get; set; }
-        public string deadline { get; set; }
+
+        private string _deadline;
+        public string deadline
+        {
+            get
+            {
+                return $"報名截止日:{_deadline}";
+            }
+            set
+            {
+                _deadline = value;
+            }
+        }
         public string created_at { get; set; }
         public string slug { get; set; }
         public int category_id { get; set; }

@@ -2,19 +2,68 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="ElderApp.Views.EventDetailPage"
-    Title="123"
-    >
+    x:Class="ElderApp.Views.EventDetailPage">
 
     
     <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Image Source="http://128.199.197.142/images/users/1/1567011852.png"
+                       HorizontalOptions="Center"
+                       Aspect="AspectFill"/>
+                
+                <StackLayout Padding="20">
+                    
+                    
+                    <Label Text="{Binding Select_event.title}" FontSize="Large"/>
+                    <Label Text="{Binding Select_event.dateTime}" FontSize="Small" TextColor="Gray"/>
+                    <Label Text="{Binding Select_event.deadline}" FontSize="Small" TextColor="Gray"/>
+                    <Label Margin="0,0,0,80" Text="{Binding Select_event.body}" FontSize="Medium"/>
+                    <!--<Label Margin="0,0,0,80"
+                    Text="lorem Ipsum   asdfkjsadfkl sadkfljslkdf sdfksadjfklsajdfkl;jsa skd;lfj kl;sdfj kl;sdajflk;sdj kl;fsj klsdjflk;sdj flk;djslka;dfjsadkl jfsldka; jkla;s jfdlk;saj flk;as jklf;sadj fkl;dsaj flk;sdajflks jflk;a sjlkfdsjalk ;fjsdlk; fjadslk; fjakls;f jlk;safdj kl;sadfj ;klasdfj kl;jsdf jsakldfj klsadfjklsdjfkl;sdmklsdcmlk;sdcnusdncksj cdu nsiucnsducnskdu cn ucn iuasdcn kjcnjknkj sncskl jnsjkc nsjkcn jksc scn jkscn klscb jcnjdkjs cas jscnjksb cjsf sf sdfsdfweacfw w vvr erv jsdan kjsdn scnjkcsksdjkchjsdbc blcb sacjb lsa lakjc lkasj jjsck d sck sjkc jksd ckj ascj jkc asjkc sjabcjkasbdcjsacb  cbjk" FontSize="Medium"/>-->
+                    
+                    
+                    <Button 
+                        Text="參加"
+                        TextColor="White"
+                        WidthRequest="220"
+                        HeightRequest="40"
+                        BorderRadius="20"
+                        FontSize="Large"
+                        Command="{Binding ButtonClick1}"
+                        BackgroundColor="#F6A723"
+                        IsVisible="{Binding Par_show}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        />
+                    <Button 
+                        Text="取消參加"
+                        TextColor="White"
+                        WidthRequest="220"
+                        HeightRequest="40"
+                        BorderRadius="20"
+                        FontSize="Large"
+                        Command="{Binding ButtonClick2}"
+                        BackgroundColor="Gray"
+                        IsVisible="{Binding Cal_show}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        />
+                    
+                    
+                </StackLayout>
+                
+                
+            </StackLayout>    
+        </ScrollView>
         
-            <TableView HasUnevenRows="True" Intent="Form">
+        
+            <!--<TableView HasUnevenRows="True" Intent="Form">
             <TableRoot>
                 <TableSection Title="活動">
                     <ViewCell Height="200">
                         <StackLayout BackgroundColor="#47ADE8">
-                            <!--<Image Source="{Binding Select_event.image_url}" />-->
+                            <Image Source="{Binding Select_event.image_url}" />
                             <Image Source="http://127.0.0.1:8000/images/users/3/1565881035.png"
                                 HeightRequest="200"
                                 WidthRequest="200"
@@ -89,7 +138,7 @@
                     
                 </TableSection>
             </TableRoot>
-        </TableView>
+        </TableView>-->
        
         
     </ContentPage.Content>
