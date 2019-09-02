@@ -2,18 +2,21 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="ElderApp.Views.MyEventPage">
+    x:Class="ElderApp.Views.MyEventPage"
+    xmlns:circleImg="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    Padding="20"
+    BackgroundColor="#F6A723"
+    Title="我的活動">
+    
     <ContentPage.Content>
-        <StackLayout>
-           
-            <!--<SearchBar Placeholder="搜尋活動" Text="{Binding SearchEvent,Mode=TwoWay}"/>-->
+        
+        
+        <!--<StackLayout>
+            
             <ListView x:Name="listview" ItemsSource="{Binding My_Events}"
                       HasUnevenRows="True"
-                      SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
-                      >
-
-                
-
+                      SelectedItem="{Binding SelectEvent,Mode=TwoWay}">
+                      
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -39,13 +42,74 @@
                                     Text="取消參加"
                                     TextColor="Red"
                                     Command="{Binding Source={x:Reference listview}, Path=BindingContext.ButtonClick}"
-                                    CommandParameter="{Binding . }"
-                                    />
+                                    CommandParameter="{Binding . }"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        </StackLayout>
+        </StackLayout>-->
+        
+        
+        <ListView x:Name="listview" ItemsSource="{Binding My_Events}"
+                      SeparatorVisibility="None"
+                      SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
+                      RowHeight="140"
+                      BackgroundColor="#F6A723">
+
+                
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <AbsoluteLayout>
+                        <BoxView BackgroundColor="#F6A723" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                        <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#F6A723">
+                            
+                            <ContentView Padding="0,5,0,5">
+                                <AbsoluteLayout>
+                                    <BoxView BackgroundColor="White" CornerRadius="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                                    <Grid Padding="12,12,12,12" Margin="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height=".4*"></RowDefinition>
+                                            <RowDefinition Height=".3*"></RowDefinition>
+                                            <RowDefinition Height=".3*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="96"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="24"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <ContentView Grid.Row="0"
+                                            Grid.Column="0"
+                                            Grid.RowSpan="3">
+                                            
+                                            <circleImg:CircleImage
+                                               Source="http://128.199.197.142/images/users/1/1567011852.png"
+                                               Aspect="AspectFill"/>    
+                                        </ContentView>
+                                        
+                                        
+                                        <Label Text="{Binding title}" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0" FontSize="Large"/>
+                                        <Label Text="{Binding location}" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0"/>
+                                        <Label Text="{Binding dateTime}" Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0"/>
+                                        
+                                        <Label Text="＞" TextColor="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
+                                    </Grid>
+                                </AbsoluteLayout>        
+                            </ContentView>
+                                
+                            
+                        </ContentView>
+                        </AbsoluteLayout>
+                        
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        
+        
     </ContentPage.Content>
 </ContentPage>

@@ -201,6 +201,14 @@ namespace ElderApp.ViewModels
             My_events_id = new List<int>();
             temp_events = new ObservableCollection<Event>();
             Categories = new ObservableCollection<Category>();
+
+            GetCategory();
+            SelectCategory = (Categories.Where(c => c.slug == "all").ToList())[0];
+            This_category = SelectCategory;
+
+
+            GetUserEvent();
+            GetEvents();
         }
 
 
@@ -360,13 +368,13 @@ namespace ElderApp.ViewModels
         public void OnNavigatedTo(INavigationParameters parameters)
         {
           
-            GetCategory();
-            SelectCategory = (Categories.Where(c => c.slug == "all").ToList())[0];
-            This_category = SelectCategory;
+            //GetCategory();
+            //SelectCategory = (Categories.Where(c => c.slug == "all").ToList())[0];
+            //This_category = SelectCategory;
             
 
-            GetUserEvent();
-            GetEvents();
+            //GetUserEvent();
+            //GetEvents();
             
         }
 

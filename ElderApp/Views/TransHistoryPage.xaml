@@ -48,11 +48,7 @@
                                         
                                     </Grid>
                                     
-                                <!--<Label Text="{Binding Event}" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="10,10,.7,.4"/>
-                                <Label Text="{Binding Event}" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="10,10,.7,.4"/>
-                                    
-                                <Label Text="{Binding Amount}" TextColor="{Binding Text_color}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".9,.9,.3,.4"/>    
-                                <Label Text="{Binding Amount}" TextColor="{Binding Text_color}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".9,.9,.3,.4"/>    -->
+                                
                                     
                                 </AbsoluteLayout>
                                 
@@ -60,8 +56,7 @@
                             </ContentView>
                         </ViewCell>
                         
-                        <!--<TextCell Text="{Binding Event}" TextColor="{Binding Text_color}"
-                                  Detail="{Binding Amount}"/>-->
+                        
                     </DataTemplate>
                         
                 </ListView.ItemTemplate>
