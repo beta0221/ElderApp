@@ -65,8 +65,8 @@
                     
                 </ContentView>
                 
-                <ContentView HeightRequest="180" Padding="12">
-                    <Grid RowSpacing="12" ColumnSpacing="12">
+                <ContentView HeightRequest="{Binding SquareHeight}">
+                    <Grid RowSpacing="0" ColumnSpacing="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
@@ -74,13 +74,13 @@
                             <ColumnDefinition Width=".5*"/>
                             <ColumnDefinition Width=".5*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" BackgroundColor="#F6A723" Text="收樂幣" TextColor="White" Command="{Binding TakeMoney}"/>
-                        <Button Grid.Row="0" Grid.Column="1" BackgroundColor="#F6A723" Text="送樂幣" TextColor="White" Command="{Binding GiveMoney}"/>
+                        <Button Grid.Row="0" Grid.Column="0" BackgroundColor="#F6A723" Text="收樂幣" TextColor="White" Command="{Binding TakeMoney}" Margin="12,12,6,12"/>
+                        <Button Grid.Row="0" Grid.Column="1" BackgroundColor="#F6A723" Text="送樂幣" TextColor="White" Command="{Binding GiveMoney}" Margin="6,12,12,12"/>
                     </Grid>
                 </ContentView>
                 
-                <ContentView HeightRequest="180" Padding="12,0,12,12">
-                    <Button BackgroundColor="#F6A723" Text="我的帳簿" TextColor="White" Command="{Binding TransHistory}"/>
+                <ContentView HeightRequest="{Binding SquareHeight}">
+                    <Button BackgroundColor="#F6A723" Text="我的帳簿" TextColor="White" Command="{Binding TransHistory}" Margin="12,0,12,24"/>
                 </ContentView>
                 
             </StackLayout>

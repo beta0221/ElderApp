@@ -145,5 +145,8 @@
     <BundleResource Include="Resources\clock%402x.png" />
     <BundleResource Include="Resources\clock%403x.png" />
     <BundleResource Include="Resources\user.png" />
+    <BundleResource Include="Resources\home_min.png" />
+    <BundleResource Include="Resources\academy_min.png" />
+    <BundleResource Include="Resources\account_min.png" />
   </ItemGroup>
 </Project>

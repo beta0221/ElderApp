@@ -12,6 +12,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using RestSharp;
 using SQLite;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ElderApp.ViewModels
@@ -81,6 +82,7 @@ namespace ElderApp.ViewModels
 
         public ICommand Account { get; set; }
 
+        public double SquareHeight { get; set; }
 
         public MyPageVM(INavigationService navigationService)
         {
@@ -100,8 +102,14 @@ namespace ElderApp.ViewModels
 
             //if (Device.RuntimePlatform == Device.Android)
             //{
-                //UpdateRequest();
+            //UpdateRequest();
             //}
+            var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            var density = mainDisplayInfo.Density;
+            var screenWidth = mainDisplayInfo.Width / density;
+            SquareHeight = screenWidth / 2;
+
+
 
 
         }
