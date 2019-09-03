@@ -4,9 +4,90 @@
              x:Class="ElderApp.Views.MyPage"
              Title="銀髮學院">
     
-    
     <ContentPage.Content>
-        <AbsoluteLayout>
+        
+        <ScrollView>
+            
+            <StackLayout Spacing="0">
+                <ContentView BackgroundColor="#F6A723" HeightRequest="180">
+                    <Grid Padding="12,12,0,12">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".25*"/>
+                            <RowDefinition Height=".25*"/>
+                            <RowDefinition Height=".25*"/>
+                            <RowDefinition Height=".25*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="156"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Image x:Name="UserImage" 
+                           Source="{Binding Image_url,Mode=TwoWay}"
+                           Grid.Row="0" 
+                           Grid.Column="0"
+                           Grid.RowSpan="4"
+                           Aspect="AspectFill"/>
+                        <ContentView Grid.Row="0" Grid.Column="1" Padding="8,0,0,0">
+                            <StackLayout Orientation="Horizontal" Spacing="0">
+                                <Label Text="姓名:" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="{Binding User.Name,Mode=TwoWay}" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                        </ContentView>
+                        
+                        <ContentView Grid.Row="1" Grid.Column="1" Padding="12,0,0,0">
+                            <StackLayout Orientation="Horizontal" Spacing="0">
+                                <Label Text="帳號:" TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="{Binding User.Email,Mode=TwoWay}" TextColor="White" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                        </ContentView>
+                        
+                        <ContentView Grid.Row="2" Grid.Column="1" Padding="12,0,0,0">
+                            <StackLayout Orientation="Horizontal" Spacing="0">
+                                <Label Text="榮譽等級:" TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="{Binding Rank,Mode=TwoWay}" TextColor="White" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                        </ContentView>
+                        
+                        <ContentView Grid.Row="3" Grid.Column="1" Padding="12,0,0,0">
+                            <StackLayout Orientation="Horizontal" Spacing="0">
+                                <Label Text="剩餘樂幣:" TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="{Binding Wallet,Mode=TwoWay}" TextColor="White" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                        </ContentView>
+                        
+                        
+                        
+                    </Grid>
+                </ContentView>
+                
+                <ContentView BackgroundColor="Gray" HeightRequest="200">
+                    
+                </ContentView>
+                
+                <ContentView HeightRequest="180" Padding="12">
+                    <Grid RowSpacing="12" ColumnSpacing="12">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0" BackgroundColor="#F6A723" Text="收樂幣" TextColor="White" Command="{Binding TakeMoney}"/>
+                        <Button Grid.Row="0" Grid.Column="1" BackgroundColor="#F6A723" Text="送樂幣" TextColor="White" Command="{Binding GiveMoney}"/>
+                    </Grid>
+                </ContentView>
+                
+                <ContentView HeightRequest="180" Padding="12,0,12,12">
+                    <Button BackgroundColor="#F6A723" Text="我的帳簿" TextColor="White" Command="{Binding TransHistory}"/>
+                </ContentView>
+                
+            </StackLayout>
+            
+        </ScrollView>
+        
+        <!--<AbsoluteLayout>
             
             
         <StackLayout>
@@ -84,6 +165,6 @@
         </StackLayout>
             <Button BackgroundColor="Gray"
                     AbsoluteLayout.LayoutBounds="10,105,30,30" BorderRadius="15" Text="+" TextColor="White" FontSize="Large" Command="{Binding SelectImage}"/>
-        </AbsoluteLayout>
+        </AbsoluteLayout>-->
     </ContentPage.Content>
 </ContentPage>

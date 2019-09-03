@@ -8,20 +8,23 @@
   <!--Pages can be added as references or inline-->
     
     
-  <NavigationPage IconImageSource="user.png"
-                  Title="首頁"
-                  >
+  <NavigationPage IconImageSource="user.png" Title="首頁">
         <x:Arguments>
             <local:MyPage />
         </x:Arguments>
     </NavigationPage>
 
     
-    <ContentPage  Title="銀髮學院" IconImageSource="user" />
+<!--    <ContentPage  Title="銀髮學院" IconImageSource="user" />-->
     
-    <NavigationPage IconImageSource="user.png"
-                  Title="我的帳戶"
-                  >
+    <NavigationPage IconImageSource="user.png" Title="銀髮學院">
+        <x:Arguments>
+            <local:AcademyPage />
+        </x:Arguments>
+    </NavigationPage>
+    
+    
+    <NavigationPage IconImageSource="user.png" Title="我的帳戶">
         <x:Arguments>
             <local:AccountPage />
         </x:Arguments>
