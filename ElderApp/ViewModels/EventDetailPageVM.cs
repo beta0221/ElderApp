@@ -12,6 +12,7 @@ using SQLite;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Navigation;
+using Xamarin.Essentials;
 
 namespace ElderApp.ViewModels
 {
@@ -57,12 +58,20 @@ namespace ElderApp.ViewModels
 
         public ICommand back { get; set; }
 
+        public double HeadImageHeight { get; set; }
+
         public EventDetailPageVM(Event eve, INavigationService navigationService)
         {
             _navigationService = navigationService;
             back = new DelegateCommand(BackRequest);
             ButtonClick1 = new Command(ButtonClickFunction1);
             ButtonClick2 = new Command(ButtonClickFunction2);
+
+            //設定圖片高度比例4:3
+            var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            var density = mainDisplayInfo.Density;
+            var screenWidth = mainDisplayInfo.Width / density;
+            HeadImageHeight = screenWidth * 0.75;
         }
         private async void BackRequest()
         {

@@ -8,9 +8,11 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Image Source="http://128.199.197.142/images/users/1/1567011852.png"
-                       HorizontalOptions="Center"
-                       Aspect="AspectFill"/>
+                <ContentView HeightRequest="{Binding HeadImageHeight}">
+                    <Image Source="{Binding Select_event.Image_Url}"
+                       Aspect="AspectFill"/>    
+                </ContentView>
+                
                 
                 <StackLayout Padding="20">
                     

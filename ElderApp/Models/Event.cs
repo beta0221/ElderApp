@@ -71,6 +71,13 @@ namespace ElderApp.Models
         public string slug { get; set; }
         public int category_id { get; set; }
 
+        public string Image_Url
+        {
+            get
+            {
+                return $"http://128.199.197.142/images/events/{id}/{slug}.png";
+            }
+        }
         public Event()
         {
         }

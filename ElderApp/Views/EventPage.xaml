@@ -115,7 +115,7 @@
                                             Grid.RowSpan="3">
                                             
                                             <circleImg:CircleImage
-                                               Source="http://128.199.197.142/images/users/1/1567011852.png"
+                                               Source="{Binding Image_Url}"
                                                Aspect="AspectFill"/>    
                                         </ContentView>
                                         
