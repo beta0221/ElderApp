@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Input;
@@ -84,6 +85,10 @@ namespace ElderApp.ViewModels
 
         public double SquareHeight { get; set; }
 
+        public double SliderHeight { get; set; }
+
+        public ObservableCollection<FileImageSource> Slider_images { get; set; }
+
         public MyPageVM(INavigationService navigationService)
         {
             User = App.CurrentUser;
@@ -95,6 +100,10 @@ namespace ElderApp.ViewModels
             GiveMoney = new DelegateCommand(GiveMoneyRequest);
             TransHistory= new DelegateCommand(TransHistoryRequest);
 
+            Slider_images = new ObservableCollection<FileImageSource>();
+            Slider_images.Add("home_min.png");
+            Slider_images.Add("academy_min.png");
+            Slider_images.Add("account_min.png");
 
             Account = new DelegateCommand(AccountRequest);
 
@@ -108,6 +117,7 @@ namespace ElderApp.ViewModels
             var density = mainDisplayInfo.Density;
             var screenWidth = mainDisplayInfo.Width / density;
             SquareHeight = screenWidth / 2;
+            SliderHeight = screenWidth * 0.75;
 
 
 

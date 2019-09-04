@@ -5,9 +5,12 @@
         
         <ScrollView>
             <StackLayout Spacing="0">
-                <Image Source="http://128.199.197.142/images/users/1/1567011852.png"
-                       HorizontalOptions="Center"
-                       Aspect="AspectFill"/>
+                
+                <ContentView HeightRequest="{Binding SliderHeight}">
+                    <Image Source="http://128.199.197.142/images/slider/joy1.png"
+                           Aspect="AspectFill"/>    
+                </ContentView>
+                
                 <ContentView Padding="12,12,12,0" HeightRequest="180">
                     <Button Text="活動行事曆" BackgroundColor="#F6A723" TextColor="White"
                             Command="{Binding Events}"/>

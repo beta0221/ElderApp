@@ -9,6 +9,7 @@ using Prism.Ioc;
 using UIKit;
 using ImageCircle.Forms.Plugin.iOS;
 
+
 namespace ElderApp.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -27,6 +28,8 @@ namespace ElderApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            
 
             // circle image
             ImageCircleRenderer.Init();

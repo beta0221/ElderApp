@@ -103,6 +103,8 @@ namespace ElderApp.Droid
 
             base.OnCreate(savedInstanceState);
 
+            
+
             //image circle
             ImageCircleRenderer.Init();
             //image circle
