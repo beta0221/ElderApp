@@ -123,6 +123,10 @@
     <AndroidResource Include="Resources\mipmap-hdpi\academy_min.png" />
     <AndroidResource Include="Resources\mipmap-hdpi\account_min.png" />
     <AndroidResource Include="Resources\mipmap-hdpi\home_min.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\btn_give.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\btn_take.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\btn_tranHis.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\btn_coupon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

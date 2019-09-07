@@ -148,5 +148,9 @@
     <BundleResource Include="Resources\home_min.png" />
     <BundleResource Include="Resources\academy_min.png" />
     <BundleResource Include="Resources\account_min.png" />
+    <BundleResource Include="Resources\btn_give.png" />
+    <BundleResource Include="Resources\btn_take.png" />
+    <BundleResource Include="Resources\btn_tranHis.png" />
+    <BundleResource Include="Resources\btn_coupon.png" />
   </ItemGroup>
 </Project>
