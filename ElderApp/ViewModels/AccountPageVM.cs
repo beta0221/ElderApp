@@ -6,6 +6,7 @@ using Prism.AppModel;
 using Prism.Commands;
 using Prism.Navigation;
 using RestSharp;
+using SQLite;
 
 namespace ElderApp.ViewModels
 {
@@ -132,6 +133,28 @@ namespace ElderApp.ViewModels
             }
         }
 
+        private string valid_color;
+        public string Valid_color
+        {
+            get { return valid_color; }
+            set
+            {
+                valid_color = value;
+                OnPropertyChanged("Valid_color");
+            }
+        }
+
+        private bool extend;
+        public bool Extend
+        {
+            get { return extend; }
+            set
+            {
+                extend = value;
+                OnPropertyChanged("Extend");
+            }
+        }
+
         //private string expriedate;
         //public string Expriedate
         //{
@@ -145,12 +168,14 @@ namespace ElderApp.ViewModels
 
         public ICommand Edit { get; set; }
 
+        public ICommand Logout { get; set; }
 
         public AccountPageVM(INavigationService navigationService)
         {
             _navigationService = navigationService;
             Edit = new DelegateCommand(EditRequest);
-            
+            Logout = new DelegateCommand(LogoutRequest);
+
         }
 
         private async void EditRequest()
@@ -200,10 +225,14 @@ namespace ElderApp.ViewModels
                         if (res["valid"].ToString() == "1")
                         {
                             Valid = "有效";
+                            Valid_color = "Green";
+                            Extend = false;
                         }
                         else
                         {
                             Valid = "過期";
+                            Valid_color = "#E22600";
+                            Extend = true;
                         }
                     }
                     else
@@ -225,6 +254,61 @@ namespace ElderApp.ViewModels
                     //await _navigationService.NavigateAsync("/NavigationPage/MyPage");
                     await _navigationService.NavigateAsync("/FirstPage?selectedTab=MyPage");
                 }
+            }
+
+        }
+
+        private async void LogoutRequest()
+        {
+
+            var result = await App.Current.MainPage.DisplayAlert("Logging out", "Sure to logout", "Yes", "Cancel");
+            if (result == true)
+            {
+
+                //System.Diagnostics.Debug.WriteLine(App.CurrentUser.Token.ToString());
+                System.Diagnostics.Debug.WriteLine("Logout");
+
+                var client = new RestClient("http://128.199.197.142/api/auth/logout");
+                //var client = new RestClient("http://127.0.0.1:8000/api/auth/logout");
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", App.CurrentUser.Token.ToString());
+                IRestResponse response = client.Execute(request);
+
+                if (response.Content != null)
+                {
+                    try
+                    {
+                        JObject res = JObject.Parse(response.Content);
+
+                        if (res["message"].ToString() == "Successfully logged out")
+                        {
+                            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                            {
+                                conn.Execute("DELETE FROM UserModel");
+
+                                await _navigationService.NavigateAsync("/LoginPage");
+
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
+
+                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                        {
+                            conn.Execute("DELETE FROM UserModel");
+
+                            await _navigationService.NavigateAsync("/LoginPage");
+
+                        }
+                    }
+
+                }
+
+
             }
 
         }
