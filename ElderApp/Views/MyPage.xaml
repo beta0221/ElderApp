@@ -77,7 +77,8 @@
                         </Grid.ColumnDefinitions>
                         
                         <ContentView Grid.Row="0" Grid.Column="0" Margin="12,12,6,6">
-                            <AbsoluteLayout>
+                            <ImageButton Source="take.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding TakeMoney}"/>
+                            <!--<AbsoluteLayout>
                                 <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Silver" CornerRadius="4"/>
                                 <Grid RowSpacing="0" ColumnSpacing="0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,1,.8">
                                     <Grid.RowDefinitions>
@@ -90,11 +91,12 @@
                                     <ImageButton Grid.Row="0" Grid.Column="0" Source="btn_take.png" Command="{Binding TakeMoney}"/>
                                     <Label Grid.Row="1" Grid.Column="0" Text="收樂幣" TextColor="White" FontSize="Large" HorizontalTextAlignment="Center"/>
                                 </Grid>
-                            </AbsoluteLayout>
+                            </AbsoluteLayout>-->
                         </ContentView>
                         
                         <ContentView Grid.Row="0" Grid.Column="1" Margin="6,12,12,6">
-                            <AbsoluteLayout>
+                            <ImageButton Source="give.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding GiveMoney}"/>
+                            <!--<AbsoluteLayout>
                                 <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Silver" CornerRadius="4"/>
                                 <Grid RowSpacing="0" ColumnSpacing="0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,1,.8">
                                     <Grid.RowDefinitions>
@@ -107,7 +109,7 @@
                                     <ImageButton Grid.Row="0" Grid.Column="0" Source="btn_give.png" Command="{Binding GiveMoney}"/>
                                     <Label Grid.Row="1" Grid.Column="0" Text="送樂幣" TextColor="White" FontSize="Large" HorizontalTextAlignment="Center"/>
                                 </Grid>
-                            </AbsoluteLayout>
+                            </AbsoluteLayout>-->
                         </ContentView>
                         
                     </Grid>
@@ -132,7 +134,8 @@
                         </Grid.ColumnDefinitions>
                         
                         <ContentView Grid.Row="0" Grid.Column="0" Margin="12,6,6,12">
-                            <AbsoluteLayout>
+                            <ImageButton Source="trans.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding TransHistory}"/>
+                            <!--<AbsoluteLayout>
                                 <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Silver" CornerRadius="4"/>
                                 <Grid RowSpacing="0" ColumnSpacing="0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,1,.8">
                                     <Grid.RowDefinitions>
@@ -145,11 +148,12 @@
                                     <ImageButton Grid.Row="0" Grid.Column="0" Source="btn_tranHis.png" Command="{Binding TransHistory}"/>
                                     <Label Grid.Row="1" Grid.Column="0" Text="我的帳簿" TextColor="White" FontSize="Large" HorizontalTextAlignment="Center"/>
                                 </Grid>
-                            </AbsoluteLayout>
+                            </AbsoluteLayout>-->
                         </ContentView>
                         
                         <ContentView Grid.Row="0" Grid.Column="1" Margin="6,6,12,12">
-                            <AbsoluteLayout>
+                            <ImageButton Source="promo.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding Promocode}"/>
+                            <!--<AbsoluteLayout>
                                 <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Silver" CornerRadius="4"/>
                                 <Grid RowSpacing="0" ColumnSpacing="0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,1,.8">
                                     <Grid.RowDefinitions>
@@ -159,10 +163,10 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <ImageButton Grid.Row="0" Grid.Column="0" Source="btn_coupon.png"/>
+                                    <ImageButton Grid.Row="0" Grid.Column="0" Source="btn_coupon.png" Command="{Binding Promocode}"/>
                                     <Label Grid.Row="1" Grid.Column="0" Text="使用兌換卷" TextColor="White" FontSize="Large" HorizontalTextAlignment="Center"/>
                                 </Grid>
-                            </AbsoluteLayout>
+                            </AbsoluteLayout>-->
                         </ContentView>
                         
                     </Grid>

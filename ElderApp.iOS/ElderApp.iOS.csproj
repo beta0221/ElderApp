@@ -152,5 +152,9 @@
     <BundleResource Include="Resources\btn_take.png" />
     <BundleResource Include="Resources\btn_tranHis.png" />
     <BundleResource Include="Resources\btn_coupon.png" />
+    <BundleResource Include="Resources\give.png" />
+    <BundleResource Include="Resources\promo.png" />
+    <BundleResource Include="Resources\take.png" />
+    <BundleResource Include="Resources\trans.png" />
   </ItemGroup>
 </Project>

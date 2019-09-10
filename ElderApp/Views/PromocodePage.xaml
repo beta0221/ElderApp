@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElderApp.Views.PromocodePage">
+    <ContentPage.Content>
+        
+        <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="12,0,12,0">
+            <Entry Text="{Binding Promocode,Mode=TwoWay}"
+                  HorizontalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center"
+                           Placeholder="兌換卷代碼"   
+                           PlaceholderColor="White" BackgroundColor="Gray" Opacity="0.3" HeightRequest="40"   
+                           TextColor="White"
+                   Margin="0,0,0,4"/>
+            <Button Text="確認領取" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                        BackgroundColor="#F6A723" Command="{Binding Submit}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -83,6 +83,8 @@ namespace ElderApp.ViewModels
 
         public ICommand Account { get; set; }
 
+        public ICommand Promocode { get; set; }
+
         public double SquareHeight { get; set; }
 
         public double SliderHeight { get; set; }
@@ -99,6 +101,7 @@ namespace ElderApp.ViewModels
             TakeMoney = new DelegateCommand(TakeMoneyRequest);
             GiveMoney = new DelegateCommand(GiveMoneyRequest);
             TransHistory= new DelegateCommand(TransHistoryRequest);
+            Promocode = new DelegateCommand(PromocodeRequest);
 
             Slider_images = new ObservableCollection<FileImageSource>();
             Slider_images.Add("home_min.png");
@@ -221,6 +224,10 @@ namespace ElderApp.ViewModels
             await _navigationService.NavigateAsync("AccountPage");
         }
 
+        private async void PromocodeRequest()
+        {
+            await _navigationService.NavigateAsync("PromocodePage");
+        }
 
         private async void LogoutRequest()
         {
