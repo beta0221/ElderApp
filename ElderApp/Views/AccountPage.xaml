@@ -77,7 +77,7 @@
                         
 <!--                        <Label HeightRequest="16" TextColor="#919191" Text="會員效期"></Label>-->
                         <Button Text="修改資料" BackgroundColor="Gray" TextColor="White" Margin="0,0,0,12" Command="{Binding Edit}"/>
-                        <Button Text="申請續會" BackgroundColor="#F6A723" TextColor="White" Margin="0,0,0,12" IsVisible="{Binding Extend,Mode=TwoWay}"/>
+                        <Button Text="申請續會" BackgroundColor="#F6A723" TextColor="White" Margin="0,0,0,12" IsVisible="{Binding Extend,Mode=TwoWay}" Command="{Binding ExtendMembership}"/>
                         <Button Text="登出" TextColor="#F6A723" Margin="0,0,0,12" Command="{Binding Logout}"/>
                     </StackLayout>
                 </ContentView>

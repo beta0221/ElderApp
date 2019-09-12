@@ -170,17 +170,63 @@ namespace ElderApp.ViewModels
 
         public ICommand Logout { get; set; }
 
+        public ICommand ExtendMembership { get; set; }
+
         public AccountPageVM(INavigationService navigationService)
         {
             _navigationService = navigationService;
             Edit = new DelegateCommand(EditRequest);
             Logout = new DelegateCommand(LogoutRequest);
+            ExtendMembership = new DelegateCommand(ExtendRequest);
 
         }
 
         private async void EditRequest()
         {
             await _navigationService.NavigateAsync("EditAccountPage");
+        }
+
+        private async void ExtendRequest()
+        {
+            System.Diagnostics.Debug.WriteLine("Extend Request");
+
+            var client = new RestClient("http://www.happybi.com.tw/api/extendMemberShip");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("token", App.CurrentUser.Token.ToString());
+            request.AddParameter("user_id", App.CurrentUser.User_id);
+            IRestResponse response = client.Execute(request);
+
+            if (response.Content != null)
+            {
+                try
+                {
+                    JObject res = JObject.Parse(response.Content);
+                    if (res.ContainsKey("s"))
+                    {
+
+                        await App.Current.MainPage.DisplayAlert("訊息", res["m"].ToString(), "確定");
+                        //if(res["s"].ToString() == "1")
+                        //{
+                        //    MyAccountRequest();
+                        //}
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
+                    await _navigationService.NavigateAsync("/FirstPage?selectedTab=MyPage");
+                }
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應或無網路服務", "確定");
+            }
+
+
+
         }
 
         private async void MyAccountRequest()
@@ -239,13 +285,6 @@ namespace ElderApp.ViewModels
                     {
                         //update token here
                     }
-                    
-
-
-                    
-
-                    
-
 
                 }
                 catch (Exception ex)
