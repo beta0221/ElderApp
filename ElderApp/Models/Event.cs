@@ -5,7 +5,7 @@ namespace ElderApp.Models
     {
         public int id { get; set; }
         public string title { get; set; }
-
+        public string image { get; set; }
         //public string image_url { get; set; }
 
         public string body { get; set; }
@@ -75,7 +75,7 @@ namespace ElderApp.Models
         {
             get
             {
-                return $"http://128.199.197.142/images/events/{id}/{slug}.png";
+                return $"http://128.199.197.142/images/events/{slug}/{image}";
             }
         }
         public Event()
