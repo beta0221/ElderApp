@@ -120,7 +120,7 @@ namespace ElderApp.ViewModels
             var density = mainDisplayInfo.Density;
             var screenWidth = mainDisplayInfo.Width / density;
             SquareHeight = screenWidth / 2;
-            SliderHeight = screenWidth * 0.75;
+            SliderHeight = screenWidth * 0.5;
 
 
 

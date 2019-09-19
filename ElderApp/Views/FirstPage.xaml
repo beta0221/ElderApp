@@ -21,7 +21,7 @@
     
     <NavigationPage IconImageSource="academy_min.png" Title="銀髮學院">
         <x:Arguments>
-            <local:AcademyPage />
+            <local:EventPage />
         </x:Arguments>
     </NavigationPage>
     

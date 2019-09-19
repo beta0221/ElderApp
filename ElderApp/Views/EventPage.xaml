@@ -4,12 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="ElderApp.Views.EventPage"
     xmlns:circleImg="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-    Padding="20"
     BackgroundColor="#F6A723"
     Title="活動行事曆">
     
     <!--xmlns:local="clr-namespace:ElderApp.ViewModels"-->
     
+    
+    <ContentPage.ToolbarItems> 
+        <ToolbarItem Text="我的活動" Command="{Binding My_events}"/>
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <!--<StackLayout>
@@ -74,73 +77,116 @@
             </ListView.ItemTemplate>
         </ListView>
         </StackLayout>-->
+        <ScrollView>
+        <StackLayout>
         
-        
-        
-        <ListView x:Name="listview" ItemsSource="{Binding Events}"
-                      SeparatorVisibility="None"
-                      IsPullToRefreshEnabled="True"
-                      RefreshCommand="{Binding RefreshCommand}"
-                      IsRefreshing="{Binding IsRefreshing}"
-                      SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
-                      RowHeight="140"
-                      BackgroundColor="#F6A723">
-
+            <ContentView BackgroundColor="White" HeightRequest="{Binding SliderHeight}">
+                <WebView Source="http://128.199.197.142/slider.html"/>
+            </ContentView>
+            
+            <ContentView Padding="20,8">
                 
-
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <AbsoluteLayout>
-                        <BoxView BackgroundColor="#F6A723" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
-                        <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#F6A723">
+                
+                <StackLayout>
+                    
+                    <ContentView>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
                             
-                            <ContentView Padding="0,5,0,5">
-                                <AbsoluteLayout>
-                                    <BoxView BackgroundColor="White" CornerRadius="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
-                                    <Grid Padding="12,12,12,12" Margin="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height=".4*"></RowDefinition>
-                                            <RowDefinition Height=".3*"></RowDefinition>
-                                            <RowDefinition Height=".3*"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="96"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="24"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        
-                                        <ContentView Grid.Row="0"
-                                            Grid.Column="0"
-                                            Grid.RowSpan="3">
-                                            
-                                            <circleImg:CircleImage
-                                               Source="{Binding Image_Url}"
-                                               Aspect="AspectFill"/>    
-                                        </ContentView>
-                                        
-                                        
-                                        <Label Text="{Binding title}" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0" FontSize="Large"/>
-                                        <Label Text="{Binding location}" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0"/>
-                                        <Label Text="{Binding dateTime}" Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0" FontSize="Small" TextColor="Gray"/>
-                                        
-                                        <Label Text="＞" TextColor="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
-                                    </Grid>
-                                </AbsoluteLayout>        
-                            </ContentView>
-                                
+                            <Picker Title="地區" BackgroundColor="#ffffff" Grid.Row="0" Grid.Column="1">
+                                <Picker.Items>
+                                    <x:String>所有地區</x:String>
+                                    <x:String>桃園</x:String>
+                                    <x:String>中壢</x:String>
+                                </Picker.Items>
+                            </Picker>
                             
-                        </ContentView>
-                        </AbsoluteLayout>
+                            <Picker Grid.Row="0"
+                                    Grid.Column="0"
+                                Title="活動類別"
+                                BackgroundColor="#ffffff"
+                                ItemsSource="{Binding Categories}"
+                                ItemDisplayBinding="{Binding name}"
+                                SelectedItem="{Binding SelectCategory}"/>
+                        </Grid>
                         
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </ContentView>
+                
+                
+                
+                    <ListView x:Name="listview" ItemsSource="{Binding Events}"
+                          SeparatorVisibility="None"
+                          IsPullToRefreshEnabled="True"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsRefreshing}"
+                          SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
+                          RowHeight="140"
+                          BackgroundColor="#F6A723">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <AbsoluteLayout>
+                                    <BoxView BackgroundColor="#F6A723" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                                    <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#F6A723">
+                                        
+                                        <ContentView Padding="0,5,0,5">
+                                            <AbsoluteLayout>
+                                                <BoxView BackgroundColor="White" CornerRadius="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                                                <Grid Padding="12,12,12,12" Margin="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height=".4*"></RowDefinition>
+                                                        <RowDefinition Height=".3*"></RowDefinition>
+                                                        <RowDefinition Height=".3*"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="96"></ColumnDefinition>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="24"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <ContentView Grid.Row="0"
+                                                        Grid.Column="0"
+                                                        Grid.RowSpan="3">
+                                                        
+                                                        <circleImg:CircleImage
+                                                           Source="{Binding Image_Url}"
+                                                           Aspect="AspectFill"/>    
+                                                    </ContentView>
+                                                    
+                                                    
+                                                    <Label Text="{Binding title}" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0" FontSize="Large"/>
+                                                    <Label Text="{Binding location}" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0"/>
+                                                    <Label Text="{Binding dateTime}" Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0" FontSize="Small" TextColor="Gray"/>
+                                                    
+                                                    <Label Text="＞" TextColor="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
+                                                </Grid>
+                                            </AbsoluteLayout>        
+                                        </ContentView>
+                                            
+                                        
+                                    </ContentView>
+                                    </AbsoluteLayout>
+                                    
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                
+                </StackLayout>
+            </ContentView>
+            
+            
+            
         
-        
-        
-        
+        </StackLayout>
+        </ScrollView>
         
     </ContentPage.Content>
 </ContentPage>
