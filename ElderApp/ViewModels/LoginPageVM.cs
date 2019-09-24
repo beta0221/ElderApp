@@ -111,7 +111,7 @@ namespace ElderApp.ViewModels
                         {
                             App.CurrentUser = newUser;
                             //await _navigationService.NavigateAsync("NavigationPage/MyPage");    //跳轉到第一頁
-                            await _navigationService.NavigateAsync("FirstPage");
+                            await _navigationService.NavigateAsync("/FirstPage");
                         }
                         else
                         {

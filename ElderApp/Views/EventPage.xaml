@@ -92,6 +92,7 @@
                     <ContentView>
                         <Grid>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>    
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -99,7 +100,12 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             
-                            <Picker Title="地區" BackgroundColor="#ffffff" Grid.Row="0" Grid.Column="1">
+                            <SearchBar
+                                    BackgroundColor="White"
+                                    Grid.Row="0" 
+                                    Grid.Column="0" Grid.ColumnSpan="2" Placeholder="搜尋活動" Text="{Binding SearchEvent,Mode=TwoWay}"/>
+                                
+                            <Picker Title="地區" BackgroundColor="#ffffff" Grid.Row="1" Grid.Column="1">
                                 <Picker.Items>
                                     <x:String>所有地區</x:String>
                                     <x:String>桃園</x:String>
@@ -107,7 +113,7 @@
                                 </Picker.Items>
                             </Picker>
                             
-                            <Picker Grid.Row="0"
+                            <Picker Grid.Row="1"
                                     Grid.Column="0"
                                 Title="活動類別"
                                 BackgroundColor="#ffffff"

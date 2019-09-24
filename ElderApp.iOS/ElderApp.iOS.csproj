@@ -25,7 +25,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>x86_64</MtouchArch>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
@@ -148,10 +148,6 @@
     <BundleResource Include="Resources\home_min.png" />
     <BundleResource Include="Resources\academy_min.png" />
     <BundleResource Include="Resources\account_min.png" />
-    <BundleResource Include="Resources\btn_give.png" />
-    <BundleResource Include="Resources\btn_take.png" />
-    <BundleResource Include="Resources\btn_tranHis.png" />
-    <BundleResource Include="Resources\btn_coupon.png" />
     <BundleResource Include="Resources\give.png" />
     <BundleResource Include="Resources\promo.png" />
     <BundleResource Include="Resources\take.png" />
