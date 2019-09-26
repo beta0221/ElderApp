@@ -19,7 +19,7 @@
             
             <Label WidthRequest="300" FontSize="Large" Margin="0,40,0,0" XAlign="Center" Text="對準對方的行動條碼" TextColor="Gray"/>
                 
-            <Button Text="返回" Command="{Binding Back}"/>
+            <Button Text="返回" FontSize="Large" Command="{Binding Back}"/>
             </StackLayout>    
         
         </ScrollView>

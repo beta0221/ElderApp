@@ -278,6 +278,9 @@ namespace ElderApp.ViewModels
         private async void SubmitRequest()
         {
 
+            //validate here
+
+
             var client = new RestClient("http://128.199.197.142/api/member/join");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -339,49 +342,58 @@ namespace ElderApp.ViewModels
 
 
 
-            if (Pay_method.Val == 0)
+            if (Pay_method != null)
             {
-                SubmitRequest();
-            }
-            else
-            {
-
-                var client = new RestClient($"http://128.199.197.142/api/inviterCheck?inviter_id_code={Inviter_id_code}");
-                var request = new RestRequest(Method.GET);
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddHeader("Accept", "application/json");
-
-                IRestResponse response = client.Execute(request);
-
-                if (response.Content != null)
+                if (Pay_method.Val == 0)
                 {
-                    try
+                    SubmitRequest();
+                }
+                else
+                {
+                    if (Inviter_id_code == null)
                     {
-                        JObject res = JObject.Parse(response.Content);
-
-                        if (res["s"].ToString() == "1")
-                        {
-                        
-                            var result = await App.Current.MainPage.DisplayAlert("確認推薦人", $"確認推薦人姓名為：{res["inviter"].ToString()}", "是", "否");
-                            if (result == true)
-                            {
-                                SubmitRequest();
-                            }
-                        }
-                        else
-                        {
-                            await App.Current.MainPage.DisplayAlert("非常抱歉", "此會員編號用戶並不存在，請檢查是否輸入錯誤或向推薦人確認。", "確定");
-                        }
-
+                        return;
                     }
-                    catch (Exception ex)
+                    
+                    var client = new RestClient($"http://128.199.197.142/api/inviterCheck?inviter_id_code={Inviter_id_code}");
+                    var request = new RestRequest(Method.GET);
+                    request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                    request.AddHeader("Accept", "application/json");
+
+                    IRestResponse response = client.Execute(request);
+
+                    if (response.Content != null)
                     {
-                        await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
+                        try
+                        {
+                            JObject res = JObject.Parse(response.Content);
+
+                            if (res["s"].ToString() == "1")
+                            {
+
+                                var result = await App.Current.MainPage.DisplayAlert("確認推薦人", $"確認推薦人姓名為：{res["inviter"].ToString()}", "是", "否");
+                                if (result == true)
+                                {
+                                    SubmitRequest();
+                                }
+                            }
+                            else
+                            {
+                                await App.Current.MainPage.DisplayAlert("非常抱歉", "此會員編號用戶並不存在，請檢查是否輸入錯誤或向推薦人確認。", "確定");
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
+                        }
+
                     }
 
                 }
 
             }
+            
 
 
         }

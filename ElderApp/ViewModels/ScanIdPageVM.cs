@@ -71,10 +71,7 @@ namespace ElderApp.ViewModels
 
         private async void backToSignUp()
         {
-            var paremeter = new NavigationParameters();
-            
-            paremeter.Add("Id", "H190815327");
-            await _navigationService.GoBackAsync(paremeter);
+            await _navigationService.GoBackAsync();
         }
 
     }
