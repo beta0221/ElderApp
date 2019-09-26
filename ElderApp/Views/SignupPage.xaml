@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="ElderApp.Views.SignupPage"
+             BackgroundColor="#ffffff">
+    <ContentPage.Content>
+        
+        <AbsoluteLayout>
+            <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="0,0,0,56">
+                <ScrollView>
+                    <StackLayout Padding="24">
+                        
+                        <Label Text="桃園市銀髮族協會" TextColor="#F6A723" Scale="1.8" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0,30,0,30"/>
+                        
+                        <Label Text="會員註冊" TextColor="#000000" Scale="1.2" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0,0,0,30"/>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="會員帳號(建議使用手機或E-mail)"></Label>
+                        <Entry HeightRequest="40" FontSize="Large" Text="{Binding Email,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="密碼"></Label>
+                        <Entry HeightRequest="40" FontSize="Large" Text="{Binding Password,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="確認密碼"></Label>
+                        <Entry HeightRequest="40" FontSize="Large" Text="{Binding Con_password,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="姓名"></Label>
+                        <Entry HeightRequest="40" FontSize="Large" Text="{Binding Name,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="手機號碼"></Label>
+                        <Entry HeightRequest="40" FontSize="Large" Text="{Binding Phone,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="家用電話"></Label>
+                        <Entry HeightRequest="40" FontSize="Large" Text="{Binding Tel,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="性別"></Label>
+                        <Picker HeightRequest="40" Title="性別" BackgroundColor="#ffffff" Margin="0,0,0,24"
+                                ItemsSource="{Binding GenderList}"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding Gender}"
+                                />
+                        
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="出生年月日"></Label>
+                        <DatePicker HeightRequest="40" Margin="0,0,0,24" Date="{Binding Birthdate,Mode=TwoWay}"/>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="生份證字號"></Label>
+                        <Entry HeightRequest="40" FontSize="Large" Text="{Binding Id_number,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="地區"></Label>
+                        <Picker HeightRequest="40" Title="地區" BackgroundColor="#ffffff" Margin="0,0,0,24"
+                                ItemsSource="{Binding DistrictList}"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding District}"/>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="地址"></Label>
+                        <Entry HeightRequest="40" FontSize="Large" Text="{Binding Address,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                        
+                        <Label HeightRequest="16" TextColor="#000000" Text="付款方式"></Label>
+                        <Picker HeightRequest="40" Title="請選擇繳費方式" BackgroundColor="#ffffff" Margin="0,0,0,24"
+                                ItemsSource="{Binding PayMethodList}"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding Pay_method}"/>
+                        
+                        
+                        <Label IsVisible="{Binding ShowInviterInput,Mode=TwoWay}" HeightRequest="16" TextColor="#000000" Text="推薦人手機會員編號"></Label>
+                        <Button IsVisible="{Binding ShowInviterInput,Mode=TwoWay}" HeightRequest="40" WidthRequest="160" Text="掃描QR Code" TextColor="#ffffff" FontSize="Large" BackgroundColor="#F6A723" Margin="0,4,0,4" Command="{Binding Scan}"/>
+                        <Entry IsVisible="{Binding ShowInviterInput,Mode=TwoWay}" HeightRequest="40" FontSize="Large" Text="{Binding Inviter_id_code,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                        
+                    </StackLayout>
+                </ScrollView>
+                
+            </ContentView>
+            
+            <Button 
+                Command="{Binding BackToLogin}"
+                Text="返回"
+                BorderRadius="0"
+                TextColor="White"
+                FontSize="Large"
+                BackgroundColor="Gray"
+                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
+                AbsoluteLayout.LayoutBounds="0,1,.5,56"
+                />
+            <Button 
+                Command="{Binding Submit}"
+                Text="送出"
+                BorderRadius="0"
+                TextColor="White"
+                FontSize="Large"
+                BackgroundColor="#F6A723"
+                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
+                AbsoluteLayout.LayoutBounds="1,1,.5,56"
+                />
+            
+            
+        </AbsoluteLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

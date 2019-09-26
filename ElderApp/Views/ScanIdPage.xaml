@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             x:Class="ElderApp.Views.ScanIdPage">
+    <ContentPage.Content>
+        
+        <ScrollView>
+
+        
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                
+            <zxing:ZXingScannerView 
+                x:Name="_scanView"
+                Result="{Binding Result, Mode=TwoWay}" 
+                ScanResultCommand="{Binding QRScanResultCommand}" 
+                IsScanning="{Binding IsScanning,Mode=TwoWay}"
+                WidthRequest="300" HeightRequest="300" />
+            
+            <Label WidthRequest="300" FontSize="Large" Margin="0,40,0,0" XAlign="Center" Text="對準對方的行動條碼" TextColor="Gray"/>
+                
+            <Button Text="返回" Command="{Binding Back}"/>
+            </StackLayout>    
+        
+        </ScrollView>
+        
+        
+    </ContentPage.Content>
+</ContentPage>

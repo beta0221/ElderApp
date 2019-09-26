@@ -21,10 +21,10 @@
             <zxing:ZXingBarcodeImageView 
                 IsVisible="True"
                 x:Name="UserBarcode"
-                BarcodeFormat="QR_CODE" 
+                BarcodeFormat="QR_CODE"
                 HeightRequest="300"
                 WidthRequest="300"
-                BarcodeValue="-1">
+                >
                 <zx:ZXingBarcodeImageView.BarcodeOptions>
                     <zxcm:EncodingOptions Width="300" Height="300"/>
                 </zx:ZXingBarcodeImageView.BarcodeOptions>

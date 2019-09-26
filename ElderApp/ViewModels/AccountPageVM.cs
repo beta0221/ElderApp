@@ -155,6 +155,17 @@ namespace ElderApp.ViewModels
             }
         }
 
+        private string id_code;
+        public string Id_code
+        {
+            get { return id_code; }
+            set
+            {
+                id_code = value;
+                OnPropertyChanged("Id_code");
+            }
+        }
+
         //private string expriedate;
         //public string Expriedate
         //{
@@ -280,6 +291,9 @@ namespace ElderApp.ViewModels
                             Valid_color = "#E22600";
                             Extend = true;
                         }
+
+                        Id_code = res["id_code"].ToString();
+
                     }
                     else
                     {

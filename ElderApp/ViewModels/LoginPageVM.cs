@@ -44,12 +44,20 @@ namespace ElderApp.ViewModels
 
         public ICommand Login { get; set; }
 
+        public ICommand Signup { get; set; }
+
         public LoginPageVM(INavigationService navigationService)
         {
             Login = new DelegateCommand(LoginRequest);
+            Signup = new DelegateCommand(SignupRequest);
             _navigationService = navigationService;
         }
 
+
+        private async void SignupRequest()
+        {
+            await _navigationService.NavigateAsync("/SignupPage");
+        }
 
         private async void LoginRequest()
         {

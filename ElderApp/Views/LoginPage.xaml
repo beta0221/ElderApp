@@ -30,8 +30,11 @@
                     <Button Command="{Binding Login}" Text="登入" TextColor="White"  
                         FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                         BackgroundColor="#F6A723" />
-                    <!--<Button Text="註冊" TextColor="#47ADE8"  
-                        FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"/>-->
+                
+                    <Button Text="註冊" TextColor="#F6A723"  
+                        FontAttributes="Bold" FontSize="Large" 
+                            HorizontalOptions="FillAndExpand"
+                            Command="{Binding Signup}"/>
                 
             </StackLayout>  
             

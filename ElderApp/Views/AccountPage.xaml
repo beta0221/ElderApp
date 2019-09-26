@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="ElderApp.Views.AccountPage"
              xmlns:circleImg="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:zx="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable"
              Title="我的帳戶">
     <ContentPage.Content>
         
@@ -73,7 +76,16 @@
                             </AbsoluteLayout>
                         </ContentView>
                         
-                        
+                        <zxing:ZXingBarcodeImageView 
+                            IsVisible="True"
+                            BarcodeFormat="QR_CODE"
+                            HeightRequest="300"
+                            WidthRequest="300"
+                            BarcodeValue="{Binding Id_code}">
+                            <zx:ZXingBarcodeImageView.BarcodeOptions>
+                                <zxcm:EncodingOptions Width="300" Height="300"/>
+                            </zx:ZXingBarcodeImageView.BarcodeOptions>
+                        </zxing:ZXingBarcodeImageView>
                         
 <!--                        <Label HeightRequest="16" TextColor="#919191" Text="會員效期"></Label>-->
                         <Button Text="修改資料" BackgroundColor="Gray" TextColor="White" Margin="0,0,0,12" Command="{Binding Edit}"/>
