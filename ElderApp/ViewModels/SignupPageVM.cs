@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using Prism.Commands;
 using Prism.Navigation;
 using RestSharp;
+using ElderApp.Models;
 
 namespace ElderApp.ViewModels
 {
@@ -250,19 +251,19 @@ namespace ElderApp.ViewModels
             PayMethodList.Add(new PayMethod { Val = 1, Name = "推薦人代收" });
             PayMethodList.Add(new PayMethod { Val = 0, Name = "自行繳費" });
 
-            DistrictList.Add(new District { Val = 1, Name = "桃園" });
-            DistrictList.Add(new District { Val = 2, Name = "中壢" });
-            DistrictList.Add(new District { Val = 3, Name = "平鎮" });
-            DistrictList.Add(new District { Val = 4, Name = "八德" });
-            DistrictList.Add(new District { Val = 5, Name = "龜山" });
-            DistrictList.Add(new District { Val = 6, Name = "蘆竹" });
-            DistrictList.Add(new District { Val = 7, Name = "大園" });
-            DistrictList.Add(new District { Val = 8, Name = "觀音" });
-            DistrictList.Add(new District { Val = 9, Name = "新屋" });
-            DistrictList.Add(new District { Val = 10, Name = "楊梅" });
-            DistrictList.Add(new District { Val = 11, Name = "龍潭" });
-            DistrictList.Add(new District { Val = 12, Name = "大溪" });
-            DistrictList.Add(new District { Val = 13, Name = "復興" });
+            //DistrictList.Add(new District { Val = 1, Name = "桃園" });
+            //DistrictList.Add(new District { Val = 2, Name = "中壢" });
+            //DistrictList.Add(new District { Val = 3, Name = "平鎮" });
+            //DistrictList.Add(new District { Val = 4, Name = "八德" });
+            //DistrictList.Add(new District { Val = 5, Name = "龜山" });
+            //DistrictList.Add(new District { Val = 6, Name = "蘆竹" });
+            //DistrictList.Add(new District { Val = 7, Name = "大園" });
+            //DistrictList.Add(new District { Val = 8, Name = "觀音" });
+            //DistrictList.Add(new District { Val = 9, Name = "新屋" });
+            //DistrictList.Add(new District { Val = 10, Name = "楊梅" });
+            //DistrictList.Add(new District { Val = 11, Name = "龍潭" });
+            //DistrictList.Add(new District { Val = 12, Name = "大溪" });
+            //DistrictList.Add(new District { Val = 13, Name = "復興" });
         }
 
         private async void BackToLoginRequest()
@@ -293,7 +294,7 @@ namespace ElderApp.ViewModels
             request.AddParameter("gender", Gender.Val);
             request.AddParameter("birthdate", Birthdate);
             request.AddParameter("id_number", Id_number);
-            request.AddParameter("district_id", District.Val);
+            request.AddParameter("district_id", District.id);
             request.AddParameter("address", Address);
             request.AddParameter("pay_method", Pay_method.Val);
             request.AddParameter("inviter_id_code", Inviter_id_code);
@@ -429,10 +430,11 @@ namespace ElderApp.ViewModels
         
     }
 
-    public class District:Gender
-    {
+    //public class District:Gender
+    //{
         
-    }
+    //}
 
+    
 
 }

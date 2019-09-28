@@ -25,6 +25,113 @@ namespace ElderApp.ViewModels
 
         private ObservableCollection<Event> temp_events { get; set; }
 
+
+
+
+        //搜尋關鍵字
+        //---------------------------------------------------------------------------------------------------
+        private String searchEvent { get; set; }
+        public String SearchEvent
+        {
+            get { return searchEvent; }
+            set
+            {
+                searchEvent = value;
+                HandledSearchItem(searchEvent);
+                OnPropertyChanged(nameof(SearchEvent));
+
+            }
+        }
+        public void HandledSearchItem(String text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                Events = temp_events;
+            }
+            else
+            {
+                Events = temp_events;
+                var test = Events.Where(c => c.title.Contains(text)).ToList();
+                Events = new ObservableCollection<Event>(test);
+            }
+
+        }
+
+
+        //選擇的地區
+        //---------------------------------------------------------------------------------------------------
+        private District selectDistrict;
+        public District SelectDistrict
+        {
+            get {
+                if (selectDistrict == null)
+                {
+                    return new District { id=0,name="所有地區"};
+                }
+                return selectDistrict;
+            }
+            set
+            {
+                selectDistrict = value;
+                OnPropertyChanged(nameof(SelectDistrict));
+                GetEvents();
+            }
+        }
+
+
+
+        //選擇的類別
+        //---------------------------------------------------------------------------------------------------
+        private Category selectCategory;
+        public Category SelectCategory
+        {
+            get {
+                if (selectCategory == null)
+                {
+                    return new Category { id = 0, name = "所有類別" };
+                }
+                return selectCategory;
+            }
+            set
+            {
+                selectCategory = value;
+                OnPropertyChanged(nameof(SelectCategory));
+                GetEvents();
+            }
+        }
+        
+
+        //選擇的活動
+        //---------------------------------------------------------------------------------------------------
+        private Event selectEvent { get; set; }
+        public Event SelectEvent
+        {
+            get { return selectEvent; }
+            set
+            {
+                selectEvent = value;
+                if (selectEvent != null)
+                {
+                    HandledSelectItem(selectEvent);
+                }
+                OnPropertyChanged(nameof(SelectEvent));
+
+            }
+        }
+        public async void HandledSelectItem(Event eve)
+        {
+
+            SelectEvent = null;
+            var navigationParams = new NavigationParameters();
+            navigationParams.Add("eve", eve);
+            //System.Diagnostics.Debug.WriteLine(eve.id);
+            await _navigationService.NavigateAsync("EventDetailPage", navigationParams);
+            //await _navigationService.NavigateAsync("EventDetailPage");
+
+        }
+
+        //類別
+        //---------------------------------------------------------------------------------------------------
         private ObservableCollection<Category> categories;
         public ObservableCollection<Category> Categories
         {
@@ -35,50 +142,23 @@ namespace ElderApp.ViewModels
                 OnPropertyChanged(nameof(Categories));
             }
         }
-        public Category This_category;
+
+
+        //地區
         //---------------------------------------------------------------------------------------------------
-        private Category selectCategory { get; set; }
-        public Category SelectCategory
+        private ObservableCollection<District> districts;
+        public ObservableCollection<District> Districts
         {
-            get { return selectCategory; }
+            get { return districts; }
             set
             {
-                selectCategory = value;
-                if (selectCategory != null)
-                {
-                    HandledSelectItem(selectCategory);
-                }
-                OnPropertyChanged(nameof(SelectCategory));
-
+                districts = value;
+                OnPropertyChanged(nameof(Districts));
             }
         }
-        public async void HandledSelectItem(Category cat)
-        {
-            This_category = cat;
-            GetEvents();
-        }
-        //---------------------------------------------------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------
-        private Category selectLocation { get; set; }
-        public Category SelectLocation
-        {
-            get { return selectLocation; }
-            set
-            {
-                selectLocation = value;
-                if (selectLocation != null)
-                {
-                    HandledSelectLocation(selectLocation);
-                }
-                OnPropertyChanged(nameof(SelectLocation));
-
-            }
-        }
-        public async void HandledSelectLocation(Category loc)
-        {
 
 
-        }
+        //活動
         //---------------------------------------------------------------------------------------------------
         private ObservableCollection<Event> events ;
         public ObservableCollection<Event> Events
@@ -112,71 +192,10 @@ namespace ElderApp.ViewModels
             }
         }
 
-       
-        //---------------------------------------------------------------------------------------------------
-        private String searchEvent { get; set; }
-        public String SearchEvent
-        {
-            get { return searchEvent; }
-            set
-            {
-                searchEvent = value;
-                //if(string.IsNullOrWhiteSpace(searchEvent))
-                //{
-                //    Events = temp_events;
-                //}
-                //else
-                //{
-                //    HandledSearchItem(searchEvent);
-                //}
-                HandledSearchItem(searchEvent);
-                OnPropertyChanged(nameof(SearchEvent));
 
-            }
-        }
-        public void HandledSearchItem(String text)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                Events = temp_events;
-            }else
-            {
-                Events = temp_events;
-                var test = Events.Where(c => c.title.StartsWith(text)).ToList();
-                Events = new ObservableCollection<Event>(test);
-            }
-            
-            //System.Diagnostics.Debug.WriteLine(text);
-        }
+
+
         
-
-        //---------------------------------------------------------------------------------------------------
-        private Event selectEvent { get; set; }
-        public Event SelectEvent
-        {
-            get { return selectEvent; }
-            set
-            {
-                selectEvent = value;
-                if (selectEvent != null)
-                {
-                    HandledSelectItem(selectEvent);
-                }
-                OnPropertyChanged(nameof(SelectEvent));
-                
-            }
-        }
-        public async void HandledSelectItem(Event eve)
-        {
-            
-            SelectEvent = null;
-            var navigationParams = new NavigationParameters();
-            navigationParams.Add("eve", eve);
-            //System.Diagnostics.Debug.WriteLine(eve.id);
-            await _navigationService.NavigateAsync("EventDetailPage", navigationParams);
-            //await _navigationService.NavigateAsync("EventDetailPage");
-
-        }
         //---------------------------------------------------------------------------------------------------
         public ICommand RefreshCommand
         {
@@ -198,6 +217,10 @@ namespace ElderApp.ViewModels
 
         public ICommand My_events { get; set; }     //我的活動
 
+        private Dictionary<int,string> DistrictDictionary { get; set; }
+
+        private Dictionary<int, string> CategoryDictionary { get; set; }
+
         public EventPageVM(INavigationService navigationService)
         {
 
@@ -213,12 +236,11 @@ namespace ElderApp.ViewModels
             My_events_id = new List<int>();
             temp_events = new ObservableCollection<Event>();
             Categories = new ObservableCollection<Category>();
+            Districts = new ObservableCollection<District>();
 
             GetCategory();
-            SelectCategory = (Categories.Where(c => c.slug == "all").ToList())[0];
-            This_category = SelectCategory;
-
-
+            GetDistrict();
+            
             GetUserEvent();
             GetEvents();
         }
@@ -229,82 +251,130 @@ namespace ElderApp.ViewModels
             await _navigationService.NavigateAsync("MyEventPage");
         }
 
+        private async void GetDistrict()
+        {
+            var client = new RestClient("http://128.199.197.142/api/district");
+
+            var request = new RestRequest(Method.GET);
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+
+            IRestResponse response = client.Execute(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    List<District> districtList = JsonConvert.DeserializeObject<List<District>>(response.Content);
+
+                    var districtDic = new Dictionary<int,string>();
+
+                    Districts.Add(new District
+                    {
+                        id=0,
+                        name="所有地區",
+                    });
+                    foreach (var dis in districtList)
+                    {
+
+                        districtDic.Add(dis.id, dis.name);
+                        Districts.Add(dis);
+                    }
+
+                    DistrictDictionary = districtDic;
+
+                }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
+                }
+            }
+
+        }
+
+        private void GetCategory()
+        {
+            var client = new RestClient("http://128.199.197.142/api/category");
+
+            var request = new RestRequest(Method.GET);
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+
+            IRestResponse response = client.Execute(request);
+            //System.Diagnostics.Debug.WriteLine(response.Content);
+
+            if (response.Content != null)
+            {
+                if (response.Content != null)
+                {
+                    List<Category> _categories = JsonConvert.DeserializeObject<List<Category>>(response.Content);
+
+                    var categoryDic = new Dictionary<int, string>();
+
+                    Categories.Clear();
+                    Categories.Add(new Category
+                    {
+                        id = 0,
+                        name = "所有類別",
+                        slug = "all",
+                        created_at = "now"
+                    });
+                    foreach (var cat in _categories)
+                    {
+                        Categories.Add(cat);
+                        categoryDic.Add(cat.id, cat.name);
+                    }
+
+                    CategoryDictionary = categoryDic;
+
+                }
+            }
+        }
+
+
+
         private void GetEvents()
         {
 
-            if (This_category.slug == "all")
+            
+            var client = new RestClient($"http://128.199.197.142/api/event?category={SelectCategory.id}&district={SelectDistrict.id}");
+            
+            var request = new RestRequest(Method.GET);
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+
+            IRestResponse response = client.Execute(request);
+            if (response.Content != null)
             {
-                var client = new RestClient("http://128.199.197.142/api/event");
-                //var client = new RestClient("http://127.0.0.1:8000/api/event");
 
-                var request = new RestRequest(Method.GET);
-
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddHeader("Accept", "application/json");
-
-                IRestResponse response = client.Execute(request);
                 if (response.Content != null)
                 {
+                    List<Event> _events = JsonConvert.DeserializeObject<List<Event>>(response.Content);
 
-                    if (response.Content != null)
+                    Events.Clear();
+                    foreach (var eve in _events)
                     {
-                        List<Event> _events = JsonConvert.DeserializeObject<List<Event>>(response.Content);
+                        //int ind = My_events_id.IndexOf(eve.id);
+                        //if (ind < 0)
+                        //{
+                        //    eve.Participate = false;
+                        //}
+                        //else
+                        //{
+                        //    eve.Participate = true;
+                        //}
+                        //var a = DistrictDictionary[eve.district_id];
+                        eve.district_name = DistrictDictionary[eve.district_id];
+                        eve.category_name = CategoryDictionary[eve.category_id];
 
-                        Events.Clear();
-                        foreach (var eve in _events)
-                        {
-                            int ind = My_events_id.IndexOf(eve.id);
-                            if (ind < 0)
-                            {
-                                eve.Participate = false;
-                            }
-                            else
-                            {
-                                eve.Participate = true;
-                            }
-                            Events.Add(eve);
-                        }
-                        temp_events = Events;
+                        Events.Add(eve);
                     }
+                    temp_events = Events;
                 }
             }
-            else
-            {
-                var client = new RestClient($"http://128.199.197.142/api/which_category_event/{This_category.name}");
-                //var client = new RestClient($"http://127.0.0.1:8000/api/which_category_event/{This_category.name}");
-
-                var request = new RestRequest(Method.GET);
-
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddHeader("Accept", "application/json");
-
-                IRestResponse response = client.Execute(request);
-                if (response.Content != null)
-                {
-
-                    if (response.Content != null)
-                    {
-                        List<Event> _events = JsonConvert.DeserializeObject<List<Event>>(response.Content);
-
-                        Events.Clear();
-                        foreach (var eve in _events)
-                        {
-                            int ind = My_events_id.IndexOf(eve.id);
-                            if (ind < 0)
-                            {
-                                eve.Participate = false;
-                            }
-                            else
-                            {
-                                eve.Participate = true;
-                            }
-                            Events.Add(eve);
-                        }
-                        temp_events = Events;
-                    }
-                }
-            }
-
+            
             
         }
 
@@ -344,40 +414,7 @@ namespace ElderApp.ViewModels
 
 
 
-        private void GetCategory()
-        {
-            var client = new RestClient("http://128.199.197.142/api/category");
-            //var client = new RestClient("http://127.0.0.1:8000/api/category");
-
-            var request = new RestRequest(Method.GET);
-
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-
-            IRestResponse response = client.Execute(request);
-            //System.Diagnostics.Debug.WriteLine(response.Content);
-
-            if (response.Content != null)
-            {
-                if (response.Content != null)
-                {
-                    List<Category> _categories = JsonConvert.DeserializeObject<List<Category>>(response.Content);
-
-                    Categories.Clear();
-                    foreach (var cat in _categories)
-                    {
-                        Categories.Add(cat);
-                    }
-                    Categories.Add(new Category
-                    {
-                        id = 0,
-                        name = "所有活動",
-                        slug = "all",
-                        created_at = "now"
-                    });
-                }
-            }
-        }
+        
 
 
         public void OnNavigatedTo(INavigationParameters parameters)

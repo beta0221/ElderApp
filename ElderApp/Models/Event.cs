@@ -70,6 +70,10 @@ namespace ElderApp.Models
         public string created_at { get; set; }
         public string slug { get; set; }
         public int category_id { get; set; }
+        public string category_name { get; set; }
+
+        public int district_id { get; set; }
+        public string district_name { get; set; }
 
         public string Image_Url
         {

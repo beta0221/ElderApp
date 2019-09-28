@@ -10,7 +10,61 @@
         <ScrollView>
             
             <StackLayout Spacing="0">
-                <ContentView BackgroundColor="#F6A723" HeightRequest="160">
+                
+                <ContentView BackgroundColor="#F6A723" HeightRequest="100" Margin="0,12,0,12">
+                    <Grid Padding="12,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".33*"/>
+                            <RowDefinition Height=".33*"/>
+                            <RowDefinition Height=".33*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Image 
+                           Source="member.png"
+                           Grid.Row="0" 
+                           Grid.Column="0"
+                           Aspect="AspectFill"/>
+                        <Image 
+                           Source="coin.png"
+                           Grid.Row="1" 
+                           Grid.Column="0"
+                           Aspect="AspectFill"/>
+                        <Image 
+                           Source="level.png"
+                           Grid.Row="2" 
+                           Grid.Column="0"
+                           Aspect="AspectFill"/>
+                        
+                        <ContentView Grid.Row="0" Grid.Column="1" Padding="8,0,0,0" VerticalOptions="Center">
+                            <StackLayout Orientation="Horizontal" Spacing="0">
+                                <Label Text="姓名:" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="{Binding User.Name,Mode=TwoWay}" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                        </ContentView>
+                        
+                        <ContentView Grid.Row="1" Grid.Column="1" Padding="8,0,0,0" VerticalOptions="Center">
+                            <StackLayout Orientation="Horizontal" Spacing="0">
+                                <Label Text="剩餘樂幣:" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="{Binding Wallet,Mode=TwoWay}" TextColor="White" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                        </ContentView>
+                        
+                        <ContentView Grid.Row="2" Grid.Column="1" Padding="8,0,0,0" VerticalOptions="Center">
+                            <StackLayout Orientation="Horizontal" Spacing="0">
+                                <Label Text="榮譽等級:" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="{Binding Rank,Mode=TwoWay}" TextColor="White" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                        </ContentView>
+                        
+                    </Grid>
+                    
+                </ContentView>
+                
+                <!--<ContentView BackgroundColor="#F6A723" HeightRequest="160">
                     <Grid Padding="12,12,0,12">
                         <Grid.RowDefinitions>
                             <RowDefinition Height=".25*"/>
@@ -58,9 +112,10 @@
                         </ContentView>
                         
                         
-                        
                     </Grid>
-                </ContentView>
+                    
+                </ContentView>-->
+                
                 
                 <ContentView BackgroundColor="White" HeightRequest="{Binding SliderHeight}">
                     

@@ -7,7 +7,6 @@
     BackgroundColor="#F6A723"
     Title="活動行事曆">
     
-    <!--xmlns:local="clr-namespace:ElderApp.ViewModels"-->
     
     
     <ContentPage.ToolbarItems> 
@@ -15,68 +14,7 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <!--<StackLayout>
-            <StackLayout Orientation="Horizontal" BackgroundColor="#47ADE8">
-                <Label Text="活動地區:" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Picker Title="篩選地區" BackgroundColor="#47ADE8">
-                    <Picker.Items>
-                        <x:String>桃園</x:String>
-                        <x:String>中壢</x:String>
-                    </Picker.Items>
-                </Picker>
-                <Label Text="活動類別:" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Picker Title="篩選類別"
-                        BackgroundColor="#47ADE8"
-                        ItemsSource="{Binding Categories}"
-                        ItemDisplayBinding="{Binding name}"
-                        SelectedItem="{Binding SelectCategory}"/>
-                    
-            </StackLayout>
-            
-            <SearchBar Placeholder="搜尋活動" Text="{Binding SearchEvent,Mode=TwoWay}"/>
-            <ListView x:Name="listview" ItemsSource="{Binding Events}"
-                      HasUnevenRows="True"
-                      IsPullToRefreshEnabled="True"
-                      RefreshCommand="{Binding RefreshCommand}"
-                      IsRefreshing="{Binding IsRefreshing}"
-                      SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
-                      >
-
-                
-
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="5" x:Name="item" BackgroundColor="#47ADE8">
-                            
-                            <Image Source="http://127.0.0.1:8000/images/users/3/1565881035.png"
-                                   HeightRequest="100"
-                                   WidthRequest="100"
-                                   HorizontalOptions="Start"
-                                   Aspect="AspectFill"/>
-                            <StackLayout VerticalOptions="Center" BackgroundColor="#47ADE8">
-                                <Label Text="{Binding title}" />
-                               
-                                <Label Text="活動時間:"/>
-                                    <Label Text="{Binding dateTime}"/>
-                                <Label Text="活動地點:"/>
-                                    <Label Text="{Binding location}"/>
-                                <Label Text="報名截止時間:"/>
-                                    <Label Text="{Binding deadline}"/>
-                                
-                            </StackLayout>
-
-                            <Label Text="{Binding participate_text,Mode=TwoWay}"
-                                       TextColor="{Binding participate_color,Mode=TwoWay}"
-                                   HorizontalOptions="EndAndExpand"
-                                   VerticalOptions="Center"/>
-                            
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        </StackLayout>-->
+        
         <ScrollView>
         <StackLayout>
         
@@ -84,7 +22,7 @@
                 <WebView Source="http://128.199.197.142/slider.html"/>
             </ContentView>
             
-            <ContentView Padding="20,8">
+            <ContentView Padding="8">
                 
                 
                 <StackLayout>
@@ -105,13 +43,12 @@
                                     Grid.Row="0" 
                                     Grid.Column="0" Grid.ColumnSpan="2" Placeholder="搜尋活動" Text="{Binding SearchEvent,Mode=TwoWay}"/>
                                 
-                            <Picker Title="地區" BackgroundColor="#ffffff" Grid.Row="1" Grid.Column="1">
-                                <Picker.Items>
-                                    <x:String>所有地區</x:String>
-                                    <x:String>桃園</x:String>
-                                    <x:String>中壢</x:String>
-                                </Picker.Items>
-                            </Picker>
+                            <Picker Title="地區" BackgroundColor="#ffffff" Grid.Row="1" Grid.Column="1"
+                                    ItemsSource="{Binding Districts}"
+                                    ItemDisplayBinding="{Binding name}"
+                                    SelectedItem="{Binding SelectDistrict}"/>
+                               
+                            
                             
                             <Picker Grid.Row="1"
                                     Grid.Column="0"
@@ -147,9 +84,12 @@
                                                 <BoxView BackgroundColor="White" CornerRadius="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
                                                 <Grid Padding="12,12,12,12" Margin="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                                                     <Grid.RowDefinitions>
-                                                        <RowDefinition Height=".4*"></RowDefinition>
-                                                        <RowDefinition Height=".3*"></RowDefinition>
-                                                        <RowDefinition Height=".3*"></RowDefinition>
+                                                        <RowDefinition Height=".25*"></RowDefinition>
+                                                        <RowDefinition Height=".2*"></RowDefinition>
+                                                        <RowDefinition Height=".2*"></RowDefinition>
+                                                        <RowDefinition Height=".2*"></RowDefinition>
+                                                        <RowDefinition Height=".15*"></RowDefinition>
+                                                       
                                                     </Grid.RowDefinitions>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="96"></ColumnDefinition>
@@ -159,7 +99,7 @@
                                                     
                                                     <ContentView Grid.Row="0"
                                                         Grid.Column="0"
-                                                        Grid.RowSpan="3">
+                                                        Grid.RowSpan="5">
                                                         
                                                         <circleImg:CircleImage
                                                            Source="{Binding Image_Url}"
@@ -169,9 +109,11 @@
                                                     
                                                     <Label Text="{Binding title}" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0" FontSize="Large"/>
                                                     <Label Text="{Binding location}" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0"/>
-                                                    <Label Text="{Binding dateTime}" Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0" FontSize="Small" TextColor="Gray"/>
+                                                    <Label Text="{Binding district_name}" Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0"/>
+                                                    <Label Text="{Binding category_name}" Grid.Row="3" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0"/>
+                                                    <Label Text="{Binding dateTime}" Grid.Row="4" Grid.Column="1" VerticalTextAlignment="Center" Margin="8,0,0,0" FontSize="Small" TextColor="Gray"/>
                                                     
-                                                    <Label Text="＞" TextColor="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
+                                                    <Label Text="＞" TextColor="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
                                                 </Grid>
                                             </AbsoluteLayout>        
                                         </ContentView>

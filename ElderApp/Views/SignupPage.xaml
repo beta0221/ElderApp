@@ -49,7 +49,7 @@
                         <Label HeightRequest="16" TextColor="#000000" Text="地區"></Label>
                         <Picker HeightRequest="40" Title="地區" BackgroundColor="#ffffff" Margin="0,0,0,24"
                                 ItemsSource="{Binding DistrictList}"
-                                ItemDisplayBinding="{Binding Name}"
+                                ItemDisplayBinding="{Binding name}"
                                 SelectedItem="{Binding District}"/>
                         
                         <Label HeightRequest="16" TextColor="#000000" Text="地址"></Label>

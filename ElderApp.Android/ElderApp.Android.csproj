@@ -127,6 +127,9 @@
     <AndroidResource Include="Resources\mipmap-hdpi\promo.png" />
     <AndroidResource Include="Resources\mipmap-hdpi\take.png" />
     <AndroidResource Include="Resources\mipmap-hdpi\trans.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\level.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\coin.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\member.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
