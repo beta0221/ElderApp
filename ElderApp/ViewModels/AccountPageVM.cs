@@ -287,7 +287,7 @@ namespace ElderApp.ViewModels
                         }
                         else
                         {
-                            Valid = "過期";
+                            Valid = "無效";
                             Valid_color = "#E22600";
                             Extend = true;
                         }
@@ -322,7 +322,7 @@ namespace ElderApp.ViewModels
                 System.Diagnostics.Debug.WriteLine("Logout");
 
                 var client = new RestClient("http://128.199.197.142/api/auth/logout");
-                //var client = new RestClient("http://127.0.0.1:8000/api/auth/logout");
+                
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 request.AddHeader("Accept", "application/json");
@@ -337,6 +337,7 @@ namespace ElderApp.ViewModels
 
                         if (res["message"].ToString() == "Successfully logged out")
                         {
+
                             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                             {
                                 conn.Execute("DELETE FROM UserModel");
@@ -344,11 +345,12 @@ namespace ElderApp.ViewModels
                                 await _navigationService.NavigateAsync("/LoginPage");
 
                             }
+
+
                         }
                     }
                     catch (Exception ex)
                     {
-                        //await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
 
                         using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                         {
@@ -357,6 +359,8 @@ namespace ElderApp.ViewModels
                             await _navigationService.NavigateAsync("/LoginPage");
 
                         }
+
+
                     }
 
                 }

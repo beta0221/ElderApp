@@ -43,7 +43,7 @@
                         <Label HeightRequest="16" TextColor="#000000" Text="出生年月日"></Label>
                         <DatePicker HeightRequest="40" Margin="0,0,0,24" Date="{Binding Birthdate,Mode=TwoWay}"/>
                         
-                        <Label HeightRequest="16" TextColor="#000000" Text="生份證字號"></Label>
+                        <Label HeightRequest="16" TextColor="#000000" Text="身份證字號"></Label>
                         <Entry HeightRequest="40" FontSize="Large" Text="{Binding Id_number,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
                         
                         <Label HeightRequest="16" TextColor="#000000" Text="地區"></Label>

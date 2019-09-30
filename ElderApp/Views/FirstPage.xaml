@@ -4,7 +4,8 @@
             xmlns:local="clr-namespace:ElderApp.Views"
              x:Class="ElderApp.Views.FirstPage"
             SelectedTabColor="#F6A723"
-            
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
             
             >
 
@@ -19,7 +20,7 @@
 
 
     
-    <NavigationPage IconImageSource="academy_min.png" Title="銀髮學院">
+    <NavigationPage IconImageSource="academy_min.png" Title="銀髮社群">
         <x:Arguments>
             <local:EventPage />
         </x:Arguments>

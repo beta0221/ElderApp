@@ -65,11 +65,16 @@ namespace ElderApp.ViewModels
         //---------------------------------------------------------------------------------------------------
         public Command ButtonClick { get; set; }
 
+        private Dictionary<int, string> DistrictDictionary { get; set; }
 
+        private Dictionary<int, string> CategoryDictionary { get; set; }
 
         public MyEventPageVM(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            GetCategory();
+            GetDistrict();
+
             My_Events = new ObservableCollection<Event>();
             ButtonClick = new Command(ButtonClickFunction);
             
@@ -140,7 +145,9 @@ namespace ElderApp.ViewModels
                     {
                         
                         eve.Participate = true;
-                        
+                        eve.district_name = DistrictDictionary[eve.district_id];
+                        eve.category_name = CategoryDictionary[eve.category_id];
+
                         My_Events.Add(eve);
                     }
                     temp_my_events = My_Events;
@@ -148,6 +155,73 @@ namespace ElderApp.ViewModels
             }
         }
 
+
+        private void GetCategory()
+        {
+            var client = new RestClient("http://128.199.197.142/api/category");
+
+            var request = new RestRequest(Method.GET);
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+
+            IRestResponse response = client.Execute(request);
+            //System.Diagnostics.Debug.WriteLine(response.Content);
+
+            if (response.Content != null)
+            {
+                if (response.Content != null)
+                {
+                    List<Category> _categories = JsonConvert.DeserializeObject<List<Category>>(response.Content);
+
+                    var categoryDic = new Dictionary<int, string>();
+
+                   
+                    foreach (var cat in _categories)
+                    {
+                        categoryDic.Add(cat.id, cat.name);
+                    }
+
+                    CategoryDictionary = categoryDic;
+
+                }
+            }
+        }
+
+        private async void GetDistrict()
+        {
+            var client = new RestClient("http://128.199.197.142/api/district");
+
+            var request = new RestRequest(Method.GET);
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+
+            IRestResponse response = client.Execute(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    List<District> districtList = JsonConvert.DeserializeObject<List<District>>(response.Content);
+
+                    var districtDic = new Dictionary<int, string>();
+
+                    foreach (var dis in districtList)
+                    {
+
+                        districtDic.Add(dis.id, dis.name);
+                    }
+
+                    DistrictDictionary = districtDic;
+
+                }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
+                }
+            }
+
+        }
 
         public void OnNavigatedTo(INavigationParameters parameters)
         {

@@ -3,34 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="ElderApp.Views.EditAccountPage">
     <ContentPage.Content>
-        <StackLayout Padding="24">
+        <ScrollView>
+            <StackLayout Padding="24">
        
             
-            <Label HeightRequest="16" TextColor="#919191" Text="姓名"></Label>
-            <Entry HeightRequest="40" FontSize="Large" Text="{Binding Name,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                <Label HeightRequest="16" TextColor="#919191" Text="姓名"></Label>
+                <Entry FontSize="Large" Text="{Binding Name,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
             
             
-            <Label HeightRequest="16" TextColor="#919191" Text="手機"></Label>
-            <Entry HeightRequest="40" FontSize="Large" Text="{Binding Phone,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                <Label HeightRequest="16" TextColor="#919191" Text="手機"></Label>
+                <Entry FontSize="Large" Text="{Binding Phone,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
             
             
-            <Label HeightRequest="16" TextColor="#919191" Text="住家電話"></Label>
-            <Entry HeightRequest="40" FontSize="Large" Text="{Binding Tel,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                <Label HeightRequest="16" TextColor="#919191" Text="住家電話"></Label>
+                <Entry FontSize="Large" Text="{Binding Tel,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
             
             
-            <Label HeightRequest="16" TextColor="#919191" Text="地址"></Label>
-            <Entry HeightRequest="40" FontSize="Large" Text="{Binding Address,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                <Label HeightRequest="16" TextColor="#919191" Text="地址"></Label>
+                <Entry FontSize="Large" Text="{Binding Address,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
             
             
-            <Label HeightRequest="16" TextColor="#919191" Text="身分證號"></Label>
-            <Entry HeightRequest="40" FontSize="Large" Text="{Binding Id_number,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
+                <Label HeightRequest="16" TextColor="#919191" Text="身分證號"></Label>
+                <Entry FontSize="Large" Text="{Binding Id_number,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
             
             
             
-            <Button Text="確定修改" BackgroundColor="#F6A723" TextColor="White" Margin="0,0,0,12" Command="{Binding Submit}"/>
-            <Button Text="取消" BackgroundColor="Gray" TextColor="White" Margin="0,0,0,12" Command="{Binding Cancel}"/>
+                <Button Text="確定修改" BackgroundColor="#F6A723" TextColor="White" Margin="0,0,0,12" Command="{Binding Submit}"/>
+                <Button Text="取消" BackgroundColor="Gray" TextColor="White" Margin="0,0,0,12" Command="{Binding Cancel}"/>
             
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
         
     </ContentPage.Content>
 </ContentPage>

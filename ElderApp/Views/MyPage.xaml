@@ -4,7 +4,10 @@
              x:Class="ElderApp.Views.MyPage"
              Title="銀髮學院"
              BackgroundColor="#F6A723">
+
     
+
+
     <ContentPage.Content>
         
         <ScrollView>
@@ -133,7 +136,7 @@
                         </Grid.ColumnDefinitions>
                         
                         <ContentView Grid.Row="0" Grid.Column="0" Margin="20,20,10,10">
-                            <ImageButton Source="take.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding TakeMoney}"/>
+                            <ImageButton Source="take.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding TakeMoney}" BackgroundColor="#F6A723"/>
                             <!--<AbsoluteLayout>
                                 <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Silver" CornerRadius="4"/>
                                 <Grid RowSpacing="0" ColumnSpacing="0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,1,.8">
@@ -151,7 +154,7 @@
                         </ContentView>
                         
                         <ContentView Grid.Row="0" Grid.Column="1" Margin="10,20,20,10">
-                            <ImageButton Source="give.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding GiveMoney}"/>
+                            <ImageButton Source="give.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding GiveMoney}" BackgroundColor="#F6A723"/>
                             <!--<AbsoluteLayout>
                                 <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Silver" CornerRadius="4"/>
                                 <Grid RowSpacing="0" ColumnSpacing="0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,1,.8">
@@ -190,7 +193,7 @@
                         </Grid.ColumnDefinitions>
                         
                         <ContentView Grid.Row="0" Grid.Column="0" Margin="20,10,10,20">
-                            <ImageButton Source="trans.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding TransHistory}"/>
+                            <ImageButton Source="trans.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding TransHistory}" BackgroundColor="#F6A723"/>
                             <!--<AbsoluteLayout>
                                 <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Silver" CornerRadius="4"/>
                                 <Grid RowSpacing="0" ColumnSpacing="0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,1,.8">
@@ -208,7 +211,7 @@
                         </ContentView>
                         
                         <ContentView Grid.Row="0" Grid.Column="1" Margin="10,10,20,20">
-                            <ImageButton Source="promo.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding Promocode}"/>
+                            <ImageButton Source="promo.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding Promocode}" BackgroundColor="#F6A723"/>
                             <!--<AbsoluteLayout>
                                 <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Silver" CornerRadius="4"/>
                                 <Grid RowSpacing="0" ColumnSpacing="0"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,1,.8">

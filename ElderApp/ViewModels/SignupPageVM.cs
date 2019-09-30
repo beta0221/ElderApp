@@ -8,6 +8,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using RestSharp;
 using ElderApp.Models;
+using Newtonsoft.Json;
 
 namespace ElderApp.ViewModels
 {
@@ -237,7 +238,7 @@ namespace ElderApp.ViewModels
             BackToLogin = new DelegateCommand(BackToLoginRequest);
             Submit = new DelegateCommand(CheckInviterRequest);
             Scan = new DelegateCommand(ScanRequest);
-            
+            GetDistrict();
             initPicker();
 
         }
@@ -251,19 +252,6 @@ namespace ElderApp.ViewModels
             PayMethodList.Add(new PayMethod { Val = 1, Name = "推薦人代收" });
             PayMethodList.Add(new PayMethod { Val = 0, Name = "自行繳費" });
 
-            //DistrictList.Add(new District { Val = 1, Name = "桃園" });
-            //DistrictList.Add(new District { Val = 2, Name = "中壢" });
-            //DistrictList.Add(new District { Val = 3, Name = "平鎮" });
-            //DistrictList.Add(new District { Val = 4, Name = "八德" });
-            //DistrictList.Add(new District { Val = 5, Name = "龜山" });
-            //DistrictList.Add(new District { Val = 6, Name = "蘆竹" });
-            //DistrictList.Add(new District { Val = 7, Name = "大園" });
-            //DistrictList.Add(new District { Val = 8, Name = "觀音" });
-            //DistrictList.Add(new District { Val = 9, Name = "新屋" });
-            //DistrictList.Add(new District { Val = 10, Name = "楊梅" });
-            //DistrictList.Add(new District { Val = 11, Name = "龍潭" });
-            //DistrictList.Add(new District { Val = 12, Name = "大溪" });
-            //DistrictList.Add(new District { Val = 13, Name = "復興" });
         }
 
         private async void BackToLoginRequest()
@@ -394,10 +382,42 @@ namespace ElderApp.ViewModels
                 }
 
             }
-            
-
-
+         
         }
+
+
+        private async void GetDistrict()
+        {
+            var client = new RestClient("http://128.199.197.142/api/district");
+
+            var request = new RestRequest(Method.GET);
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+
+            IRestResponse response = client.Execute(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    List<District> districtList = JsonConvert.DeserializeObject<List<District>>(response.Content);
+
+
+                    foreach (var dis in districtList)
+                    {
+
+                        DistrictList.Add(dis);
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
+                }
+            }
+        }
+
 
         public void OnNavigatedFrom(INavigationParameters parameters)
         {
@@ -430,10 +450,7 @@ namespace ElderApp.ViewModels
         
     }
 
-    //public class District:Gender
-    //{
-        
-    //}
+   
 
     
 
