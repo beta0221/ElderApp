@@ -7,6 +7,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using RestSharp;
 using SQLite;
+using Xamarin.Forms;
 
 namespace ElderApp.ViewModels
 {
@@ -166,16 +167,7 @@ namespace ElderApp.ViewModels
             }
         }
 
-        //private string expriedate;
-        //public string Expriedate
-        //{
-        //    get { return expriedate; }
-        //    set
-        //    {
-        //        expriedate = value;
-        //        OnPropertyChanged("Expriedate");
-        //    }
-        //}
+
 
         public ICommand Edit { get; set; }
 
@@ -183,14 +175,19 @@ namespace ElderApp.ViewModels
 
         public ICommand ExtendMembership { get; set; }
 
+        
+
         public AccountPageVM(INavigationService navigationService)
         {
+            
             _navigationService = navigationService;
             Edit = new DelegateCommand(EditRequest);
             Logout = new DelegateCommand(LogoutRequest);
             ExtendMembership = new DelegateCommand(ExtendRequest);
+            
 
         }
+
 
         private async void EditRequest()
         {
@@ -342,8 +339,9 @@ namespace ElderApp.ViewModels
                             {
                                 conn.Execute("DELETE FROM UserModel");
 
+                                
                                 await _navigationService.NavigateAsync("/LoginPage");
-
+                                
                             }
 
 
@@ -355,9 +353,9 @@ namespace ElderApp.ViewModels
                         using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                         {
                             conn.Execute("DELETE FROM UserModel");
-
+                            
                             await _navigationService.NavigateAsync("/LoginPage");
-
+                            
                         }
 
 

@@ -103,6 +103,7 @@ namespace ElderApp.ViewModels
                         var newUser = new UserModel()
                         {
                             User_id = Convert.ToInt32(res["user_id"]),
+                            Id_code = res["id_code"].ToString(),
                             Email = res["email"].ToString(),
                             Name = res["name"].ToString(),
                             Password = Password,

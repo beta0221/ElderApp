@@ -39,11 +39,11 @@ namespace ElderApp
                         CurrentUser = user;
 
                         //NavigationService.NavigateAsync("NavigationPage/MyPage");
-                        NavigationService.NavigateAsync("FirstPage");
+                        NavigationService.NavigateAsync("/FirstPage");
                     }
                     else
                     {
-                        NavigationService.NavigateAsync("LoginPage");
+                        NavigationService.NavigateAsync("/LoginPage");
                     }
 
 
@@ -52,7 +52,7 @@ namespace ElderApp
                 }
                 catch (Exception ex)
                 {
-                    NavigationService.NavigateAsync("LoginPage");
+                    NavigationService.NavigateAsync("/LoginPage");
 
                     var properties = new Dictionary<string, string>
                     {
@@ -94,6 +94,7 @@ namespace ElderApp
             containerRegistry.RegisterForNavigation<PromocodePage, PromocodePageVM>();
             containerRegistry.RegisterForNavigation<SignupPage, SignupPageVM>();
             containerRegistry.RegisterForNavigation<ScanIdPage, ScanIdPageVM>();
+            
             //containerRegistry.RegisterForNavigation<CategoryPage, CategoryPageVM>();
             containerRegistry.RegisterForNavigation<FirstPage>();
 

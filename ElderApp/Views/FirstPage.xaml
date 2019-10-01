@@ -6,7 +6,6 @@
             SelectedTabColor="#F6A723"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            
             >
 
   <!--Pages can be added as references or inline-->

@@ -75,19 +75,19 @@
                                 <Label AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,.5" HeightRequest="20" FontSize="Medium" TextColor="{Binding Valid_color,Mode=TwoWay}" Text="{Binding Valid,Mode=TwoWay}"></Label>
                             </AbsoluteLayout>
                         </ContentView>
+
+
+                        <zxing:ZXingBarcodeImageView
+                             x:Name="UserIdCode"
+                             BarcodeFormat="QR_CODE"
+                             HeightRequest="300"
+                             WidthRequest="300">
+                             <zx:ZXingBarcodeImageView.BarcodeOptions>
+                                 <zxcm:EncodingOptions Width="300" Height="300"/>
+                             </zx:ZXingBarcodeImageView.BarcodeOptions>
+                         </zxing:ZXingBarcodeImageView>
                         
-                        <zxing:ZXingBarcodeImageView 
-                            IsVisible="True"
-                            BarcodeFormat="QR_CODE"
-                            HeightRequest="300"
-                            WidthRequest="300"
-                            BarcodeValue="{Binding Id_code}">
-                            <zx:ZXingBarcodeImageView.BarcodeOptions>
-                                <zxcm:EncodingOptions Width="300" Height="300"/>
-                            </zx:ZXingBarcodeImageView.BarcodeOptions>
-                        </zxing:ZXingBarcodeImageView>
                         
-<!--                        <Label HeightRequest="16" TextColor="#919191" Text="會員效期"></Label>-->
                         <Button Text="修改資料" BackgroundColor="Gray" TextColor="White" Margin="0,0,0,12" Command="{Binding Edit}"/>
                         <Button Text="申請續會" BackgroundColor="#F6A723" TextColor="White" Margin="0,0,0,12" IsVisible="{Binding Extend,Mode=TwoWay}" Command="{Binding ExtendMembership}"/>
                         <Button Text="登出" TextColor="#F6A723" Margin="0,0,0,12" Command="{Binding Logout}"/>
