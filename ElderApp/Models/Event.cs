@@ -79,7 +79,7 @@ namespace ElderApp.Models
         {
             get
             {
-                return $"http://128.199.197.142/images/events/{slug}/{image}";
+                return $"https://www.happybi.com.tw/images/events/{slug}/{image}";
             }
         }
         public Event()

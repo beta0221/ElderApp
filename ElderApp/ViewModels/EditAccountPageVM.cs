@@ -144,7 +144,7 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("Submit Edit Request");
 
-            var client = new RestClient("http://128.199.197.142/api/auth/updateAccount");
+            var client = new RestClient("https://www.happybi.com.tw/api/auth/updateAccount");
             //var client = new RestClient("http://127.0.0.1:8000/api/auth/updateAccount");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -182,7 +182,7 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("MyAccount");
 
-            var client = new RestClient("http://128.199.197.142/api/auth/myAccount");
+            var client = new RestClient("https://www.happybi.com.tw/api/auth/myAccount");
             //var client = new RestClient("http://127.0.0.1:8000/api/auth/myAccount");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");

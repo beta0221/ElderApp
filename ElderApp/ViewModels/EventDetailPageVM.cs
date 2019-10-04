@@ -84,7 +84,7 @@ namespace ElderApp.ViewModels
         
             var result = await App.Current.MainPage.DisplayAlert("參加活動確認", $"是否確認參加活動:{eve_data.title}?", "是", "否");
 
-            var client = new RestClient($"http://128.199.197.142/api/joinevent/{eve_data.slug}");
+            var client = new RestClient($"https://www.happybi.com.tw/api/joinevent/{eve_data.slug}");
             //var client = new RestClient($"http://127.0.0.1:8000/api/joinevent/{eve_data.slug}");
 
             if (result == true)
@@ -120,7 +120,7 @@ namespace ElderApp.ViewModels
             var eve_data = Select_event;
             var result = await App.Current.MainPage.DisplayAlert("取消參加活動確認", $"是否確認取消參加活動:{eve_data.title}？", "是", "否");
 
-            var client = new RestClient($"http://128.199.197.142/api/cancelevent/{eve_data.slug}");
+            var client = new RestClient($"https://www.happybi.com.tw/api/cancelevent/{eve_data.slug}");
             //var client = new RestClient($"http://127.0.0.1:8000/api/cancelevent/{eve_data.slug}");
 
             if (result == true)

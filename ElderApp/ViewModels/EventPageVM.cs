@@ -253,7 +253,7 @@ namespace ElderApp.ViewModels
 
         private async void GetDistrict()
         {
-            var client = new RestClient("http://128.199.197.142/api/district");
+            var client = new RestClient("https://www.happybi.com.tw/api/district");
 
             var request = new RestRequest(Method.GET);
 
@@ -294,7 +294,7 @@ namespace ElderApp.ViewModels
 
         private void GetCategory()
         {
-            var client = new RestClient("http://128.199.197.142/api/category");
+            var client = new RestClient("https://www.happybi.com.tw/api/category");
 
             var request = new RestRequest(Method.GET);
 
@@ -338,7 +338,7 @@ namespace ElderApp.ViewModels
         {
 
             
-            var client = new RestClient($"http://128.199.197.142/api/event?category={SelectCategory.id}&district={SelectDistrict.id}");
+            var client = new RestClient($"https://www.happybi.com.tw/api/event?category={SelectCategory.id}&district={SelectDistrict.id}");
             
             var request = new RestRequest(Method.GET);
 
@@ -382,7 +382,7 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("GetUserEvent");
 
-            var client = new RestClient("http://128.199.197.142/api/myevent");
+            var client = new RestClient("https://www.happybi.com.tw/api/myevent");
             //var client = new RestClient("http://127.0.0.1:8000/api/myevent");
 
             var request = new RestRequest(Method.POST);

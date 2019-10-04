@@ -37,7 +37,7 @@ namespace ElderApp.ViewModels
 
         private void GetTransHistory()
         {
-            var client = new RestClient($"http://128.199.197.142/api/trans-history/{App.CurrentUser.User_id}");
+            var client = new RestClient($"https://www.happybi.com.tw/api/trans-history/{App.CurrentUser.User_id}");
             //var client = new RestClient($"http://127.0.0.1:8000/api/trans-history/{App.CurrentUser.User_id}");
             var request = new RestRequest(Method.GET);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");

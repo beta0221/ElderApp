@@ -81,7 +81,7 @@ namespace ElderApp.ViewModels
 
         private async void SubmitTransactionRequest()
         {
-            var client = new RestClient("http://128.199.197.142/api/transaction");
+            var client = new RestClient("https://www.happybi.com.tw/api/transaction");
             //var client = new RestClient("http://127.0.0.1:8000/api/transaction");
             var request = new RestRequest(Method.POST);
 

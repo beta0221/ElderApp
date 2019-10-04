@@ -198,7 +198,7 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("Extend Request");
 
-            var client = new RestClient("http://www.happybi.com.tw/api/extendMemberShip");
+            var client = new RestClient("https://www.happybi.com.tw/api/extendMemberShip");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddHeader("Accept", "application/json");
@@ -241,8 +241,8 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("MyAccount");
 
-            var client = new RestClient("http://128.199.197.142/api/auth/myAccount");
-            //var client = new RestClient("http://127.0.0.1:8000/api/auth/myAccount");
+            var client = new RestClient("https://www.happybi.com.tw/api/auth/myAccount");
+            //var client = new RestClient("https://127.0.0.1:8000/api/auth/myAccount");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddHeader("Accept", "application/json");
@@ -257,7 +257,7 @@ namespace ElderApp.ViewModels
                     if (res.ContainsKey("img"))
                     {
                         var userId = App.CurrentUser.User_id;
-                        string image_url = $"http://128.199.197.142/images/users/{userId}/{res["img"].ToString()}";
+                        string image_url = $"https://www.happybi.com.tw/images/users/{userId}/{res["img"].ToString()}";
                         Image_url = image_url.ToString();
                         Name = res["name"].ToString();
                         Account = res["email"].ToString();
@@ -318,7 +318,7 @@ namespace ElderApp.ViewModels
                 //System.Diagnostics.Debug.WriteLine(App.CurrentUser.Token.ToString());
                 System.Diagnostics.Debug.WriteLine("Logout");
 
-                var client = new RestClient("http://128.199.197.142/api/auth/logout");
+                var client = new RestClient("https://www.happybi.com.tw/api/auth/logout");
                 
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");

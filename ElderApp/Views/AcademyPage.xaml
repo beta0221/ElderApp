@@ -7,7 +7,7 @@
             <StackLayout Spacing="0">
                 
                 <ContentView HeightRequest="{Binding SliderHeight}">
-                    <Image Source="http://128.199.197.142/images/slider/joy1.png"
+                    <Image Source="https://www.happybi.com.tw/images/slider/joy1.png"
                            Aspect="AspectFill"/>    
                 </ContentView>
                 

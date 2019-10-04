@@ -90,7 +90,7 @@ namespace ElderApp.ViewModels
            
             var result = await App.Current.MainPage.DisplayAlert("取消參加活動確認", $"是否確認取消參加活動:{eve_data.title}？", "是", "否");
 
-            client = new RestClient($"http://128.199.197.142/api/cancelevent/{eve_data.slug}");
+            client = new RestClient($"https://www.happybi.com.tw/api/cancelevent/{eve_data.slug}");
             //client = new RestClient($"http://127.0.0.1:8000/api/cancelevent/{eve_data.slug}");
 
 
@@ -118,7 +118,7 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("GetMyEvents");
 
-            var client = new RestClient("http://128.199.197.142/api/myevent");
+            var client = new RestClient("https://www.happybi.com.tw/api/myevent");
             //var client = new RestClient("http://127.0.0.1:8000/api/myevent");
 
             var request = new RestRequest(Method.POST);
@@ -158,7 +158,7 @@ namespace ElderApp.ViewModels
 
         private void GetCategory()
         {
-            var client = new RestClient("http://128.199.197.142/api/category");
+            var client = new RestClient("https://www.happybi.com.tw/api/category");
 
             var request = new RestRequest(Method.GET);
 
@@ -190,7 +190,7 @@ namespace ElderApp.ViewModels
 
         private async void GetDistrict()
         {
-            var client = new RestClient("http://128.199.197.142/api/district");
+            var client = new RestClient("https://www.happybi.com.tw/api/district");
 
             var request = new RestRequest(Method.GET);
 

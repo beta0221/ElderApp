@@ -122,7 +122,7 @@
                 
                 <ContentView BackgroundColor="White" HeightRequest="{Binding SliderHeight}">
                     
-                    <WebView Source="http://128.199.197.142/slider.html"/>
+                    <WebView Source="https://www.happybi.com.tw/slider.html"/>
                 </ContentView>
                 
                 <ContentView HeightRequest="{Binding SquareHeight}" BackgroundColor="#F6A723">

@@ -70,8 +70,8 @@ namespace ElderApp.ViewModels
 
         private void GetCategory()
         {
-            var client = new RestClient("http://128.199.197.142/api/category");
-            //var client = new RestClient("http://127.0.0.1:8000/api/category");
+            var client = new RestClient("https://www.happybi.com.tw/api/category");
+            //var client = new RestClient("https://127.0.0.1:8000/api/category");
 
             var request = new RestRequest(Method.GET);
 

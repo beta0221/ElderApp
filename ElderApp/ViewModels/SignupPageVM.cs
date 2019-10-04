@@ -270,7 +270,7 @@ namespace ElderApp.ViewModels
             //validate here
 
 
-            var client = new RestClient("http://128.199.197.142/api/member/join");
+            var client = new RestClient("https://www.happybi.com.tw/api/member/join");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddHeader("Accept", "application/json");
@@ -344,7 +344,7 @@ namespace ElderApp.ViewModels
                         return;
                     }
                     
-                    var client = new RestClient($"http://128.199.197.142/api/inviterCheck?inviter_id_code={Inviter_id_code}");
+                    var client = new RestClient($"https://www.happybi.com.tw/api/inviterCheck?inviter_id_code={Inviter_id_code}");
                     var request = new RestRequest(Method.GET);
                     request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                     request.AddHeader("Accept", "application/json");
@@ -388,7 +388,7 @@ namespace ElderApp.ViewModels
 
         private async void GetDistrict()
         {
-            var client = new RestClient("http://128.199.197.142/api/district");
+            var client = new RestClient("https://www.happybi.com.tw/api/district");
 
             var request = new RestRequest(Method.GET);
 
