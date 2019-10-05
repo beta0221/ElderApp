@@ -155,5 +155,6 @@
     <BundleResource Include="Resources\level.png" />
     <BundleResource Include="Resources\coin.png" />
     <BundleResource Include="Resources\member.png" />
+    <BundleResource Include="Resources\sliderBG.png" />
   </ItemGroup>
 </Project>

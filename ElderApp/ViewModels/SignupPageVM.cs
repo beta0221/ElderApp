@@ -92,7 +92,9 @@ namespace ElderApp.ViewModels
         private Gender gender;
         public Gender Gender
         {
-            get { return gender; }
+            get {
+                return gender;
+            }
             set
             {
                 gender = value;
@@ -328,60 +330,49 @@ namespace ElderApp.ViewModels
         {
 
             //validation here
-
-
-
-            if (Pay_method != null)
+            if (!isValid())
             {
-                if (Pay_method.Val == 0)
-                {
-                    SubmitRequest();
-                }
-                else
-                {
-                    if (Inviter_id_code == null)
-                    {
-                        return;
-                    }
-                    
-                    var client = new RestClient($"https://www.happybi.com.tw/api/inviterCheck?inviter_id_code={Inviter_id_code}");
-                    var request = new RestRequest(Method.GET);
-                    request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                    request.AddHeader("Accept", "application/json");
-
-                    IRestResponse response = client.Execute(request);
-
-                    if (response.Content != null)
-                    {
-                        try
-                        {
-                            JObject res = JObject.Parse(response.Content);
-
-                            if (res["s"].ToString() == "1")
-                            {
-
-                                var result = await App.Current.MainPage.DisplayAlert("確認推薦人", $"確認推薦人姓名為：{res["inviter"].ToString()}", "是", "否");
-                                if (result == true)
-                                {
-                                    SubmitRequest();
-                                }
-                            }
-                            else
-                            {
-                                await App.Current.MainPage.DisplayAlert("非常抱歉", "此會員編號用戶並不存在，請檢查是否輸入錯誤或向推薦人確認。", "確定");
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
-                        }
-
-                    }
-
-                }
-
+                return;
             }
+            
+             var client = new RestClient($"https://www.happybi.com.tw/api/inviterCheck?inviter_id_code={Inviter_id_code}");
+             var request = new RestRequest(Method.GET);
+             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+             request.AddHeader("Accept", "application/json");
+
+             IRestResponse response = client.Execute(request);
+
+             if (response.Content != null)
+             {
+                 try
+                 {
+                     JObject res = JObject.Parse(response.Content);
+
+                     if (res["s"].ToString() == "1")
+                     {
+
+                         var result = await App.Current.MainPage.DisplayAlert("確認推薦人", $"確認推薦人姓名為：{res["inviter"].ToString()}", "是", "否");
+                         if (result == true)
+                         {
+                             SubmitRequest();
+                         }
+                     }
+                     else
+                     {
+                         await App.Current.MainPage.DisplayAlert("非常抱歉", "此會員編號用戶並不存在，請檢查是否輸入錯誤或向推薦人確認。", "確定");
+                     }
+
+                 }
+                 catch (Exception ex)
+                 {
+                     await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
+                 }
+
+             }
+
+                
+
+            
          
         }
 
@@ -429,9 +420,271 @@ namespace ElderApp.ViewModels
             Inviter_id_code = parameters["Id"].ToString();
         }
 
+
+        private bool isValid()
+        {
+
+            
+            var result = true;
+            Email_alert = false;
+            Password_alert = false;
+            Con_password_alert = false;
+            Name_alert = false;
+            Gender_alert = false;
+            Birthdate_alert = false;
+            Id_number_alert = false;
+            District_alert = false;
+            Address_alert = false;
+            Pay_method_alert = false;
+            Inviter_id_code_alert = false;
+
+            if (String.IsNullOrEmpty(Email))
+            {
+                Email_alert = true;
+                result = false;
+            }
+            if (String.IsNullOrEmpty(Password))
+            {
+                Password_alert = true;
+                result = false;
+            }
+            if (Password != Con_password)
+            {
+                Con_password_alert = true;
+                result = false;
+            }
+            if (String.IsNullOrEmpty(Name))
+            {
+                Name_alert = true;
+                result = false;
+            }
+            if (Gender == null)
+            {
+                Gender_alert = true;
+                result = false;
+            }
+            if (String.IsNullOrEmpty(Birthdate))
+            {
+                Birthdate_alert = true;
+                result = false;
+            }
+            if (String.IsNullOrEmpty(Id_number))
+            {
+                Id_number_alert = true;
+                result = false;
+            }
+            if (District == null)
+            {
+                District_alert = true;
+                result = false;
+            }
+            if (String.IsNullOrEmpty(Address))
+            {
+                Address_alert = true;
+                result = false;
+            }
+            if (Pay_method == null)
+            {
+                Pay_method_alert = true;
+                result = false;
+            }
+            else
+            {
+                if (Pay_method.Val == 1)
+                {
+                    if (String.IsNullOrEmpty(Inviter_id_code))
+                    {
+                        Inviter_id_code_alert = true;
+                        result = false;
+                    }
+                }
+            }
+            
+
+
+            return result;
+        }
+
+
+        //------------------------------alert property------------------------------
+
+        private bool email_alert = false;
+        public bool Email_alert
+        {
+            get
+            {
+                return email_alert;
+            }
+            set
+            {
+                email_alert = value;
+                OnPropertyChanged("Email_alert");
+
+            }
+        }
+
+        private bool password_alert = false;
+        public bool Password_alert
+        {
+            get
+            {
+                return password_alert;
+            }
+            set
+            {
+                password_alert = value;
+                OnPropertyChanged("Password_alert");
+
+            }
+        }
+        private bool con_password_alert = false;
+        public bool Con_password_alert
+        {
+            get
+            {
+                return con_password_alert;
+            }
+            set
+            {
+                con_password_alert = value;
+                OnPropertyChanged("Con_password_alert");
+
+            }
+        }
+        private bool name_alert = false;
+        public bool Name_alert
+        {
+            get
+            {
+                return name_alert;
+            }
+            set
+            {
+                name_alert = value;
+                OnPropertyChanged("Name_alert");
+
+            }
+        }
+
+        private bool gender_alert = false;
+        public bool Gender_alert
+        {
+            get
+            {
+                return gender_alert;
+            }
+            set
+            {
+                gender_alert = value;
+                OnPropertyChanged("Gender_alert");
+
+            }
+        }
+
+        private bool birthdate_alert = false;
+        public bool Birthdate_alert
+        {
+            get
+            {
+                return birthdate_alert;
+            }
+            set
+            {
+                birthdate_alert = value;
+                OnPropertyChanged("Birthdate_alert");
+
+            }
+        }
+
+        private bool id_number_alert = false;
+        public bool Id_number_alert
+        {
+            get
+            {
+                return id_number_alert;
+            }
+            set
+            {
+                id_number_alert = value;
+                OnPropertyChanged("Id_number_alert");
+
+            }
+        }
+
+        private bool district_alert = false;
+        public bool District_alert
+        {
+            get
+            {
+                return district_alert;
+            }
+            set
+            {
+                district_alert = value;
+                OnPropertyChanged("District_alert");
+
+            }
+        }
+
+        private bool address_alert = false;
+        public bool Address_alert
+        {
+            get
+            {
+                return address_alert;
+            }
+            set
+            {
+                address_alert = value;
+                OnPropertyChanged("Address_alert");
+
+            }
+        }
+
+        private bool pay_method_alert = false;
+        public bool Pay_method_alert
+        {
+            get
+            {
+                return pay_method_alert;
+            }
+            set
+            {
+                pay_method_alert = value;
+                OnPropertyChanged("Pay_method_alert");
+
+            }
+        }
+
+        private bool inviter_id_code_alert = false;
+        public bool Inviter_id_code_alert
+        {
+            get
+            {
+                return inviter_id_code_alert;
+            }
+            set
+            {
+                inviter_id_code_alert = value;
+                OnPropertyChanged("Inviter_id_code_alert");
+
+            }
+        }
+        
+
+
+
+
+
+
+
+
     }//class end brecket
 
-    
+
+
+
+
 
 
     public class NameAndVal
@@ -449,8 +702,6 @@ namespace ElderApp.ViewModels
     {
         
     }
-
-   
 
     
 

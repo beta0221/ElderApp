@@ -5126,16 +5126,19 @@ namespace ElderApp.Droid
 			public const int promo = 2131165499;
 			
 			// aapt resource value: 0x7F07013C
-			public const int take = 2131165500;
+			public const int sliderBG = 2131165500;
 			
 			// aapt resource value: 0x7F07013D
-			public const int tooltip_frame_dark = 2131165501;
+			public const int take = 2131165501;
 			
 			// aapt resource value: 0x7F07013E
-			public const int tooltip_frame_light = 2131165502;
+			public const int tooltip_frame_dark = 2131165502;
 			
 			// aapt resource value: 0x7F07013F
-			public const int trans = 2131165503;
+			public const int tooltip_frame_light = 2131165503;
+			
+			// aapt resource value: 0x7F070140
+			public const int trans = 2131165504;
 			
 			static Drawable()
 			{

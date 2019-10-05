@@ -121,8 +121,25 @@
                 
                 
                 <ContentView BackgroundColor="White" HeightRequest="{Binding SliderHeight}">
+                    <AbsoluteLayout>
+
+                        
+                        
+
+                        <WebView AbsoluteLayout.LayoutFlags="All"
+                                 AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                 Source="https://www.happybi.com.tw/slider.html"
+                                 Navigated="OnNavigated"/>
+
+                        <Image AbsoluteLayout.LayoutFlags="All"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               Source="sliderBG.png"
+                               x:Name="sliderBG"
+                               IsVisible="true"/>
+
+                    </AbsoluteLayout>
                     
-                    <WebView Source="https://www.happybi.com.tw/slider.html"/>
+
                 </ContentView>
                 
                 <ContentView HeightRequest="{Binding SquareHeight}" BackgroundColor="#F6A723">
