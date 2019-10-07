@@ -82,6 +82,14 @@ namespace ElderApp.ViewModels
 
         private async void SubmitTransactionRequest()
         {
+
+            if (Amount < 1)
+            {
+                await App.Current.MainPage.DisplayAlert("錯誤", "請確認支付金額", "確定");
+                return;
+            }
+
+
             var client = new RestClient("https://www.happybi.com.tw/api/transaction");
             //var client = new RestClient("http://127.0.0.1:8000/api/transaction");
             var request = new RestRequest(Method.POST);
@@ -96,21 +104,29 @@ namespace ElderApp.ViewModels
             request.AddParameter("event", Event);
             IRestResponse response = client.Execute(request);
 
-            if (response.Content.ToString() == "success")
+            if (response.Content != null)
             {
-                await App.Current.MainPage.DisplayAlert("支付成功", "回首頁", "OK");
-                //await _navigationService.GoBackAsync();
-                await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+                if (response.Content.ToString() == "success")
+                {
+                    await App.Current.MainPage.DisplayAlert("支付成功", "回首頁", "確定");
+                    await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+                }
+                else if (response.Content.ToString() == "insufficient")
+                {
+                    await App.Current.MainPage.DisplayAlert("失敗", "剩餘樂幣不足", "確定");
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("失敗", "伺服器異常", "確定");
+                    await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+                }
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("失敗", "不明原因", "OK");
-                //await _navigationService.GoBackAsync();
+                await App.Current.MainPage.DisplayAlert("失敗", "伺服器異常", "確定");
                 await _navigationService.NavigateAsync("/NavigationPage/MyPage");
             }
-
-
-            //System.Diagnostics.Debug.WriteLine(response.Content.ToString());
+            
 
         }
 
