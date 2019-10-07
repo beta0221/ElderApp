@@ -109,7 +109,7 @@ namespace ElderApp.ViewModels
                 if (response.Content.ToString() == "success")
                 {
                     await App.Current.MainPage.DisplayAlert("支付成功", "回首頁", "確定");
-                    await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+                    await _navigationService.NavigateAsync("/FirstPage");
                 }
                 else if (response.Content.ToString() == "insufficient")
                 {
@@ -118,13 +118,13 @@ namespace ElderApp.ViewModels
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("失敗", "伺服器異常", "確定");
-                    await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+                    await _navigationService.NavigateAsync("/FirstPage");
                 }
             }
             else
             {
                 await App.Current.MainPage.DisplayAlert("失敗", "伺服器異常", "確定");
-                await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+                await _navigationService.NavigateAsync("/FirstPage");
             }
             
 
@@ -132,7 +132,7 @@ namespace ElderApp.ViewModels
 
         private async void CancelTransactionRequest()
         {
-            await _navigationService.NavigateAsync("/NavigationPage/MyPage");
+            await _navigationService.NavigateAsync("/FirstPage");
         }
 
 
