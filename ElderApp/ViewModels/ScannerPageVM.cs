@@ -34,6 +34,19 @@ namespace ElderApp.ViewModels
             }
         }
 
+        
+
+        private bool isNotValidCode;
+        public bool IsNotValidCode
+        {
+            get { return isNotValidCode; }
+            set
+            {
+                isNotValidCode = value;
+                OnPropertyChanged("IsNotValidCode");
+            }
+        }
+
         public Command QRScanResultCommand
         {
             get
@@ -48,16 +61,28 @@ namespace ElderApp.ViewModels
                         //await App.Current.MainPage.DisplayAlert("Result", Result.Text, "OK");
 
                         IsScanning = false;
+                        IsNotValidCode = false;
 
                         string[] a = Result.Text.Split(',');
 
+                        if(a.Length == 3)
+                        {
+                            var paremeter = new NavigationParameters();
+                            paremeter.Add("User_id", a[0]);
+                            paremeter.Add("User_name", a[1]);
+                            paremeter.Add("User_email", a[2]);
 
-                        var paremeter = new NavigationParameters();
-                        paremeter.Add("User_id",a[0]);
-                        paremeter.Add("User_name", a[1]);
-                        paremeter.Add("User_email", a[2]);
+                            await _navigationService.NavigateAsync("/NavigationPage/GiveMoneyPage", paremeter);
+                        }
+                        else
+                        {
+                            IsScanning = false;
+                            IsNotValidCode = true;
+                        }
 
-                        await _navigationService.NavigateAsync("/NavigationPage/GiveMoneyPage", paremeter);
+                        
+
+                        
                     });
                 });
             }
@@ -69,6 +94,7 @@ namespace ElderApp.ViewModels
         {
             _navigationService = navigationService;
             IsScanning = true;
+            IsNotValidCode = false;
         }
 
         
