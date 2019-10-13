@@ -240,7 +240,7 @@ namespace ElderApp.ViewModels
 
             GetCategory();
             GetDistrict();
-            
+
             GetUserEvent();
             GetEvents();
         }
@@ -338,7 +338,7 @@ namespace ElderApp.ViewModels
         {
 
             
-            var client = new RestClient($"https://www.happybi.com.tw/api/event?category={SelectCategory.id}&district={SelectDistrict.id}");
+            var client = new RestClient($"https://www.happybi.com.tw/api/getEvents?category={SelectCategory.id}&district={SelectDistrict.id}");
             
             var request = new RestRequest(Method.GET);
 
@@ -356,16 +356,16 @@ namespace ElderApp.ViewModels
                     Events.Clear();
                     foreach (var eve in _events)
                     {
-                        //int ind = My_events_id.IndexOf(eve.id);
-                        //if (ind < 0)
-                        //{
-                        //    eve.Participate = false;
-                        //}
-                        //else
-                        //{
-                        //    eve.Participate = true;
-                        //}
-                        //var a = DistrictDictionary[eve.district_id];
+                        int ind = My_events_id.IndexOf(eve.id);
+                        if (ind < 0)
+                        {
+                            eve.Participate = false;
+                        }
+                        else
+                        {
+                            eve.Participate = true;
+                        }
+                        
                         eve.district_name = DistrictDictionary[eve.district_id];
                         eve.category_name = CategoryDictionary[eve.category_id];
 
@@ -419,19 +419,28 @@ namespace ElderApp.ViewModels
 
         public void OnNavigatedTo(INavigationParameters parameters)
         {
-          
+
             //GetCategory();
             //SelectCategory = (Categories.Where(c => c.slug == "all").ToList())[0];
             //This_category = SelectCategory;
-            
+
 
             //GetUserEvent();
             //GetEvents();
-            
+
+
+            //GetUserEvent();
+            //GetEvents();
+
         }
 
         public void OnNavigatingTo(INavigationParameters parameters)
         {
+            //GetEvents();
+            //GetCategory();
+            //GetDistrict();
+
+            //GetUserEvent();
             //GetEvents();
         }
 

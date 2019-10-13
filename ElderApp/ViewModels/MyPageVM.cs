@@ -43,6 +43,17 @@ namespace ElderApp.ViewModels
             }
         }
 
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
         private int rank;
         public int Rank
         {
@@ -325,15 +336,18 @@ namespace ElderApp.ViewModels
                     {
                         using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                         {
-                            var _user = conn.Table<UserModel>().FirstOrDefault();
+                            //var _user = conn.Table<UserModel>().FirstOrDefault();
 
-                            conn.Execute($"UPDATE UserModel SET Wallet = '{Int32.Parse(res["rank"].ToString())}',Rank = '{Int32.Parse(res["wallet"].ToString())}' WHERE Id = {_user.Id}");
+                            //conn.Execute($"UPDATE UserModel SET Wallet = '{Int32.Parse(res["rank"].ToString())}',Rank = '{Int32.Parse(res["wallet"].ToString())}' WHERE Id = {_user.Id}");
 
                             User.Rank = Int32.Parse(res["rank"].ToString());
                             User.Wallet = Int32.Parse(res["wallet"].ToString());
+                            User.Name = res["name"].ToString();
+                            
 
                             Rank = Int32.Parse(res["rank"].ToString());
                             Wallet = Int32.Parse(res["wallet"].ToString());
+                            Name = res["name"].ToString();
                         }
 
                     }

@@ -117,7 +117,7 @@ namespace ElderApp.ViewModels
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("失敗", "伺服器異常", "確定");
+                    await App.Current.MainPage.DisplayAlert("失敗", response.Content.ToString(), "確定");
                     await _navigationService.NavigateAsync("/FirstPage");
                 }
             }

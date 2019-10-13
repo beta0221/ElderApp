@@ -53,7 +53,7 @@ namespace ElderApp.Models
         public string btn_text { get; set; }
         public string btn_color { get; set; }
 
-        public string location { get; set; }
+        
 
         private string _deadline;
         public string deadline
@@ -69,8 +69,19 @@ namespace ElderApp.Models
         }
         public string created_at { get; set; }
         public string slug { get; set; }
+
+
+        public string location { get; set; }
         public int category_id { get; set; }
         public string category_name { get; set; }
+
+        public string catAndDic
+        {
+            get
+            {
+                return $"{category_name}-{district_name}";
+            }
+        }
 
         public int district_id { get; set; }
         public string district_name { get; set; }
@@ -79,7 +90,24 @@ namespace ElderApp.Models
         {
             get
             {
-                return $"https://www.happybi.com.tw/images/events/{slug}/{image}";
+                if (String.IsNullOrEmpty(image))
+                {
+                    return "event_default.png";
+                }
+                else
+                {
+                    return $"https://www.happybi.com.tw/images/events/{slug}/{image}";
+                }
+                
+            }
+        }
+        public int maximum { get; set; }
+        public int numberOfPeople { get; set; }
+
+        public string people {
+            get
+            {
+                return $"人數: {numberOfPeople} / {maximum}";
             }
         }
         public Event()

@@ -9,7 +9,22 @@ namespace ElderApp.Models
 
         public int User_id { get; set; }
 
-        public string Event { get; set; }
+        private string _event;
+        public string Event
+        {
+            get { return _event; }
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
+                    _event = "無";
+                }
+                else
+                {
+                    _event = value;
+                }
+            }
+        }
 
         public int Amount { get; set; }
 

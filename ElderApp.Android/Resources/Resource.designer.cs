@@ -6127,37 +6127,43 @@ namespace ElderApp.Droid
 			public const int coin = 2131492866;
 			
 			// aapt resource value: 0x7F0C0003
-			public const int give = 2131492867;
+			public const int event_default = 2131492867;
 			
 			// aapt resource value: 0x7F0C0004
-			public const int home_min = 2131492868;
-			
-			// aapt resource value: 0x7F0C0006
-			public const int icon = 2131492870;
-			
-			// aapt resource value: 0x7F0C0007
-			public const int icon_round = 2131492871;
+			public const int give = 2131492868;
 			
 			// aapt resource value: 0x7F0C0005
-			public const int ic_launcher = 2131492869;
+			public const int home_min = 2131492869;
+			
+			// aapt resource value: 0x7F0C0007
+			public const int icon = 2131492871;
 			
 			// aapt resource value: 0x7F0C0008
-			public const int launcher_foreground = 2131492872;
+			public const int icon_round = 2131492872;
+			
+			// aapt resource value: 0x7F0C0006
+			public const int ic_launcher = 2131492870;
 			
 			// aapt resource value: 0x7F0C0009
-			public const int level = 2131492873;
+			public const int launcher_foreground = 2131492873;
 			
 			// aapt resource value: 0x7F0C000A
-			public const int member = 2131492874;
+			public const int level = 2131492874;
 			
 			// aapt resource value: 0x7F0C000B
-			public const int promo = 2131492875;
+			public const int member = 2131492875;
 			
 			// aapt resource value: 0x7F0C000C
-			public const int take = 2131492876;
+			public const int promo = 2131492876;
 			
 			// aapt resource value: 0x7F0C000D
-			public const int trans = 2131492877;
+			public const int take = 2131492877;
+			
+			// aapt resource value: 0x7F0C000E
+			public const int trans = 2131492878;
+			
+			// aapt resource value: 0x7F0C000F
+			public const int user_default = 2131492879;
 			
 			static Mipmap()
 			{

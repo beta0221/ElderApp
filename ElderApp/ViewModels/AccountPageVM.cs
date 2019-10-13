@@ -257,8 +257,19 @@ namespace ElderApp.ViewModels
                     if (res.ContainsKey("img"))
                     {
                         var userId = App.CurrentUser.User_id;
-                        string image_url = $"https://www.happybi.com.tw/images/users/{userId}/{res["img"].ToString()}";
-                        Image_url = image_url.ToString();
+                        string image_url = "";
+                        System.Diagnostics.Debug.WriteLine(res["img"].ToString());
+                        if (String.IsNullOrEmpty(res["img"].ToString()))
+                        {
+
+                            image_url = "user_default.png";
+                        }
+                        else
+                        {
+                            image_url = $"https://www.happybi.com.tw/images/users/{userId}/{res["img"].ToString()}";
+                        }
+                        
+                        Image_url = image_url;
                         Name = res["name"].ToString();
                         Account = res["email"].ToString();
                         if (res["gender"].ToString() == "1")

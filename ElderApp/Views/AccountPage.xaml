@@ -23,7 +23,6 @@
                         
                         <BoxView BackgroundColor="White" AbsoluteLayout.LayoutFlags="PositionProportional"
                                  AbsoluteLayout.LayoutBounds=".5,.5,108,108" CornerRadius="54"/>
-                        
                         <circleImg:CircleImage x:Name="UserImage"
                            Source="{Binding Image_url,Mode=TwoWay}"
                            Aspect="AspectFill" 

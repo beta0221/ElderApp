@@ -101,17 +101,19 @@
                                                         Grid.Column="0"
                                                         Grid.RowSpan="5"
                                                         Padding="6">
+
                                                         
                                                         <circleImg:CircleImage
                                                            Source="{Binding Image_Url}"
-                                                           Aspect="AspectFill"/>    
+                                                           Aspect="AspectFill"/>
+                                                        
                                                     </ContentView>
                                                     
                                                     
                                                     <Label Text="{Binding title}" Grid.Row="0" Grid.Column="1" VerticalOptions="Start" />
-                                                    <Label Text="{Binding location}" Grid.Row="1" Grid.Column="1" VerticalOptions="Start" />
-                                                    <Label Text="{Binding district_name}" Grid.Row="2" Grid.Column="1" VerticalOptions="Start" />
-                                                    <Label Text="{Binding category_name}" Grid.Row="3" Grid.Column="1" VerticalOptions="Start" />
+                                                    <Label Text="{Binding catAndDic}" Grid.Row="1" Grid.Column="1" VerticalOptions="Start" />
+                                                    <Label Text="{Binding location}" Grid.Row="2" Grid.Column="1" VerticalOptions="Start" />
+                                                    <Label Text="{Binding people}" Grid.Row="3" Grid.Column="1" VerticalOptions="Start" />
                                                     <Label Text="{Binding dateTime}" Grid.Row="4" Grid.Column="1" VerticalOptions="Start" TextColor="Gray"/>
                                                     
                                                     <Label Text="＞" TextColor="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large"/>

@@ -45,7 +45,7 @@
                         <ContentView Grid.Row="0" Grid.Column="1" Padding="8,0,0,0" VerticalOptions="Center">
                             <StackLayout Orientation="Horizontal" Spacing="0">
                                 <Label Text="姓名:" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>        
-                                <Label Text="{Binding User.Name,Mode=TwoWay}" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>
+                                <Label Text="{Binding Name,Mode=TwoWay}" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>
                             </StackLayout>
                         </ContentView>
                         
