@@ -102,10 +102,19 @@
                                                         Grid.RowSpan="5"
                                                         Padding="6">
 
+
+                                                        
                                                         
                                                         <circleImg:CircleImage
-                                                           Source="{Binding Image_Url}"
-                                                           Aspect="AspectFill"/>
+                                                           Source="{Binding Image_Url}"   
+                                                           Aspect="AspectFill">
+                                                            <!--<circleImg:CircleImage.Source>
+                                                                <UriImageSource Uri="{Binding Image_Url}"
+                                                                                />
+                                                            </circleImg:CircleImage.Source>-->
+                                                        </circleImg:CircleImage>
+
+
                                                         
                                                     </ContentView>
                                                     

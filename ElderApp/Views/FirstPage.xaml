@@ -5,6 +5,7 @@
              x:Class="ElderApp.Views.FirstPage"
             SelectedTabColor="#F6A723"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             >
 
@@ -12,6 +13,13 @@
     
     
   <NavigationPage IconImageSource="home_min.png" Title="首頁">
+      <NavigationPage.BarBackgroundColor>
+          <OnPlatform x:TypeArguments="Color">
+              <OnPlatform.iOS>WHITE</OnPlatform.iOS>
+              <OnPlatform.Android>LightGray</OnPlatform.Android>
+          </OnPlatform>
+      </NavigationPage.BarBackgroundColor>
+                  
         <x:Arguments>
             <local:MyPage />
         </x:Arguments>
@@ -19,7 +27,13 @@
 
 
     
-    <NavigationPage IconImageSource="academy_min.png" Title="銀髮社群">
+    <NavigationPage IconImageSource="academy_min.png" Title="活動">
+    <NavigationPage.BarBackgroundColor>
+          <OnPlatform x:TypeArguments="Color">
+              <OnPlatform.iOS>WHITE</OnPlatform.iOS>
+              <OnPlatform.Android>LightGray</OnPlatform.Android>
+          </OnPlatform>
+    </NavigationPage.BarBackgroundColor>
         <x:Arguments>
             <local:EventPage />
         </x:Arguments>
@@ -27,6 +41,12 @@
     
     
     <NavigationPage IconImageSource="account_min.png" Title="我的帳戶">
+    <NavigationPage.BarBackgroundColor>
+          <OnPlatform x:TypeArguments="Color">
+              <OnPlatform.iOS>WHITE</OnPlatform.iOS>
+              <OnPlatform.Android>LightGray</OnPlatform.Android>
+          </OnPlatform>
+     </NavigationPage.BarBackgroundColor>
         
             <x:Arguments>
                 <local:AccountPage />

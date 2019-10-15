@@ -25,8 +25,7 @@ namespace ElderApp.Views
 
             }
 
-
-
+            
         }
     }
 }

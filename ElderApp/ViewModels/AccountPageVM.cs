@@ -1,7 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using ElderApp.Helpers;
+using ElderApp.Models;
 using Newtonsoft.Json.Linq;
+using Plugin.Media;
 using Prism.AppModel;
 using Prism.Commands;
 using Prism.Navigation;
@@ -175,7 +178,7 @@ namespace ElderApp.ViewModels
 
         public ICommand ExtendMembership { get; set; }
 
-        
+        public ICommand SelectImage { get; set; }
 
         public AccountPageVM(INavigationService navigationService)
         {
@@ -184,7 +187,7 @@ namespace ElderApp.ViewModels
             Edit = new DelegateCommand(EditRequest);
             Logout = new DelegateCommand(LogoutRequest);
             ExtendMembership = new DelegateCommand(ExtendRequest);
-            
+            SelectImage = new DelegateCommand(SelectImageRequest);
 
         }
 
@@ -376,6 +379,73 @@ namespace ElderApp.ViewModels
 
 
             }
+
+        }
+
+        private async void SelectImageRequest()
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                await App.Current.MainPage.DisplayAlert("Not able", "Not able to pick photo", "OK");
+                return;
+            }
+
+            //pick image
+            var file = await CrossMedia.Current.PickPhotoAsync();
+
+            if (file == null)
+                return;
+
+            var stream = file.GetStream();
+
+            byte[] byteArray = ImageConverter.StreamToByteArray(stream);
+            string image_string = Convert.ToBase64String(byteArray);
+
+            var client = new RestClient("https://www.happybi.com.tw/api/auth/uploadImage");
+            
+            var request = new RestRequest(Method.POST);
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("token", App.CurrentUser.Token);
+            request.AddParameter("id", App.CurrentUser.User_id.ToString());
+            request.AddParameter("name", App.CurrentUser.Name);
+            request.AddParameter("image", image_string);
+
+            IRestResponse response = client.Execute(request);
+
+            if (response.Content != null)
+            {
+                System.Diagnostics.Debug.WriteLine(response.Content);
+                try
+                {
+                    JObject res = JObject.Parse(response.Content);
+                    if (res.ContainsKey("image_name"))
+                    {
+                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                        {
+                            var _user = conn.Table<UserModel>().FirstOrDefault();
+                            string image_url = $"https://www.happybi.com.tw/images/users/{_user.User_id}/{res["image_name"].ToString()}";
+                            //string image_url = $"http://127.0.0.1:8000/images/users/{_user.User_id}/{res["image_name"].ToString()}";
+                            conn.Execute($"UPDATE UserModel SET Img = '{image_url}' WHERE Id = {_user.Id}");
+
+                            Image_url = image_url.ToString();
+                            App.CurrentUser.Img = image_url.ToString();
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("發生錯誤", ex.ToString(), "OK");
+                }
+
+
+
+            }
+
 
         }
 

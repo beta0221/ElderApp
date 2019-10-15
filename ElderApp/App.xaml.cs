@@ -4,6 +4,7 @@ using ElderApp.Models;
 using ElderApp.ViewModels;
 using ElderApp.Views;
 using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Prism;
 using Prism.Ioc;
@@ -102,11 +103,17 @@ namespace ElderApp
         }
 
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
             string androidAppSecret = "1a282c36-cd4e-42a5-902e-c0e660ca2151";
             string iOSAppSecret = "ebf97172-1b0d-4728-ad56-5d17c5abf99d";
-            AppCenter.Start($"android={androidAppSecret};ios={iOSAppSecret}", typeof(Crashes));
+            AppCenter.Start($"android={androidAppSecret};ios={iOSAppSecret}", typeof(Crashes),typeof(Analytics));
+
+            bool didAppCrashed = await Crashes.HasCrashedInLastSessionAsync();
+            if (didAppCrashed)
+            {
+                var crashReport = await Crashes.GetLastSessionCrashReportAsync();
+            }
         }
 
     }

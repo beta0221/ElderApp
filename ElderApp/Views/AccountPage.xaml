@@ -29,7 +29,11 @@
                            AbsoluteLayout.LayoutBounds=".5,.5,100,100" 
                            AbsoluteLayout.LayoutFlags="PositionProportional"/>
                         
-                        
+                        <Button Text="上傳照片" TextColor="Gray"
+                                AbsoluteLayout.LayoutFlags="PositionProportional"
+                                AbsoluteLayout.LayoutBounds=".5,.9"
+                                Command="{Binding SelectImage}"/>
+
                     </AbsoluteLayout>
                 </ContentView>
                 
@@ -74,7 +78,6 @@
                                 <Label AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,.5" HeightRequest="20" FontSize="Medium" TextColor="{Binding Valid_color,Mode=TwoWay}" Text="{Binding Valid,Mode=TwoWay}"></Label>
                             </AbsoluteLayout>
                         </ContentView>
-
 
                         <zxing:ZXingBarcodeImageView
                              x:Name="UserIdCode"

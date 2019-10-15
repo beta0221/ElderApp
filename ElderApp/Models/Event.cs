@@ -97,8 +97,9 @@ namespace ElderApp.Models
                 else
                 {
                     return $"https://www.happybi.com.tw/images/events/{slug}/{image}";
+                    
                 }
-                
+
             }
         }
         public int maximum { get; set; }
