@@ -27,7 +27,7 @@
                             <Label Text="{Binding Select_event.deadline}" FontSize="Default" TextColor="Gray" Margin="0,0,0,8"/>
                             <Label Margin="0,0,0,80" Text="{Binding Select_event.body}" FontSize="Medium"/>
                             
-                            
+                            <Button Text="領取活動獎勵" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Green" Command="{Binding DrawReward}"/>
                             
                         </StackLayout>
                         

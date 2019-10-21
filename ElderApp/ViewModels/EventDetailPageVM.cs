@@ -56,6 +56,8 @@ namespace ElderApp.ViewModels
         public Command ButtonClick1 { get; set; }
         public Command ButtonClick2 { get; set; }
 
+        public ICommand DrawReward { get; set; }
+
         public ICommand back { get; set; }
 
         public double HeadImageHeight { get; set; }
@@ -66,6 +68,8 @@ namespace ElderApp.ViewModels
             back = new DelegateCommand(BackRequest);
             ButtonClick1 = new Command(ButtonClickFunction1);
             ButtonClick2 = new Command(ButtonClickFunction2);
+
+            DrawReward = new DelegateCommand(ScanReward);
 
             //設定圖片高度比例4:3
             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
@@ -151,12 +155,20 @@ namespace ElderApp.ViewModels
             }
         }
 
+        private async void ScanReward()
+        {
+            await _navigationService.NavigateAsync("ScannerRewardPage");
+        }
+
         public void OnNavigatedTo(INavigationParameters parameters)
         {
+            if (parameters["eve"]!=null)
+            {
+                Select_event = parameters["eve"] as Event;
+                Par_show = !Select_event.Participate;
+                Cal_show = Select_event.Participate;
+            }
             
-            Select_event = parameters["eve"] as Event;
-            Par_show = !Select_event.Participate;
-            Cal_show = Select_event.Participate;
         }
 
         public void OnNavigatingTo(INavigationParameters parameters)

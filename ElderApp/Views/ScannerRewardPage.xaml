@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             x:Class="ElderApp.Views.ScannerRewardPage"
+             BackgroundColor="#F6A723">
+
+
+
+        <ScrollView>
+
+        
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                
+            <zxing:ZXingScannerView 
+                x:Name="_scanView"
+                Result="{Binding Result, Mode=TwoWay}" 
+                ScanResultCommand="{Binding QRScanResultCommand}" 
+                IsScanning="{Binding IsScanning,Mode=TwoWay}"
+                WidthRequest="300" HeightRequest="300" />
+            
+            <Label WidthRequest="300" FontSize="Large" Margin="0,40,0,0" XAlign="Center" Text="對準行動條碼，掃描後即可獲得樂幣。" TextColor="White"/>
+            <Label WidthRequest="300" Margin="0,8,0,0" XAlign="Center" Text="無效的條碼" TextColor="Red" IsVisible="{Binding IsNotValidCode,Mode=TwoWay}"/>
+            </StackLayout>    
+        
+        </ScrollView>
+
+
+
+
+</ContentPage>

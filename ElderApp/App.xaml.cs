@@ -95,7 +95,8 @@ namespace ElderApp
             containerRegistry.RegisterForNavigation<PromocodePage, PromocodePageVM>();
             containerRegistry.RegisterForNavigation<SignupPage, SignupPageVM>();
             containerRegistry.RegisterForNavigation<ScanIdPage, ScanIdPageVM>();
-            
+            containerRegistry.RegisterForNavigation<ScannerRewardPage, ScannerRewardPageVM>();
+
             //containerRegistry.RegisterForNavigation<CategoryPage, CategoryPageVM>();
             containerRegistry.RegisterForNavigation<FirstPage>();
 

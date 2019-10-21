@@ -15,12 +15,12 @@
 
     <ContentPage.Content>
         
-        <ScrollView>
+        <!--<ScrollView>-->
         <StackLayout>
         
-            <ContentView BackgroundColor="White" HeightRequest="{Binding SliderHeight}">
+            <!--<ContentView BackgroundColor="White" HeightRequest="{Binding SliderHeight}">
                 <WebView Source="https://www.happybi.com.tw/slider.html"/>
-            </ContentView>
+            </ContentView>-->
             
             <ContentView Padding="8">
                 
@@ -30,8 +30,8 @@
                     <ContentView>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>    
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="60"/>    
+                                <RowDefinition Height="60"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -69,7 +69,7 @@
                           RefreshCommand="{Binding RefreshCommand}"
                           IsRefreshing="{Binding IsRefreshing}"
                           SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
-                          RowHeight="140"
+                          RowHeight="198"
                           BackgroundColor="#F6A723">
 
                         <ListView.ItemTemplate>
@@ -97,10 +97,10 @@
                                                         <ColumnDefinition Width="24"></ColumnDefinition>
                                                     </Grid.ColumnDefinitions>
                                                     
-                                                    <ContentView Grid.Row="0"
+                                                    <ContentView Grid.Row="1"
                                                         Grid.Column="0"
-                                                        Grid.RowSpan="5"
-                                                        Padding="6">
+                                                        Grid.RowSpan="3"
+                                                        Padding="6,0">
 
 
                                                         
@@ -146,7 +146,7 @@
             
         
         </StackLayout>
-        </ScrollView>
+        <!--</ScrollView>-->
         
     </ContentPage.Content>
 </ContentPage>
