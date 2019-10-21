@@ -17,7 +17,7 @@
         <ListView x:Name="listview" ItemsSource="{Binding My_Events}"
                       SeparatorVisibility="None"
                       SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
-                      RowHeight="140"
+                      RowHeight="198"
                       BackgroundColor="#F6A723">
 
                 
@@ -46,10 +46,10 @@
                                             <ColumnDefinition Width="24"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         
-                                        <ContentView Grid.Row="0"
+                                        <ContentView Grid.Row="1"
                                             Grid.Column="0"
-                                            Grid.RowSpan="5"
-                                            Padding="6">
+                                            Grid.RowSpan="3"
+                                            Padding="6.0">
                                             
                                             <circleImg:CircleImage
                                                Source="{Binding Image_Url}"

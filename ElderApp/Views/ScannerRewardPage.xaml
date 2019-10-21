@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              x:Class="ElderApp.Views.ScannerRewardPage"
-             BackgroundColor="#F6A723">
+             BackgroundColor="#d41252">
 
 
 
