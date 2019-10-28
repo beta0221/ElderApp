@@ -27,6 +27,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -37,6 +38,7 @@
     <MtouchLink>None</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
     <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,9 +62,11 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Distribution: Yi Ju Lin (V4C8JA4SFU)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>Full</MtouchLink>
+    <CodesignProvision>ElderApp_PP_store</CodesignProvision>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -77,26 +81,24 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\167.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\152.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\76.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\29.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\20.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\180.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_167.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_40-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_20.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_120-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_80-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_58-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\樂活_40-2.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

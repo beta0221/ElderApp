@@ -9,6 +9,7 @@ using Prism.Navigation;
 using RestSharp;
 using ElderApp.Models;
 using Newtonsoft.Json;
+using ElderApp.Services;
 
 namespace ElderApp.ViewModels
 {
@@ -269,58 +270,21 @@ namespace ElderApp.ViewModels
         private async void SubmitRequest()
         {
 
-            //validate here
-
-
-            var client = new RestClient("https://www.happybi.com.tw/api/member/join");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("email", Email);
-            request.AddParameter("password", Password);
-            request.AddParameter("name", Name);
-            request.AddParameter("phone", Phone);
-            request.AddParameter("tel", Tel);
-            request.AddParameter("gender", Gender.Val);
-            request.AddParameter("birthdate", Birthdate);
-            request.AddParameter("id_number", Id_number);
-            request.AddParameter("district_id", District.id);
-            request.AddParameter("address", Address);
-            request.AddParameter("pay_method", Pay_method.Val);
-            request.AddParameter("inviter_id_code", Inviter_id_code);
-            request.AddParameter("app", true);
-
-            IRestResponse response = client.Execute(request);
-
-            if (response.Content != null)
+            var service = new ApiServices();
+            var response = await service.SignUpRequest(Email,Password,Name,Phone,Tel,Gender.Val,Birthdate,Id_number,District.id,Address,Pay_method.Val,Inviter_id_code);
+            switch (response.Item1)
             {
-                try
-                {
-                    JObject res = JObject.Parse(response.Content);
-
-                    //do things here
-                    if (res.ContainsKey("s"))
-                    {
-                        if(res["s"].ToString() == "1")
-                        {
-                            await App.Current.MainPage.DisplayAlert("成功", "您已成功註冊", "確定");
-                            await _navigationService.NavigateAsync("/LoginPage");
-                        }
-                    }
-                    else
-                    {
-                        await App.Current.MainPage.DisplayAlert("發生錯誤", res.ToString(), "OK");
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
-                }
-
-
+                case 1:
+                    await App.Current.MainPage.DisplayAlert("成功", response.Item2, "確定");
+                    await _navigationService.NavigateAsync("/LoginPage");
+                    break;
+                case 2:
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
+                    break;
+                default:
+                    break;
             }
-
                 
         }
 
@@ -328,85 +292,56 @@ namespace ElderApp.ViewModels
 
         private async void CheckInviterRequest()
         {
-
-            //validation here
             if (!isValid())
             {
                 return;
             }
-            
-             var client = new RestClient($"https://www.happybi.com.tw/api/inviterCheck?inviter_id_code={Inviter_id_code}");
-             var request = new RestRequest(Method.GET);
-             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-             request.AddHeader("Accept", "application/json");
 
-             IRestResponse response = client.Execute(request);
-
-             if (response.Content != null)
-             {
-                 try
-                 {
-                     JObject res = JObject.Parse(response.Content);
-
-                     if (res["s"].ToString() == "1")
-                     {
-
-                         var result = await App.Current.MainPage.DisplayAlert("確認推薦人", $"確認推薦人姓名為：{res["inviter"].ToString()}", "是", "否");
-                         if (result == true)
-                         {
-                             SubmitRequest();
-                         }
-                     }
-                     else
-                     {
-                         await App.Current.MainPage.DisplayAlert("非常抱歉", "此會員編號用戶並不存在，請檢查是否輸入錯誤或向推薦人確認。", "確定");
-                     }
-
-                 }
-                 catch (Exception ex)
-                 {
-                     await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
-                 }
-
-             }
-
-                
-
-            
-         
+            var service = new ApiServices();
+            var response = await service.CheckInviterRequest(Inviter_id_code);
+            switch (response.Item1)
+            {
+                case 1:
+                    var result = await App.Current.MainPage.DisplayAlert("確認推薦人", $"確認推薦人姓名為：{response.Item2}", "是", "否");
+                    if (result == true)
+                    {
+                        SubmitRequest();
+                    }
+                    break;
+                case 2:
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
+                    break;
+                default:
+                    break;
+            }
         }
 
 
         private async void GetDistrict()
         {
-            var client = new RestClient("https://www.happybi.com.tw/api/district");
 
-            var request = new RestRequest(Method.GET);
-
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-
-            IRestResponse response = client.Execute(request);
-            if (response.Content != null)
+            var service = new ApiServices();
+            var response = await service.GetDistrict();
+            switch (response.Item1)
             {
-                try
-                {
-                    List<District> districtList = JsonConvert.DeserializeObject<List<District>>(response.Content);
-
-
-                    foreach (var dis in districtList)
+                case 1:
+                    List<District> dList = response.Item2;
+                    foreach (var dis in dList)
                     {
-
                         DistrictList.Add(dis);
                     }
-
-
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
-                }
+                    break;
+                case 2:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤。", "確定");
+                    break;
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
+                    break;
+                default:
+                    break;
             }
+
         }
 
 

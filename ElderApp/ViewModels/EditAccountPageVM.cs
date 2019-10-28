@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ElderApp.Services;
 using System.ComponentModel;
 using System.Windows.Input;
 using Newtonsoft.Json.Linq;
@@ -144,37 +145,22 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("Submit Edit Request");
 
-            var client = new RestClient("https://www.happybi.com.tw/api/auth/updateAccount");
-            //var client = new RestClient("http://127.0.0.1:8000/api/auth/updateAccount");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("token", App.CurrentUser.Token.ToString());
-            request.AddParameter("name", Name);
-            request.AddParameter("phone", Phone);
-            request.AddParameter("tel", Tel);
-            request.AddParameter("address", Address);
-            request.AddParameter("id_number", Id_number);
-            IRestResponse response = client.Execute(request);
-            if (response.Content != null)
+            var service = new ApiServices();
+            var response = await service.UpdateAccountRequest(Name,Phone,Tel,Address,Id_number);
+            switch (response.Item1)
             {
-                try
-                {
-                    JObject res = JObject.Parse(response.Content);
-                    
-                    if(res["s"].ToString() == "1")
-                    {
-                        await App.Current.MainPage.DisplayAlert("完成", res["m"].ToString(), "確定");
-                        //await _navigationService.NavigateAsync("/NavigationPage/MyPage");
-                        await _navigationService.NavigateAsync("/FirstPage?selectedTab=AccountPage");
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
-                }
+                case 1:
+                    await App.Current.MainPage.DisplayAlert("完成", response.Item2, "確定");
+                    await _navigationService.NavigateAsync("/FirstPage?selectedTab=AccountPage");
+                    break;
+                case 2:
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤",response.Item2 , "確定");
+                    break;
+                default:
+                    break;
             }
+
 
         }
 
@@ -182,45 +168,31 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("MyAccount");
 
-            var client = new RestClient("https://www.happybi.com.tw/api/auth/myAccount");
-            //var client = new RestClient("http://127.0.0.1:8000/api/auth/myAccount");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("token", App.CurrentUser.Token.ToString());
-            IRestResponse response = client.Execute(request);
 
-            if (response.Content != null)
+            var service = new ApiServices();
+            var response = await service.MyAccountRequest();
+
+            switch (response.Item1)
             {
-                try
-                {
-                    JObject res = JObject.Parse(response.Content);
+                case 1:
+                    var res = response.Item2;
                     Name = res["name"].ToString();
-
-                    //if (res["gender"].ToString() == "1")
-                    //{
-                    //    GenderItem = new Gender() { Key=1,Value="男"};
-                    //}
-                    //else
-                    //{
-                    //    GenderItem = new Gender() { Key = 0, Value = "女" };
-                    //}
-
                     Phone = res["phone"].ToString();
                     Tel = res["tel"].ToString();
                     Address = res["address"].ToString();
                     Id_number = res["id_number"].ToString();
-
-                    
-
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
-                    //await _navigationService.NavigateAsync("/NavigationPage/MyPage");
-                    await _navigationService.NavigateAsync("//FirstPage?selectedTab=AccountPage");
-                }
+                    break;
+                case 2:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤。", "確定");
+                    break;
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
+                    break;
+                default:
+                    break;
             }
+
+           
 
         }
 

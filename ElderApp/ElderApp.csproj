@@ -30,6 +30,7 @@
     <Folder Include="Models\" />
     <Folder Include="Interface\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.iOS">

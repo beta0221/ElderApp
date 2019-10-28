@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using ElderApp.Models;
+using ElderApp.Services;
 using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -63,85 +64,74 @@ namespace ElderApp.ViewModels
         {
 
             System.Diagnostics.Debug.WriteLine("Login");
+            var service = new ApiServices();
+            var response = await service.LoginRequest(Email,Password);
 
-            var client = new RestClient("https://www.happybi.com.tw/api/auth/login");
-            //var client = new RestClient("http://127.0.0.1:8000/api/auth/login");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("email", Email);
-            request.AddParameter("password", Password);
-            IRestResponse response = client.Execute(request);
-
-            if (response.Content!=null)
+            switch (response.Item1)
             {
-                JObject res = JObject.Parse(response.Content);
+                case 1:
+                    var res = response.Item2;
+                    if (res.ContainsKey("access_token"))
+                    {
+                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+                        {
+                            try
+                            {
+                                conn.Execute("DELETE FROM UserModel");
+                            }
+                            catch (Exception ex)
+                            {
+                                var properties = new Dictionary<string, string>
+                                {
+                                    {"error","Delete from UserModel fail"}
+                                };
+                                Crashes.TrackError(ex, properties);
+                            }
+                            conn.CreateTable<UserModel>();
+                            string image_url = $"{service.ApiHost}/images/users/{res["user_id"]}/{res["img"]}";
+                            var newUser = new UserModel()
+                            {
+                                User_id = Convert.ToInt32(res["user_id"]),
+                                Id_code = res["id_code"].ToString(),
+                                Email = res["email"].ToString(),
+                                Name = res["name"].ToString(),
+                                Password = Password,
+                                Wallet = Convert.ToInt32(res["wallet"]),
+                                Rank = Convert.ToInt32(res["rank"]),
+                                Img = image_url,
+                                Token = res["access_token"].ToString(),
+                            };
 
-                if (res.ContainsKey("access_token"))
-                {
-
+                            int inserted = conn.Insert(newUser);
+                            if (inserted >= 1)
+                            {
+                                App.CurrentUser = newUser;
+                                await _navigationService.NavigateAsync("/FirstPage");
+                            }
+                            else
+                            {
+                                await App.Current.MainPage.DisplayAlert("失敗", "錯誤發生", "確定");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("登入失敗", "帳號密碼錯誤", "OK");
+                    }
+                    break;
+                case 2:
                     using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                     {
-                        try
-                        {
-                            conn.Execute("DELETE FROM UserModel");
-                        }
-                        catch (Exception ex)
-                        {
-                            var properties = new Dictionary<string, string>
-                            {
-                                {"error","Delete from UserModel fail"}
-                            };
-                            Crashes.TrackError(ex, properties);
-                        }
-
-
-                        conn.CreateTable<UserModel>();
-                        string image_url = $"https://www.happybi.com.tw/images/users/{res["user_id"]}/{res["img"]}";
-                        //string image_url = $"http://127.0.0.1:8000/images/users/{res["user_id"]}/{res["img"]}";
-
-                        var newUser = new UserModel()
-                        {
-                            User_id = Convert.ToInt32(res["user_id"]),
-                            Id_code = res["id_code"].ToString(),
-                            Email = res["email"].ToString(),
-                            Name = res["name"].ToString(),
-                            Password = Password,
-                            Wallet = Convert.ToInt32(res["wallet"]),
-                            Rank = Convert.ToInt32(res["rank"]),
-                            Img = image_url,
-                            Token = res["access_token"].ToString(),
-
-                        };
-
-                        int inserted = conn.Insert(newUser);
-
-                        if (inserted >= 1)
-                        {
-                            App.CurrentUser = newUser;
-                            //await _navigationService.NavigateAsync("NavigationPage/MyPage");    //跳轉到第一頁
-                            await _navigationService.NavigateAsync("/FirstPage");
-                        }
-                        else
-                        {
-                            await App.Current.MainPage.DisplayAlert("Failure", "An error occured", "OK");
-                        }
-
+                        conn.Execute("DELETE FROM UserModel");
                     }
-
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert("登入失敗", "帳號密碼錯誤", "OK");
-                }
+                    await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤", "確定");
+                    break;
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("登入失敗", "伺服器連線異常", "OK");
-            }
-
-
-
 
 
         }

@@ -1,109 +1,109 @@
 {
   "images": [
     {
-      "filename": "Icon40.png",
+      "filename": "樂活_40-2.png",
       "size": "20x20",
       "scale": "2x",
       "idiom": "iphone"
     },
     {
-      "filename": "Icon60.png",
+      "filename": "樂活_60.png",
       "size": "20x20",
       "scale": "3x",
       "idiom": "iphone"
     },
     {
-      "filename": "Icon58.png",
+      "filename": "樂活_58-1.png",
       "size": "29x29",
       "scale": "2x",
       "idiom": "iphone"
     },
     {
-      "filename": "Icon87.png",
+      "filename": "樂活_87.png",
       "size": "29x29",
       "scale": "3x",
       "idiom": "iphone"
     },
     {
-      "filename": "80-1.png",
+      "filename": "樂活_80-1.png",
       "size": "40x40",
       "scale": "2x",
       "idiom": "iphone"
     },
     {
-      "filename": "120-1.png",
+      "filename": "樂活_120-1.png",
       "size": "40x40",
       "scale": "3x",
       "idiom": "iphone"
     },
     {
-      "filename": "120.png",
+      "filename": "樂活_120.png",
       "size": "60x60",
       "scale": "2x",
       "idiom": "iphone"
     },
     {
-      "filename": "180.png",
+      "filename": "樂活_180.png",
       "size": "60x60",
       "scale": "3x",
       "idiom": "iphone"
     },
     {
-      "filename": "20.png",
+      "filename": "樂活_20.png",
       "size": "20x20",
       "scale": "1x",
       "idiom": "ipad"
     },
     {
-      "filename": "40-1.png",
+      "filename": "樂活_40-1.png",
       "size": "20x20",
       "scale": "2x",
       "idiom": "ipad"
     },
     {
-      "filename": "29.png",
+      "filename": "樂活_29.png",
       "size": "29x29",
       "scale": "1x",
       "idiom": "ipad"
     },
     {
-      "filename": "58.png",
+      "filename": "樂活_58.png",
       "size": "29x29",
       "scale": "2x",
       "idiom": "ipad"
     },
     {
-      "filename": "40.png",
+      "filename": "樂活_40.png",
       "size": "40x40",
       "scale": "1x",
       "idiom": "ipad"
     },
     {
-      "filename": "80.png",
+      "filename": "樂活_80.png",
       "size": "40x40",
       "scale": "2x",
       "idiom": "ipad"
     },
     {
-      "filename": "167.png",
+      "filename": "樂活_167.png",
       "size": "83.5x83.5",
       "scale": "2x",
       "idiom": "ipad"
     },
     {
-      "filename": "76.png",
+      "filename": "樂活_76.png",
       "size": "76x76",
       "scale": "1x",
       "idiom": "ipad"
     },
     {
-      "filename": "152.png",
+      "filename": "樂活_152.png",
       "size": "76x76",
       "scale": "2x",
       "idiom": "ipad"
     },
     {
-      "filename": "1024.png",
+      "filename": "樂活_1024.png",
       "size": "1024x1024",
       "scale": "1x",
       "idiom": "ios-marketing"

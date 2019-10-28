@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using ElderApp.Helpers;
 using ElderApp.Models;
+using ElderApp.Services;
 using Newtonsoft.Json.Linq;
 using Plugin.Media;
 using Prism.AppModel;
@@ -201,42 +202,23 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("Extend Request");
 
-            var client = new RestClient("https://www.happybi.com.tw/api/extendMemberShip");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("token", App.CurrentUser.Token.ToString());
-            request.AddParameter("user_id", App.CurrentUser.User_id);
-            IRestResponse response = client.Execute(request);
+            var service = new ApiServices();
+            var response = await service.ExtendRequest();
 
-            if (response.Content != null)
+            switch (response.Item1)
             {
-                try
-                {
-                    JObject res = JObject.Parse(response.Content);
-                    if (res.ContainsKey("s"))
-                    {
-
-                        await App.Current.MainPage.DisplayAlert("訊息", res["m"].ToString(), "確定");
-                        //if(res["s"].ToString() == "1")
-                        //{
-                        //    MyAccountRequest();
-                        //}
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
-                    await _navigationService.NavigateAsync("/FirstPage?selectedTab=MyPage");
-                }
-            }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應或無網路服務", "確定");
+                case 1:
+                    await App.Current.MainPage.DisplayAlert("訊息", response.Item2, "確定");
+                    break;
+                case 2:
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
+                    break;
+                default:
+                    break;
             }
 
-
+            
 
         }
 
@@ -244,19 +226,12 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("MyAccount");
 
-            var client = new RestClient("https://www.happybi.com.tw/api/auth/myAccount");
-            //var client = new RestClient("https://127.0.0.1:8000/api/auth/myAccount");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("token", App.CurrentUser.Token.ToString());
-            IRestResponse response = client.Execute(request);
-
-            if (response.Content != null)
+            var service = new ApiServices();
+            var response = await service.MyAccountRequest();
+            switch (response.Item1)
             {
-                try
-                {
-                    JObject res = JObject.Parse(response.Content);
+                case 1:
+                    var res = response.Item2;
                     if (res.ContainsKey("img"))
                     {
                         var userId = App.CurrentUser.User_id;
@@ -269,9 +244,9 @@ namespace ElderApp.ViewModels
                         }
                         else
                         {
-                            image_url = $"https://www.happybi.com.tw/images/users/{userId}/{res["img"].ToString()}";
+                            image_url = $"{service.ApiHost}/images/users/{userId}/{res["img"].ToString()}";
                         }
-                        
+
                         Image_url = image_url;
                         Name = res["name"].ToString();
                         Account = res["email"].ToString();
@@ -306,77 +281,49 @@ namespace ElderApp.ViewModels
                         Id_code = res["id_code"].ToString();
 
                     }
-                    else
-                    {
-                        //update token here
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
-                    //await _navigationService.NavigateAsync("/NavigationPage/MyPage");
-                    await _navigationService.NavigateAsync("/FirstPage?selectedTab=MyPage");
-                }
+                    break;
+                case 2:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤。", "確定");
+                    break;
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
+                    break;
+                default:
+                    break;
             }
+
 
         }
 
         private async void LogoutRequest()
         {
 
-            var result = await App.Current.MainPage.DisplayAlert("Logging out", "Sure to logout", "Yes", "Cancel");
+            var result = await App.Current.MainPage.DisplayAlert("登出使用者", "確定登出", "是", "否");
             if (result == true)
             {
 
-                //System.Diagnostics.Debug.WriteLine(App.CurrentUser.Token.ToString());
                 System.Diagnostics.Debug.WriteLine("Logout");
 
-                var client = new RestClient("https://www.happybi.com.tw/api/auth/logout");
-                
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddHeader("Accept", "application/json");
-                request.AddParameter("token", App.CurrentUser.Token.ToString());
-                IRestResponse response = client.Execute(request);
+                var service = new ApiServices();
+                var response = await service.LogoutRequest();
 
-                if (response.Content != null)
+                switch (response)
                 {
-                    try
-                    {
-                        JObject res = JObject.Parse(response.Content);
-
-                        if (res["message"].ToString() == "Successfully logged out")
-                        {
-
-                            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-                            {
-                                conn.Execute("DELETE FROM UserModel");
-
-                                
-                                await _navigationService.NavigateAsync("/LoginPage");
-                                
-                            }
-
-
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-
+                    case 1:
+                    case 2:
                         using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                         {
                             conn.Execute("DELETE FROM UserModel");
-                            
-                            await _navigationService.NavigateAsync("/LoginPage");
-                            
                         }
-
-
-                    }
-
+                        await _navigationService.NavigateAsync("/LoginPage");
+                        break;
+                    
+                    case 3:
+                        await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
+                        break;
+                    default:
+                        break;
                 }
-
 
             }
 
@@ -403,49 +350,32 @@ namespace ElderApp.ViewModels
             byte[] byteArray = ImageConverter.StreamToByteArray(stream);
             string image_string = Convert.ToBase64String(byteArray);
 
-            var client = new RestClient("https://www.happybi.com.tw/api/auth/uploadImage");
-            
-            var request = new RestRequest(Method.POST);
-
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("token", App.CurrentUser.Token);
-            request.AddParameter("id", App.CurrentUser.User_id.ToString());
-            request.AddParameter("name", App.CurrentUser.Name);
-            request.AddParameter("image", image_string);
-
-            IRestResponse response = client.Execute(request);
-
-            if (response.Content != null)
+            var service = new ApiServices();
+            var response = await service.UploadImageRequest(image_string);
+            switch (response.Item1)
             {
-                System.Diagnostics.Debug.WriteLine(response.Content);
-                try
-                {
-                    JObject res = JObject.Parse(response.Content);
-                    if (res.ContainsKey("image_name"))
+                case 1:
+                    var image_name = response.Item2;
+                    string img_url = "";
+                    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                     {
-                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-                        {
-                            var _user = conn.Table<UserModel>().FirstOrDefault();
-                            string image_url = $"https://www.happybi.com.tw/images/users/{_user.User_id}/{res["image_name"].ToString()}";
-                            //string image_url = $"http://127.0.0.1:8000/images/users/{_user.User_id}/{res["image_name"].ToString()}";
-                            conn.Execute($"UPDATE UserModel SET Img = '{image_url}' WHERE Id = {_user.Id}");
-
-                            Image_url = image_url.ToString();
-                            App.CurrentUser.Img = image_url.ToString();
-                        }
-
+                        var _user = conn.Table<UserModel>().FirstOrDefault();
+                        img_url = $"{service.ApiHost}/images/users/{_user.User_id}/{image_name}";
+                        conn.Execute($"UPDATE UserModel SET Img = '{img_url}' WHERE Id = {_user.Id}");
                     }
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("發生錯誤", ex.ToString(), "OK");
-                }
-
-
-
+                    Image_url = img_url;
+                    App.CurrentUser.Img = img_url;
+                    
+                    break;
+                case 2:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤。", "確定");
+                    break;
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
+                    break;
+                default:
+                    break;
             }
-
 
         }
 

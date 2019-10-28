@@ -13,6 +13,7 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Navigation;
 using Xamarin.Essentials;
+using ElderApp.Services;
 
 namespace ElderApp.ViewModels
 {
@@ -88,35 +89,24 @@ namespace ElderApp.ViewModels
         
             var result = await App.Current.MainPage.DisplayAlert("參加活動確認", $"是否確認參加活動:{eve_data.title}?", "是", "否");
 
-            var client = new RestClient($"https://www.happybi.com.tw/api/joinevent/{eve_data.slug}");
-            //var client = new RestClient($"http://127.0.0.1:8000/api/joinevent/{eve_data.slug}");
+            var service = new ApiServices();
+            var response = await service.JoinEventRequest(eve_data.slug);
 
-            if (result == true)
+            switch (response.Item1)
             {
-                var request = new RestRequest(Method.POST);
-
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddHeader("Accept", "application/json");
-                request.AddParameter("id", App.CurrentUser.User_id);
-                request.AddParameter("token", App.CurrentUser.Token.ToString());
-
-                IRestResponse response = client.Execute(request);
-                if (response.Content != null)
-                {
-                    JObject res = JObject.Parse(response.Content);
-                    if (res["s"].ToString() == "1")
-                    {
-                        Select_event.Participate = true;
-                        Par_show = !Par_show;
-                        Cal_show = !Cal_show;
-                    }
-                    else
-                    {
-                        await App.Current.MainPage.DisplayAlert("訊息", $"{res["m"].ToString()}", "OK");
-                    }
-
-                }
+                case 1:
+                    Select_event.Participate = true;
+                    Par_show = !Par_show;
+                    Cal_show = !Cal_show;
+                    break;
+                case 2:
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
+                    break;
+                default:
+                    break;
             }
+
         }
 
         private async void ButtonClickFunction2()
@@ -124,36 +114,28 @@ namespace ElderApp.ViewModels
             var eve_data = Select_event;
             var result = await App.Current.MainPage.DisplayAlert("取消參加活動確認", $"是否確認取消參加活動:{eve_data.title}？", "是", "否");
 
-            var client = new RestClient($"https://www.happybi.com.tw/api/cancelevent/{eve_data.slug}");
-            //var client = new RestClient($"http://127.0.0.1:8000/api/cancelevent/{eve_data.slug}");
 
-            if (result == true)
+
+            var service = new ApiServices();
+            var response = await service.CancelEventRequest(eve_data.slug);
+
+            switch (response.Item1)
             {
-                var request = new RestRequest(Method.POST);
-
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddHeader("Accept", "application/json");
-                request.AddParameter("id", App.CurrentUser.User_id);
-                request.AddParameter("token", App.CurrentUser.Token.ToString());
-
-                IRestResponse response = client.Execute(request);
-                if (response.Content != null)
-                {
-                    JObject res = JObject.Parse(response.Content);
-                    if (res["s"].ToString() == "1")
-                    {
-                        Select_event.Participate = false;
-                        Par_show = !Par_show;
-                        Cal_show = !Cal_show;
-                    }
-                    else
-                    {
-                        await App.Current.MainPage.DisplayAlert("訊息", $"{res["m"].ToString()}", "OK");
-                    }
-
-                }
+                case 1:
+                    Select_event.Participate = false;
+                    Par_show = !Par_show;
+                    Cal_show = !Cal_show;
+                    break;
+                case 2:
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
+                    break;
+                default:
+                    break;
             }
+
         }
+
 
         private async void ScanReward()
         {
