@@ -16,7 +16,7 @@
       <NavigationPage.BarBackgroundColor>
           <OnPlatform x:TypeArguments="Color">
               <OnPlatform.iOS>WHITE</OnPlatform.iOS>
-              <OnPlatform.Android>LightGray</OnPlatform.Android>
+              <OnPlatform.Android>#C8C8C8</OnPlatform.Android>
           </OnPlatform>
       </NavigationPage.BarBackgroundColor>
                   
@@ -31,7 +31,7 @@
     <NavigationPage.BarBackgroundColor>
           <OnPlatform x:TypeArguments="Color">
               <OnPlatform.iOS>WHITE</OnPlatform.iOS>
-              <OnPlatform.Android>LightGray</OnPlatform.Android>
+              <OnPlatform.Android>#C8C8C8</OnPlatform.Android>
           </OnPlatform>
     </NavigationPage.BarBackgroundColor>
         <x:Arguments>
@@ -44,7 +44,7 @@
     <NavigationPage.BarBackgroundColor>
           <OnPlatform x:TypeArguments="Color">
               <OnPlatform.iOS>WHITE</OnPlatform.iOS>
-              <OnPlatform.Android>LightGray</OnPlatform.Android>
+              <OnPlatform.Android>#C8C8C8</OnPlatform.Android>
           </OnPlatform>
      </NavigationPage.BarBackgroundColor>
         

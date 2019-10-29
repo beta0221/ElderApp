@@ -161,5 +161,7 @@
     <BundleResource Include="Resources\sliderBG.png" />
     <BundleResource Include="Resources\event_default.png" />
     <BundleResource Include="Resources\user_default.png" />
+    <BundleResource Include="Resources\construction.png" />
+    <BundleResource Include="Resources\splashscreen.png" />
   </ItemGroup>
 </Project>

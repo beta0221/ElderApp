@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElderApp.Models;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -51,11 +52,11 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "extend request" } });
                     return ((int)Result.decodeError, "系統錯誤。");
-                    //傳送 app center ex.ToString()
                 }
             }
-
+            
             return ((int)Result.responseError, "伺服器無回應，網路連線錯誤。");
 
         }
@@ -87,8 +88,9 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "logout request" } });
                     return (int)Result.decodeError;
-                    //傳送 app center ex.ToString()
+                    
                 }
             }
 
@@ -120,8 +122,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "login request" } });
                     return ((int)Result.decodeError,null);
-                    //傳送 app center ex.ToString()
                 }
             }
 
@@ -171,6 +173,7 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "sign up request" } });
                     return ((int)Result.decodeError, "系統錯誤。");
                 }
             }
@@ -205,8 +208,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "check inviter request" } });
                     return ((int)Result.decodeError, "系統錯誤。");
-                    //傳送 app center ex.ToString()
                 }
             }
 
@@ -234,8 +237,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "get district request" } });
                     return ((int)Result.decodeError, null);
-                    //傳送 app center ex.ToString()
                 }
             }
 
@@ -262,8 +265,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "get category request" } });
                     return ((int)Result.decodeError, null);
-                    //傳送 app center ex.ToString()
                 }
             }
 
@@ -291,8 +294,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "get event request" } });
                     return ((int)Result.decodeError, null);
-                    //傳送 app center ex.ToString()
                 }
             }
 
@@ -324,8 +327,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "get user event request" } });
                     return ((int)Result.decodeError, null);
-                    //傳送 app center ex.ToString()
                 }
             }
 
@@ -364,8 +367,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "upload user image request" } });
                     return ((int)Result.decodeError, null);
-                    //傳送 app center ex.ToString()
                 }
             }
 
@@ -393,8 +396,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "my account request" } });
                     return ((int)Result.decodeError, null);
-                    //傳送 app center ex.ToString()
                 }
             }
 
@@ -434,8 +437,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "update account request" } });
                     return ((int)Result.decodeError, "系統錯誤。");
-                    //傳送 app center ex.ToString()
                 }
             }
 
@@ -471,8 +474,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "join event request" } });
                     return ((int)Result.decodeError, "系統錯誤。");
-                    //傳送 app center ex.ToString()
                 }
             }
 
@@ -510,8 +513,8 @@ namespace ElderApp.Services
                 }
                 catch (Exception ex)
                 {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "cancel event request" } });
                     return ((int)Result.decodeError, "系統錯誤。");
-                    //傳送 app center ex.ToString()
                 }
             }
 

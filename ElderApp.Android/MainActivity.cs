@@ -19,7 +19,7 @@ using ImageCircle.Forms.Plugin.Droid;
 namespace ElderApp.Droid
 {
 
-    [Activity(Label = "ElderApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "ElderApp", Icon = "@mipmap/app", Theme = "@style/MyTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
 
@@ -100,6 +100,9 @@ namespace ElderApp.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+            //base.Window.RequestFeature(WindowFeatures.ActionBar);
+
+            //base.SetTheme(Resource.Style.MainTheme);
 
             base.OnCreate(savedInstanceState);
 
