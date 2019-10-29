@@ -12,7 +12,7 @@
         
         <ScrollView>
             
-            <StackLayout>
+            <StackLayout Spacing="0">
                 <ContentView HeightRequest="240">
                     <AbsoluteLayout>
                         <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#F6A723"/>
@@ -37,7 +37,7 @@
                     </AbsoluteLayout>
                 </ContentView>
                 
-                <ContentView Padding="24">
+                <ContentView Padding="24" BackgroundColor="#ffffff" >
                     <StackLayout>
                         <Label HeightRequest="16" TextColor="#919191" Text="姓名"></Label>
                         <Label HeightRequest="20" FontSize="Medium" Text="{Binding Name,Mode=TwoWay}"></Label>
