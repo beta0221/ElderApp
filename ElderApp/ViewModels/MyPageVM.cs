@@ -6,6 +6,7 @@ using System.Windows.Input;
 using ElderApp.Helpers;
 using ElderApp.Interface;
 using ElderApp.Models;
+using ElderApp.Services;
 using Newtonsoft.Json.Linq;
 using Plugin.Media;
 using Prism.AppModel;
@@ -83,9 +84,6 @@ namespace ElderApp.ViewModels
         }
 
 
-        public ICommand Logout { get; set; }
-
-        public ICommand SelectImage { get; set; }
 
         public ICommand TakeMoney { get; set; }
 
@@ -107,13 +105,14 @@ namespace ElderApp.ViewModels
 
         public ObservableCollection<FileImageSource> Slider_images { get; set; }
 
+        private ApiServices service;
         public MyPageVM(INavigationService navigationService)
         {
+            service = new ApiServices();
             User = App.CurrentUser;
             Image_url = User.Img;
             System.Diagnostics.Debug.WriteLine(Image_url);
-            Logout = new DelegateCommand(LogoutRequest);
-            SelectImage = new DelegateCommand(SelectImageRequest);
+            
             TakeMoney = new DelegateCommand(TakeMoneyRequest);
             GiveMoney = new DelegateCommand(GiveMoneyRequest);
             TransHistory= new DelegateCommand(TransHistoryRequest);
@@ -143,7 +142,6 @@ namespace ElderApp.ViewModels
 
 
 
-
         }
 
 
@@ -153,76 +151,6 @@ namespace ElderApp.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
-        private async void SelectImageRequest()
-        {
-            await CrossMedia.Current.Initialize();
-
-            if (!CrossMedia.Current.IsPickPhotoSupported)
-            {
-                await App.Current.MainPage.DisplayAlert("Not able", "Not able to pick photo", "OK");
-                return;
-            }
-
-            //pick image
-            var file = await CrossMedia.Current.PickPhotoAsync();
-
-            if (file == null)
-                return;
-
-            var stream = file.GetStream();
-
-            byte[] byteArray = ImageConverter.StreamToByteArray(stream);
-            string image_string = Convert.ToBase64String(byteArray);
-
-            var client = new RestClient("https://www.happybi.com.tw/api/uploadImage");
-            //var client = new RestClient("http://127.0.0.1:8000/api/uploadImage");
-            var request = new RestRequest(Method.POST);
-
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("token", User.Token);
-            request.AddParameter("id", User.User_id);
-            request.AddParameter("name", User.Name);
-            request.AddParameter("image", image_string);
-
-            IRestResponse response = client.Execute(request);
-
-            if (response.Content != null)
-            {
-                System.Diagnostics.Debug.WriteLine(response.Content);
-                try
-                {
-                    JObject res = JObject.Parse(response.Content);
-                    if (res.ContainsKey("image_name"))
-                    {
-                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-                        {
-                            var _user = conn.Table<UserModel>().FirstOrDefault();
-                            string image_url = $"https://www.happybi.com.tw/images/users/{_user.User_id}/{res["image_name"].ToString()}";
-                            //string image_url = $"http://127.0.0.1:8000/images/users/{_user.User_id}/{res["image_name"].ToString()}";
-                            conn.Execute($"UPDATE UserModel SET Img = '{image_url}' WHERE Id = {_user.Id}");
-
-                            Image_url = image_url.ToString();
-                            App.CurrentUser.Img = image_url.ToString();
-                        }
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("發生錯誤", ex.ToString(), "OK");
-                }
-
-
-
-            }
-
-
-        }
-
-        
 
         private async void TakeMoneyRequest()
         {
@@ -250,136 +178,49 @@ namespace ElderApp.ViewModels
             await _navigationService.NavigateAsync("PromocodePage");
         }
 
-        private async void LogoutRequest()
-        {
+       
 
-            var result = await App.Current.MainPage.DisplayAlert("Logging out", "Sure to logout", "Yes","Cancel");
-            if (result == true)
-            {
-
-                //System.Diagnostics.Debug.WriteLine(App.CurrentUser.Token.ToString());
-                System.Diagnostics.Debug.WriteLine("Logout");
-
-                var client = new RestClient("https://www.happybi.com.tw/api/auth/logout");
-                //var client = new RestClient("http://127.0.0.1:8000/api/auth/logout");
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddHeader("Accept", "application/json");
-                request.AddParameter("token", App.CurrentUser.Token.ToString());
-                IRestResponse response = client.Execute(request);
-
-                if (response.Content != null)
-                {
-                    try
-                    {
-                        JObject res = JObject.Parse(response.Content);
-
-                        if (res["message"].ToString() == "Successfully logged out")
-                        {
-                            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-                            {
-                                conn.Execute("DELETE FROM UserModel");
-
-                                await _navigationService.NavigateAsync("/LoginPage");
-
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        //await App.Current.MainPage.DisplayAlert("Error", ex.ToString(), "Yes");
-
-                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-                        {
-                            conn.Execute("DELETE FROM UserModel");
-
-                            await _navigationService.NavigateAsync("/LoginPage");
-
-                        }
-                    }
-
-                }
-
-            }
-
-
-
-
-
-
-        }
-
-        private void UpdateRequest()
+        private async void UpdateRequest()
         {
 
             System.Diagnostics.Debug.WriteLine("UpdateRequest");
 
-            var client = new RestClient("https://www.happybi.com.tw/api/auth/me");
-            //var client = new RestClient("http://127.0.0.1:8000/api/auth/me");
-            var request = new RestRequest(Method.POST);
+            var response = await service.MeRequest();
 
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("token", App.CurrentUser.Token);
-            IRestResponse response = client.Execute(request);
-
-            if (response.Content != null)
+            switch (response.Item1)
             {
-                try
-                {
-                    JObject res = JObject.Parse(response.Content);                      //
-                    if (res.ContainsKey("error"))
-                    {
-                        AutoReLogin();
-                    }
-                    else
-                    {
-                        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-                        {
-                            //var _user = conn.Table<UserModel>().FirstOrDefault();
+                case 1:
 
-                            //conn.Execute($"UPDATE UserModel SET Wallet = '{Int32.Parse(res["rank"].ToString())}',Rank = '{Int32.Parse(res["wallet"].ToString())}' WHERE Id = {_user.Id}");
+                    var res = response.Item2;
+                    User.Rank = Int32.Parse(res["rank"].ToString());
+                    User.Wallet = Int32.Parse(res["wallet"].ToString());
+                    User.Name = res["name"].ToString();
 
-                            User.Rank = Int32.Parse(res["rank"].ToString());
-                            User.Wallet = Int32.Parse(res["wallet"].ToString());
-                            User.Name = res["name"].ToString();
-                            
-
-                            Rank = Int32.Parse(res["rank"].ToString());
-                            Wallet = Int32.Parse(res["wallet"].ToString());
-                            Name = res["name"].ToString();
-                        }
-
-                    }
-
-                }
-                catch (Exception ex)
-                {
+                    Rank = Int32.Parse(res["rank"].ToString());
+                    Wallet = Int32.Parse(res["wallet"].ToString());
+                    Name = res["name"].ToString();
+                    
+                    break;
+                case 2:
+                case 3:
                     AutoReLogin();
-                }
-
-                
-
+                    break;
+                default:
+                    break;
             }
+
+
         }
 
         private async void AutoReLogin()
         {
             System.Diagnostics.Debug.WriteLine("AutoReLogin");
 
-            var client = new RestClient("https://www.happybi.com.tw/api/auth/login");
-            //var client = new RestClient("http://127.0.0.1:8000/api/auth/login");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("email", App.CurrentUser.Email);
-            request.AddParameter("password", App.CurrentUser.Password);
-            IRestResponse response = client.Execute(request);
-            if (response.Content != null)
+            var response = await service.AutoReLoginRequest();
+            switch (response.Item1)
             {
-                try
-                {
-                    JObject res = JObject.Parse(response.Content);
+                case 1:
+                    var res = response.Item2;
                     if (res.ContainsKey("access_token"))
                     {
                         using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
@@ -394,29 +235,26 @@ namespace ElderApp.ViewModels
                     }
                     else
                     {
-                        await App.Current.MainPage.DisplayAlert("登入失敗", "帳號密碼錯誤", "OK");
                         using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                         {
                             conn.Execute("DELETE FROM UserModel");
-
                             await _navigationService.NavigateAsync("/LoginPage");
-
                         }
                     }
-                }
-                catch (Exception ex)
-                {
 
+                    break;
+                case 2:
+                case 3:
                     using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
                     {
                         conn.Execute("DELETE FROM UserModel");
-
                         await _navigationService.NavigateAsync("/LoginPage");
-
                     }
-                }
-                
+                    break;
+                default:
+                    break;
             }
+
                 
         }
 

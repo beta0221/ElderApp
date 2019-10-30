@@ -120,8 +120,10 @@ namespace ElderApp.ViewModels
         //    public string Value { get; set; }
         //}
 
+        private ApiServices service;
         public EditAccountPageVM(INavigationService navigationService)
         {
+            service = new ApiServices();
             _navigationService = navigationService;
             Cancel = new DelegateCommand(CancelRequest);
             Submit = new DelegateCommand(SubmitRequest);
@@ -145,7 +147,6 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("Submit Edit Request");
 
-            var service = new ApiServices();
             var response = await service.UpdateAccountRequest(Name,Phone,Tel,Address,Id_number);
             switch (response.Item1)
             {
@@ -168,8 +169,6 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("MyAccount");
 
-
-            var service = new ApiServices();
             var response = await service.MyAccountRequest();
 
             switch (response.Item1)

@@ -51,14 +51,10 @@
     <Compile Remove="Views\TabbedPage.xaml.cs" />
     <Compile Remove="Views\MyTabbedPage.xaml.cs" />
     <Compile Remove="ViewModels\MyTabbedPageVM.cs" />
-    <Compile Remove="ViewModels\CategoryPageVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\MyEventPage.xaml.cs">
       <DependentUpon>MyEventPage.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ViewModels\CategoryPageVM.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>
 </Project>

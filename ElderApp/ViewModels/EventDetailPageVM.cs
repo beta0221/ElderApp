@@ -63,8 +63,10 @@ namespace ElderApp.ViewModels
 
         public double HeadImageHeight { get; set; }
 
+        private ApiServices service;
         public EventDetailPageVM(Event eve, INavigationService navigationService)
         {
+            service = new ApiServices();
             _navigationService = navigationService;
             back = new DelegateCommand(BackRequest);
             ButtonClick1 = new Command(ButtonClickFunction1);
@@ -89,7 +91,6 @@ namespace ElderApp.ViewModels
         
             var result = await App.Current.MainPage.DisplayAlert("參加活動確認", $"是否確認參加活動:{eve_data.title}?", "是", "否");
 
-            var service = new ApiServices();
             var response = await service.JoinEventRequest(eve_data.slug);
 
             switch (response.Item1)
@@ -114,9 +115,6 @@ namespace ElderApp.ViewModels
             var eve_data = Select_event;
             var result = await App.Current.MainPage.DisplayAlert("取消參加活動確認", $"是否確認取消參加活動:{eve_data.title}？", "是", "否");
 
-
-
-            var service = new ApiServices();
             var response = await service.CancelEventRequest(eve_data.slug);
 
             switch (response.Item1)

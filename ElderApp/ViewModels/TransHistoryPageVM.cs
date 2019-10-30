@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using ElderApp.Models;
+using ElderApp.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Prism.AppModel;
@@ -16,46 +17,44 @@ namespace ElderApp.ViewModels
 
         public ObservableCollection<Transaction> Transactions{ get; set; }
 
-
+        private ApiServices service;
         public TransHistoryPageVM()
         {
+            service = new ApiServices();
             Transactions = new ObservableCollection<Transaction>();
-
-
-
 
             if (Device.RuntimePlatform == Device.Android)
             {
-                GetTransHistory();
-
+                GetTransHistory();    
             }
-
-
 
 
         }
 
-        private void GetTransHistory()
+        private async void GetTransHistory()
         {
-            var client = new RestClient($"https://www.happybi.com.tw/api/trans-history/{App.CurrentUser.User_id}");
-            //var client = new RestClient($"http://127.0.0.1:8000/api/trans-history/{App.CurrentUser.User_id}");
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            IRestResponse response = client.Execute(request);
 
-            System.Diagnostics.Debug.WriteLine(response.Content);
-            if (response.Content != null)
+            var response = await service.GetTransHistory();
+            switch (response.Item1)
             {
-                List<Transaction> trans = JsonConvert.DeserializeObject<List<Transaction>>(response.Content);
-
-                Transactions.Clear();
-                foreach (var tran in trans)
-                {
-                    Transactions.Add(tran);
-                }
-
+                case 1:
+                    var trans = response.Item2;
+                    Transactions.Clear();
+                    foreach (var tran in trans)
+                    {
+                        Transactions.Add(tran);
+                    }
+                    break;
+                case 2:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤。", "確定");
+                    break;
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
+                    break;
+                default:
+                    break;
             }
+
 
         }
 

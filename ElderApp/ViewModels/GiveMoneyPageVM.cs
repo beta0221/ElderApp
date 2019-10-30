@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
+using ElderApp.Services;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
 using Prism.Navigation;
@@ -71,8 +72,10 @@ namespace ElderApp.ViewModels
 
         public ICommand CancelTransaction { get; set; }
 
+        private ApiServices service;
         public GiveMoneyPageVM(INavigationService navigationService)
         {
+            service = new ApiServices();
             _navigationService = navigationService;
             SubmitTransaction = new DelegateCommand(SubmitTransactionRequest);
             CancelTransaction = new DelegateCommand(CancelTransactionRequest);
@@ -89,44 +92,33 @@ namespace ElderApp.ViewModels
                 return;
             }
 
-
-            var client = new RestClient("https://www.happybi.com.tw/api/transaction");
-            //var client = new RestClient("http://127.0.0.1:8000/api/transaction");
-            var request = new RestRequest(Method.POST);
-
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("give_id", App.CurrentUser.User_id);
-            request.AddParameter("give_email", App.CurrentUser.Email);
-            request.AddParameter("take_id", User_id);
-            request.AddParameter("take_email", User_email);
-            request.AddParameter("amount", Amount);
-            request.AddParameter("event", Event);
-            IRestResponse response = client.Execute(request);
-
-            if (response.Content != null)
+            var response = await service.TransactionRequest(User_id,User_email,Amount,Event);
+            switch (response.Item1)
             {
-                if (response.Content.ToString() == "success")
-                {
-                    await App.Current.MainPage.DisplayAlert("支付成功", "回首頁", "確定");
+                case 1:
+                    if (response.Item2 == "success")
+                    {
+                        await App.Current.MainPage.DisplayAlert("支付成功", "回首頁", "確定");
+                        await _navigationService.NavigateAsync("/FirstPage");
+                    }
+                    else if (response.Item2 == "insufficient")
+                    {
+                        await App.Current.MainPage.DisplayAlert("失敗", "剩餘樂幣不足", "確定");
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("失敗", response.Item2, "確定");
+                        await _navigationService.NavigateAsync("/FirstPage");
+                    }
+                    break;
+                case 2:
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("失敗", response.Item2, "確定");
                     await _navigationService.NavigateAsync("/FirstPage");
-                }
-                else if (response.Content.ToString() == "insufficient")
-                {
-                    await App.Current.MainPage.DisplayAlert("失敗", "剩餘樂幣不足", "確定");
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert("失敗", response.Content.ToString(), "確定");
-                    await _navigationService.NavigateAsync("/FirstPage");
-                }
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("失敗", "伺服器異常", "確定");
-                await _navigationService.NavigateAsync("/FirstPage");
-            }
-            
 
         }
 

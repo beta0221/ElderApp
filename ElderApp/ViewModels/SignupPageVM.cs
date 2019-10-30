@@ -16,7 +16,7 @@ namespace ElderApp.ViewModels
     public class SignupPageVM : INotifyPropertyChanged, INavigatedAware
     {
         INavigationService _navigationService;
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
@@ -230,9 +230,10 @@ namespace ElderApp.ViewModels
 
         public ICommand Scan { get; set; }
 
-
+        private ApiServices service;
         public SignupPageVM(INavigationService navigationService)
         {
+            service = new ApiServices();
             _navigationService = navigationService;
             ShowInviterInput = false;
             GenderList = new ObservableCollection<Gender>();
@@ -270,7 +271,7 @@ namespace ElderApp.ViewModels
         private async void SubmitRequest()
         {
 
-            var service = new ApiServices();
+            
             var response = await service.SignUpRequest(Email,Password,Name,Phone,Tel,Gender.Val,Birthdate,Id_number,District.id,Address,Pay_method.Val,Inviter_id_code);
             switch (response.Item1)
             {
@@ -297,7 +298,7 @@ namespace ElderApp.ViewModels
                 return;
             }
 
-            var service = new ApiServices();
+            
             var response = await service.CheckInviterRequest(Inviter_id_code);
             switch (response.Item1)
             {
@@ -321,7 +322,6 @@ namespace ElderApp.ViewModels
         private async void GetDistrict()
         {
 
-            var service = new ApiServices();
             var response = await service.GetDistrict();
             switch (response.Item1)
             {

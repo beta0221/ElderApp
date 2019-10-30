@@ -47,8 +47,10 @@ namespace ElderApp.ViewModels
 
         public ICommand Signup { get; set; }
 
+        private ApiServices service;
         public LoginPageVM(INavigationService navigationService)
         {
+            service = new ApiServices();
             Login = new DelegateCommand(LoginRequest);
             Signup = new DelegateCommand(SignupRequest);
             _navigationService = navigationService;
@@ -64,7 +66,7 @@ namespace ElderApp.ViewModels
         {
 
             System.Diagnostics.Debug.WriteLine("Login");
-            var service = new ApiServices();
+            
             var response = await service.LoginRequest(Email,Password);
 
             switch (response.Item1)

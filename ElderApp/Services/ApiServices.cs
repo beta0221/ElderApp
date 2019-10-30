@@ -131,6 +131,35 @@ namespace ElderApp.Services
         }
 
 
+        //首頁 使用者自動登入
+        public async Task<(int, JObject)> AutoReLoginRequest()
+        {
+            var client = new RestClient($"{ApiHost}/api/auth/login");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("email", App.CurrentUser.Email);
+            request.AddParameter("password", App.CurrentUser.Password);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    JObject res = JObject.Parse(response.Content);
+                    return ((int)Result.success, res);
+
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "auto relogin request" } });
+                    return ((int)Result.decodeError, null);
+                }
+            }
+
+            return ((int)Result.responseError, null);
+        }
+
+
 
 
         //註冊
@@ -405,6 +434,45 @@ namespace ElderApp.Services
         }
 
 
+        //get 使用者 資料 首頁用拿的資料比較少
+        public async Task<(int, JObject)> MeRequest()
+        {
+            var client = new RestClient($"{ApiHost}/api/auth/me");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("token", App.CurrentUser.Token);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    JObject res = JObject.Parse(response.Content);
+                    if (res.ContainsKey("error"))
+                    {
+                        return ((int)Result.responseError, null);
+                    }
+                    else
+                    {
+                        return ((int)Result.success, res);
+                    }
+                    
+
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "index me request" } });
+                    return ((int)Result.decodeError, null);
+                }
+            }
+
+            return ((int)Result.responseError, null);
+        }
+
+
+
+
+
         //更新使用者資料
         public async Task<(int, string)> UpdateAccountRequest(string Name,string Phone,string Tel,string Address,string Id_number)
         {
@@ -522,7 +590,101 @@ namespace ElderApp.Services
         }
 
 
-        
+
+
+
+
+        //Get 交易紀錄
+        public async Task<(int, List<Transaction>)> GetTransHistory()
+        {
+
+            var client = new RestClient($"{ApiHost}/api/trans-history/{App.CurrentUser.User_id}");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    List<Transaction> trans = JsonConvert.DeserializeObject<List<Transaction>>(response.Content);
+                    return ((int)Result.success, trans);
+
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "get trans history request" } });
+                    return ((int)Result.decodeError, null);
+                }
+            }
+
+            return ((int)Result.responseError, null);
+        }
+
+
+
+
+        //領取 活動獎勵
+        public async Task<(int, string)> RrawEventReward(string slug)
+        {
+            var client = new RestClient($"{ApiHost}/api/drawEventReward/{slug}");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("id", App.CurrentUser.User_id);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    JObject res = JObject.Parse(response.Content);
+
+                    if (res["s"].ToString() == "1")
+                    {
+                        return ((int)Result.success, "您已成功領取活動獎勵");
+                    }
+                    else
+                    {
+                        return ((int)Result.responseError, res["m"].ToString());
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "draw event reward request" } });
+                    return ((int)Result.decodeError, "系統錯誤。");
+                }
+            }
+
+            return ((int)Result.responseError, "伺服器無回應，網路連線錯誤。");
+        }
+
+
+        //付錢
+        public async Task<(int, string)> TransactionRequest(int take_id,string take_email,int amount,string eventName)
+        {
+            var client = new RestClient($"{ApiHost}/api/transaction");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("give_id", App.CurrentUser.User_id);
+            request.AddParameter("give_email", App.CurrentUser.Email);
+            request.AddParameter("take_id", take_id);
+            request.AddParameter("take_email", take_email);
+            request.AddParameter("amount", amount);
+            request.AddParameter("event", eventName);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                return ((int)Result.success, response.Content.ToString());
+            }
+
+            return ((int)Result.responseError, "伺服器無回應，網路連線錯誤。");
+        }
+
+
+
+
 
 
 

@@ -181,9 +181,10 @@ namespace ElderApp.ViewModels
 
         public ICommand SelectImage { get; set; }
 
+        private ApiServices service;
         public AccountPageVM(INavigationService navigationService)
         {
-            
+            service = new ApiServices();
             _navigationService = navigationService;
             Edit = new DelegateCommand(EditRequest);
             Logout = new DelegateCommand(LogoutRequest);
@@ -202,9 +203,7 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("Extend Request");
 
-            var service = new ApiServices();
             var response = await service.ExtendRequest();
-
             switch (response.Item1)
             {
                 case 1:
@@ -226,7 +225,6 @@ namespace ElderApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("MyAccount");
 
-            var service = new ApiServices();
             var response = await service.MyAccountRequest();
             switch (response.Item1)
             {
@@ -304,7 +302,6 @@ namespace ElderApp.ViewModels
 
                 System.Diagnostics.Debug.WriteLine("Logout");
 
-                var service = new ApiServices();
                 var response = await service.LogoutRequest();
 
                 switch (response)
@@ -350,7 +347,6 @@ namespace ElderApp.ViewModels
             byte[] byteArray = ImageConverter.StreamToByteArray(stream);
             string image_string = Convert.ToBase64String(byteArray);
 
-            var service = new ApiServices();
             var response = await service.UploadImageRequest(image_string);
             switch (response.Item1)
             {

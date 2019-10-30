@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using ElderApp.Services;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
 using Prism.Navigation;
@@ -64,44 +65,24 @@ namespace ElderApp.ViewModels
 
                         IsScanning = false;
                         IsNotValidCode = false;
-                        var text = Result.Text;
-                        var client = new RestClient($"https://www.happybi.com.tw/api/drawEventReward/{text}");
-                        
-                        var request = new RestRequest(Method.POST);
-                        request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                        request.AddHeader("Accept", "application/json");
-                        request.AddParameter("user_id", App.CurrentUser.User_id);
-                        IRestResponse response = client.Execute(request);
-                        if (response.Content != null)
-                        {
-                            try
-                            {
-                                JObject res = JObject.Parse(response.Content);
-                                if (res.ContainsKey("s"))
-                                {
-                                    if (res["s"].ToString() == "1")
-                                    {
-                                        await App.Current.MainPage.DisplayAlert("成功", "您已成功領取活動獎勵", "確定");
-                                        await _navigationService.GoBackAsync();
-                                    }
-                                    else if(res["s"].ToString() == "0")
-                                    {
-                                        await App.Current.MainPage.DisplayAlert("Oops!", res["m"].ToString(), "確定");
-                                        await _navigationService.GoBackAsync();
-                                    }
-                                }
-                                else
-                                {
-                                    await App.Current.MainPage.DisplayAlert("發生錯誤", res.ToString(), "OK");
-                                    await _navigationService.GoBackAsync();
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                await App.Current.MainPage.DisplayAlert("Decode Problem", ex.ToString(), "OK");
-                            }
-                        }
+                        var slug = Result.Text;
 
+                        var response = await service.RrawEventReward(slug);
+
+                        switch (response.Item1)
+                        {
+                            case 1:
+                                await App.Current.MainPage.DisplayAlert("成功", "您已成功領取活動獎勵", "確定");
+                                await _navigationService.GoBackAsync();
+                                break;
+                            case 2:
+                            case 3:
+                                await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
+                                await _navigationService.GoBackAsync();
+                                break;
+                            default:
+                                break;
+                        }
 
 
                     });
@@ -109,8 +90,10 @@ namespace ElderApp.ViewModels
             }
         }
 
+        private ApiServices service;
         public ScannerRewardPageVM(INavigationService navigationService)
         {
+            service = new ApiServices();
             _navigationService = navigationService;
             IsScanning = true;
             IsNotValidCode = false;
