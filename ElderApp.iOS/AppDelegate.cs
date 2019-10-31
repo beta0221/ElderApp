@@ -8,7 +8,7 @@ using Prism;
 using Prism.Ioc;
 using UIKit;
 using ImageCircle.Forms.Plugin.iOS;
-
+using Microsoft.AppCenter.Crashes;
 
 namespace ElderApp.iOS
 {
@@ -27,28 +27,46 @@ namespace ElderApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+
+
+            try
+            {
 
             
 
-            // circle image
-            ImageCircleRenderer.Init();
-            // circle image
+                global::Xamarin.Forms.Forms.Init();
 
-            //ZXing
-            ZXing.Net.Mobile.Forms.iOS.Platform.Init();
-            //ZXing
+            
 
-            //sqlite
-            string fileName = "ElderApp.db3";
-            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"..","Library");
-            string completePath = Path.Combine(folderPath, fileName);
-            //sqlite
+                // circle image
+                ImageCircleRenderer.Init();
+                // circle image
+
+                //ZXing
+                ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+                //ZXing
+
+                //sqlite
+                string fileName = "ElderApp.db3";
+                string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"..","Library");
+                string completePath = Path.Combine(folderPath, fileName);
+                //sqlite
 
 
 
 
-            LoadApplication(new App(completePath,new iOSInitializer()));
+                LoadApplication(new App(completePath,new iOSInitializer()));
+
+
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex, new Dictionary<string, string> { { "init", "appdelegate problem" } });
+            }
+
+
+
+
 
             return base.FinishedLaunching(app, options);
         }
