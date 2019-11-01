@@ -74,7 +74,7 @@
                         <StackLayout IsVisible="{Binding ShowInviterInput,Mode=TwoWay}">
                             <Label HeightRequest="16" TextColor="#000000" Text="推薦人手機會員編號"></Label>
                             <Label IsVisible="{Binding Inviter_id_code_alert,Mode=TwoWay}" HeightRequest="16" TextColor="Red" Text="必填"/>
-                            <Button HeightRequest="40" WidthRequest="160" Text="掃描QR Code" TextColor="#ffffff" FontSize="Large" BackgroundColor="#F6A723" Margin="0,4,0,4" Command="{Binding Scan}"/>
+                            <Button HeightRequest="56" WidthRequest="160" Text="掃描QR Code" TextColor="#ffffff" FontSize="Large" BackgroundColor="#F6A723" Margin="0,4,0,4" Command="{Binding Scan}"/>
                             <Entry HeightRequest="40" FontSize="Large" Text="{Binding Inviter_id_code,Mode=TwoWay}" Margin="0,0,0,24"></Entry>
                         </StackLayout>
                         
