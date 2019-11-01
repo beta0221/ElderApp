@@ -120,7 +120,7 @@
                 </ContentView>-->
                 
                 
-                <ContentView BackgroundColor="White" HeightRequest="{Binding SliderHeight}">
+                <!--<ContentView BackgroundColor="White" HeightRequest="{Binding SliderHeight}">
                     <AbsoluteLayout>
 
                         
@@ -140,7 +140,7 @@
                     </AbsoluteLayout>
                     
 
-                </ContentView>
+                </ContentView>-->
                 
                 <ContentView HeightRequest="{Binding SquareHeight}" BackgroundColor="#F6A723">
                     <Grid RowSpacing="0" ColumnSpacing="0">
