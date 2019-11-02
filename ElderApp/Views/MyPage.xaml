@@ -120,7 +120,7 @@
                 </ContentView>-->
                 
                 
-                <!--<ContentView BackgroundColor="White" HeightRequest="{Binding SliderHeight}">
+                <ContentView BackgroundColor="White" HeightRequest="{Binding SliderHeight}">
                     <AbsoluteLayout>
 
                         
@@ -140,7 +140,7 @@
                     </AbsoluteLayout>
                     
 
-                </ContentView>-->
+                </ContentView>
                 
                 <ContentView HeightRequest="{Binding SquareHeight}" BackgroundColor="#F6A723">
                     <Grid RowSpacing="0" ColumnSpacing="0">
@@ -253,84 +253,5 @@
             
         </ScrollView>
         
-        <!--<AbsoluteLayout>
-            
-            
-        <StackLayout>
-            
-            <ContentView BackgroundColor="#47ADE8"
-                         Padding="8"
-                         HorizontalOptions="Fill"
-                         VerticalOptions="Start">
-                
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="160" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="160" />
-                    </Grid.RowDefinitions>
-                    
-                    
-                    
-                    <Image x:Name="UserImage" 
-                           Source="{Binding Image_url,Mode=TwoWay}"
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           Aspect="AspectFill"/>
-                    
-                    
-                   <StackLayout
-                        Grid.Column="1"
-                        Grid.Row="0"
-                        Padding="8">
-                        <Label Text="{Binding User.Name,Mode=TwoWay}" FontSize="Large" TextColor="White"/>
-                        <Label Text="{Binding User.Email,Mode=TwoWay}" TextColor="White"/>
-                        <Label Text="{Binding Rank,Mode=TwoWay}" TextColor="White"/>
-                        <Label Text="{Binding Wallet,Mode=TwoWay}" TextColor="White"/>
-                        
-                    </StackLayout>
-                
-                </Grid>
-                
-            </ContentView>
-            
-            
-            
-            
-            <Grid Padding="8,0">
-                
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                
-                <Button Text="收紅包"  Grid.Row="0" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding TakeMoney}"/>
-                <Button Text="送紅包"  Grid.Row="0" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding GiveMoney}"/>
-                <Button Text="我的帳簿"  Grid.Row="0" Grid.Column="2" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding TransHistory}"/>
-                <Button Text="我的活動"  Grid.Row="1" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding My_events}"/>
-                <Button Text="活動行事曆"  Grid.Row="1" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding Events}"/>
-                <Button Text="-"  Grid.Row="1" Grid.Column="2" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
-                <Button Text="-"  Grid.Row="2" Grid.Column="0" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80"/>
-                <Button Text="會員資料"  Grid.Row="2" Grid.Column="1" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding Account}"/>
-                <Button Text="登出"  Grid.Row="2" Grid.Column="2" BackgroundColor="#47ADE8" TextColor="White" HeightRequest="80" Command="{Binding Logout}"/>
-            
-            </Grid>
-            
-            
-            
-            
-            
-        </StackLayout>
-            <Button BackgroundColor="Gray"
-                    AbsoluteLayout.LayoutBounds="10,105,30,30" BorderRadius="15" Text="+" TextColor="White" FontSize="Large" Command="{Binding SelectImage}"/>
-        </AbsoluteLayout>-->
     </ContentPage.Content>
 </ContentPage>

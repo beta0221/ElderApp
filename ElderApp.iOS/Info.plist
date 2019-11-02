@@ -42,7 +42,7 @@
 	<string>This app needs access to the photo gallery.</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>This app needs access to bluetooth</string>
+	<key>CFBundleVersion</key>
+	<string>1232123</string>
 </dict>
 </plist>

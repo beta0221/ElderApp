@@ -18,7 +18,7 @@ namespace ElderApp.Views
 
         private void OnNavigated(object sender, WebNavigatedEventArgs e)
         {
-            //sliderBG.IsVisible = false;
+            sliderBG.IsVisible = false;
         }
     }
 }
