@@ -6,7 +6,8 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              xmlns:zx="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable"
-             Title="我的帳戶">
+             Title="我的帳戶"
+             BackgroundColor="#ffffff">
     <ContentPage.Content>
         
         
@@ -39,43 +40,43 @@
                 
                 <ContentView Padding="24" BackgroundColor="#ffffff" >
                     <StackLayout>
-                        <Label HeightRequest="16" TextColor="#919191" Text="姓名"></Label>
-                        <Label HeightRequest="20" FontSize="Medium" Text="{Binding Name,Mode=TwoWay}"></Label>
+                        <Label HeightRequest="40" TextColor="#919191" Text="姓名"></Label>
+                        <Label HeightRequest="60"  Text="{Binding Name,Mode=TwoWay}"></Label>
                         <BoxView HeightRequest="1" BackgroundColor="#c8c8c8" Margin="0,0,0,24"/>
                         
-                        <Label HeightRequest="16" TextColor="#919191" Text="帳號"></Label>
-                        <Label HeightRequest="20" FontSize="Medium" Text="{Binding Account,Mode=TwoWay}"></Label>
+                        <Label HeightRequest="40" TextColor="#919191" Text="帳號"></Label>
+                        <Label HeightRequest="60"  Text="{Binding Account,Mode=TwoWay}"></Label>
                         <BoxView HeightRequest="1" BackgroundColor="#c8c8c8" Margin="0,0,0,24"/>
                         
-                        <Label HeightRequest="16" TextColor="#919191" Text="性別"></Label>
-                        <Label HeightRequest="20" FontSize="Medium" Text="{Binding Gender,Mode=TwoWay}"></Label>
+                        <Label HeightRequest="40" TextColor="#919191" Text="性別"></Label>
+                        <Label HeightRequest="60"  Text="{Binding Gender,Mode=TwoWay}"></Label>
                         <BoxView HeightRequest="1" BackgroundColor="#c8c8c8" Margin="0,0,0,24"/>
                         
-                        <Label HeightRequest="16" TextColor="#919191" Text="生日"></Label>
-                        <Label HeightRequest="20" FontSize="Medium" Text="{Binding Birthdate,Mode=TwoWay}"></Label>
+                        <Label HeightRequest="40" TextColor="#919191" Text="生日"></Label>
+                        <Label HeightRequest="60"  Text="{Binding Birthdate,Mode=TwoWay}"></Label>
                         <BoxView HeightRequest="1" BackgroundColor="#c8c8c8" Margin="0,0,0,24"/>
                         
-                        <Label HeightRequest="16" TextColor="#919191" Text="手機"></Label>
-                        <Label HeightRequest="20" FontSize="Medium" Text="{Binding Phone,Mode=TwoWay}"></Label>
+                        <Label HeightRequest="40" TextColor="#919191" Text="手機"></Label>
+                        <Label HeightRequest="60"  Text="{Binding Phone,Mode=TwoWay}"></Label>
                         <BoxView HeightRequest="1" BackgroundColor="#c8c8c8" Margin="0,0,0,24"/>
                         
-                        <Label HeightRequest="16" TextColor="#919191" Text="住家電話"></Label>
-                        <Label HeightRequest="20" FontSize="Medium" Text="{Binding Tel,Mode=TwoWay}"></Label>
+                        <Label HeightRequest="40" TextColor="#919191" Text="住家電話"></Label>
+                        <Label HeightRequest="60"  Text="{Binding Tel,Mode=TwoWay}"></Label>
                         <BoxView HeightRequest="1" BackgroundColor="#c8c8c8" Margin="0,0,0,24"/>
                         
-                        <Label HeightRequest="16" TextColor="#919191" Text="地址"></Label>
-                        <Label HeightRequest="20" FontSize="Medium" Text="{Binding Address,Mode=TwoWay}"></Label>
+                        <Label HeightRequest="40" TextColor="#919191" Text="地址"></Label>
+                        <Label HeightRequest="60"  Text="{Binding Address,Mode=TwoWay}"></Label>
                         <BoxView HeightRequest="1" BackgroundColor="#c8c8c8" Margin="0,0,0,24"/>
                         
-                        <Label HeightRequest="16" TextColor="#919191" Text="身分證號"></Label>
-                        <Label HeightRequest="20" FontSize="Medium" Text="{Binding Id_number,Mode=TwoWay}"></Label>
+                        <Label HeightRequest="40" TextColor="#919191" Text="身分證號"></Label>
+                        <Label HeightRequest="60"  Text="{Binding Id_number,Mode=TwoWay}"></Label>
                         <BoxView HeightRequest="1" BackgroundColor="#c8c8c8" Margin="0,0,0,24"/>
                         
                         
                         <ContentView Margin="0,0,0,24">
                             <AbsoluteLayout>
-                                <Label AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,.5" HeightRequest="20" FontSize="Medium" TextColor="#919191" Text="會員資格"></Label>
-                                <Label AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,.5" HeightRequest="20" FontSize="Medium" TextColor="{Binding Valid_color,Mode=TwoWay}" Text="{Binding Valid,Mode=TwoWay}"></Label>
+                                <Label AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,.5" HeightRequest="60"  TextColor="#919191" Text="會員資格"></Label>
+                                <Label AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,.5" HeightRequest="60"  TextColor="{Binding Valid_color,Mode=TwoWay}" Text="{Binding Valid,Mode=TwoWay}"></Label>
                             </AbsoluteLayout>
                         </ContentView>
 
@@ -90,9 +91,9 @@
                          </zxing:ZXingBarcodeImageView>
                         
                         
-                        <Button Text="修改資料" BackgroundColor="Gray" TextColor="White" Margin="0,0,0,12" Command="{Binding Edit}"/>
-                        <Button Text="申請續會" BackgroundColor="#F6A723" TextColor="White" Margin="0,0,0,12" IsVisible="{Binding Extend,Mode=TwoWay}" Command="{Binding ExtendMembership}"/>
-                        <Button Text="登出" TextColor="#F6A723" Margin="0,0,0,12" Command="{Binding Logout}"/>
+                        <Button Text="修改資料" BackgroundColor="Gray" TextColor="White" Margin="0,0,0,12" Command="{Binding Edit}" HeightRequest="60"/>
+                        <Button Text="申請續會" BackgroundColor="#F6A723" TextColor="White" Margin="0,0,0,12" HeightRequest="60" IsVisible="{Binding Extend,Mode=TwoWay}" Command="{Binding ExtendMembership}"/>
+                        <Button Text="登出" TextColor="#F6A723" Margin="0,0,0,12" HeightRequest="60" Command="{Binding Logout}"/>
                     </StackLayout>
                 </ContentView>
                 

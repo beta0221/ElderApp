@@ -295,27 +295,35 @@ namespace ElderApp.ViewModels
         {
             if (!isValid())
             {
+                await App.Current.MainPage.DisplayAlert("提醒", "請確認資料是否完整", "確定");
                 return;
             }
 
-            
-            var response = await service.CheckInviterRequest(Inviter_id_code);
-            switch (response.Item1)
+            if (Pay_method.Val == 0)
             {
-                case 1:
-                    var result = await App.Current.MainPage.DisplayAlert("確認推薦人", $"確認推薦人姓名為：{response.Item2}", "是", "否");
-                    if (result == true)
-                    {
-                        SubmitRequest();
-                    }
-                    break;
-                case 2:
-                case 3:
-                    await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
-                    break;
-                default:
-                    break;
+                SubmitRequest();
             }
+            else
+            {
+                var response = await service.CheckInviterRequest(Inviter_id_code);
+                switch (response.Item1)
+                {
+                    case 1:
+                        var result = await App.Current.MainPage.DisplayAlert("確認推薦人", $"確認推薦人姓名為：{response.Item2}", "是", "否");
+                        if (result == true)
+                        {
+                            SubmitRequest();
+                        }
+                        break;
+                    case 2:
+                    case 3:
+                        await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
         }
 
 

@@ -14,7 +14,7 @@
             
             <StackLayout Spacing="0">
                 
-                <ContentView BackgroundColor="#F6A723" HeightRequest="100" Margin="0,12,0,12">
+                <ContentView BackgroundColor="#F6A723" HeightRequest="200" Margin="0,12,0,12">
                     <Grid Padding="12,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height=".33*"/>
@@ -22,7 +22,7 @@
                             <RowDefinition Height=".33*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         
@@ -44,21 +44,21 @@
                         
                         <ContentView Grid.Row="0" Grid.Column="1" Padding="8,0,0,0" VerticalOptions="Center">
                             <StackLayout Orientation="Horizontal" Spacing="0">
-                                <Label Text="姓名:" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>        
-                                <Label Text="{Binding Name,Mode=TwoWay}" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>
+                                <Label Text="姓名:"  TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="{Binding Name,Mode=TwoWay}"  TextColor="White" VerticalTextAlignment="Center"/>
                             </StackLayout>
                         </ContentView>
                         
                         <ContentView Grid.Row="1" Grid.Column="1" Padding="8,0,0,0" VerticalOptions="Center">
                             <StackLayout Orientation="Horizontal" Spacing="0">
-                                <Label Text="剩餘樂幣:" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="剩餘樂幣:"  TextColor="White" VerticalTextAlignment="Center"/>        
                                 <Label Text="{Binding Wallet,Mode=TwoWay}" TextColor="White" VerticalTextAlignment="Center"/>
                             </StackLayout>
                         </ContentView>
                         
                         <ContentView Grid.Row="2" Grid.Column="1" Padding="8,0,0,0" VerticalOptions="Center">
                             <StackLayout Orientation="Horizontal" Spacing="0">
-                                <Label Text="榮譽等級:" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="榮譽等級:"  TextColor="White" VerticalTextAlignment="Center"/>        
                                 <Label Text="{Binding Rank,Mode=TwoWay}" TextColor="White" VerticalTextAlignment="Center"/>
                             </StackLayout>
                         </ContentView>
@@ -88,8 +88,8 @@
                            Aspect="AspectFill"/>
                         <ContentView Grid.Row="0" Grid.Column="1" Padding="8,0,0,0">
                             <StackLayout Orientation="Horizontal" Spacing="0">
-                                <Label Text="姓名:" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>        
-                                <Label Text="{Binding User.Name,Mode=TwoWay}" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>
+                                <Label Text="姓名:"  TextColor="White" VerticalTextAlignment="Center"/>        
+                                <Label Text="{Binding User.Name,Mode=TwoWay}"  TextColor="White" VerticalTextAlignment="Center"/>
                             </StackLayout>
                         </ContentView>
                         
@@ -165,7 +165,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <ImageButton Grid.Row="0" Grid.Column="0" Source="btn_take.png" Command="{Binding TakeMoney}"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="收樂幣" TextColor="White" FontSize="Large" HorizontalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="收樂幣" TextColor="White"  HorizontalTextAlignment="Center"/>
                                 </Grid>
                             </AbsoluteLayout>-->
                         </ContentView>
@@ -183,7 +183,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <ImageButton Grid.Row="0" Grid.Column="0" Source="btn_give.png" Command="{Binding GiveMoney}"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="送樂幣" TextColor="White" FontSize="Large" HorizontalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="送樂幣" TextColor="White"  HorizontalTextAlignment="Center"/>
                                 </Grid>
                             </AbsoluteLayout>-->
                         </ContentView>
@@ -222,7 +222,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <ImageButton Grid.Row="0" Grid.Column="0" Source="btn_tranHis.png" Command="{Binding TransHistory}"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="我的帳簿" TextColor="White" FontSize="Large" HorizontalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="我的帳簿" TextColor="White"  HorizontalTextAlignment="Center"/>
                                 </Grid>
                             </AbsoluteLayout>-->
                         </ContentView>
@@ -240,7 +240,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <ImageButton Grid.Row="0" Grid.Column="0" Source="btn_coupon.png" Command="{Binding Promocode}"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="使用兌換卷" TextColor="White" FontSize="Large" HorizontalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="使用兌換卷" TextColor="White"  HorizontalTextAlignment="Center"/>
                                 </Grid>
                             </AbsoluteLayout>-->
                         </ContentView>
@@ -285,7 +285,7 @@
                         Grid.Column="1"
                         Grid.Row="0"
                         Padding="8">
-                        <Label Text="{Binding User.Name,Mode=TwoWay}" FontSize="Large" TextColor="White"/>
+                        <Label Text="{Binding User.Name,Mode=TwoWay}"  TextColor="White"/>
                         <Label Text="{Binding User.Email,Mode=TwoWay}" TextColor="White"/>
                         <Label Text="{Binding Rank,Mode=TwoWay}" TextColor="White"/>
                         <Label Text="{Binding Wallet,Mode=TwoWay}" TextColor="White"/>
@@ -330,7 +330,7 @@
             
         </StackLayout>
             <Button BackgroundColor="Gray"
-                    AbsoluteLayout.LayoutBounds="10,105,30,30" BorderRadius="15" Text="+" TextColor="White" FontSize="Large" Command="{Binding SelectImage}"/>
+                    AbsoluteLayout.LayoutBounds="10,105,30,30" BorderRadius="15" Text="+" TextColor="White"  Command="{Binding SelectImage}"/>
         </AbsoluteLayout>-->
     </ContentPage.Content>
 </ContentPage>

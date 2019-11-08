@@ -328,50 +328,51 @@ namespace ElderApp.ViewModels
 
         private async void SelectImageRequest()
         {
-            await CrossMedia.Current.Initialize();
+            await App.Current.MainPage.DisplayAlert("提醒", "目前此功能尚未開放", "確定");
+            //await CrossMedia.Current.Initialize();
 
-            if (!CrossMedia.Current.IsPickPhotoSupported)
-            {
-                await App.Current.MainPage.DisplayAlert("Not able", "Not able to pick photo", "OK");
-                return;
-            }
+            //if (!CrossMedia.Current.IsPickPhotoSupported)
+            //{
+            //    await App.Current.MainPage.DisplayAlert("Not able", "Not able to pick photo", "OK");
+            //    return;
+            //}
 
-            //pick image
-            var file = await CrossMedia.Current.PickPhotoAsync();
+            ////pick image
+            //var file = await CrossMedia.Current.PickPhotoAsync();
 
-            if (file == null)
-                return;
+            //if (file == null)
+            //    return;
 
-            var stream = file.GetStream();
+            //var stream = file.GetStream();
 
-            byte[] byteArray = ImageConverter.StreamToByteArray(stream);
-            string image_string = Convert.ToBase64String(byteArray);
+            //byte[] byteArray = ImageConverter.StreamToByteArray(stream);
+            //string image_string = Convert.ToBase64String(byteArray);
 
-            var response = await service.UploadImageRequest(image_string);
-            switch (response.Item1)
-            {
-                case 1:
-                    var image_name = response.Item2;
-                    string img_url = "";
-                    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-                    {
-                        var _user = conn.Table<UserModel>().FirstOrDefault();
-                        img_url = $"{service.ApiHost}/images/users/{_user.User_id}/{image_name}";
-                        conn.Execute($"UPDATE UserModel SET Img = '{img_url}' WHERE Id = {_user.Id}");
-                    }
-                    Image_url = img_url;
-                    App.CurrentUser.Img = img_url;
+            //var response = await service.UploadImageRequest(image_string);
+            //switch (response.Item1)
+            //{
+            //    case 1:
+            //        var image_name = response.Item2;
+            //        string img_url = "";
+            //        using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            //        {
+            //            var _user = conn.Table<UserModel>().FirstOrDefault();
+            //            img_url = $"{service.ApiHost}/images/users/{_user.User_id}/{image_name}";
+            //            conn.Execute($"UPDATE UserModel SET Img = '{img_url}' WHERE Id = {_user.Id}");
+            //        }
+            //        Image_url = img_url;
+            //        App.CurrentUser.Img = img_url;
                     
-                    break;
-                case 2:
-                    await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤。", "確定");
-                    break;
-                case 3:
-                    await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
-                    break;
-                default:
-                    break;
-            }
+            //        break;
+            //    case 2:
+            //        await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤。", "確定");
+            //        break;
+            //    case 3:
+            //        await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
+            //        break;
+            //    default:
+            //        break;
+            //}
 
         }
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ElderApp.Views.LoginPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ElderApp.Views.LoginPage" BackgroundColor="#ffffff">
     <ContentPage.Content>
         
         
@@ -19,20 +19,20 @@
             
                     <Entry Text="{Binding Email,Mode=TwoWay}"
                            Placeholder="Email"   
-                           PlaceholderColor="White" BackgroundColor="Gray" Opacity="0.3" HeightRequest="40"   
+                           PlaceholderColor="White" BackgroundColor="Gray" Opacity="0.3" HeightRequest="60"   
                            TextColor="White"/>  
                     <Entry Text="{Binding Password,Mode=TwoWay}"
                            Placeholder="密碼"   
-                           PlaceholderColor="White" BackgroundColor="Gray" Opacity="0.3" HeightRequest="40"   
+                           PlaceholderColor="White" BackgroundColor="Gray" Opacity="0.3" HeightRequest="60"   
                            IsPassword="True"  
                            TextColor="White"/>  
                 
                     <Button Command="{Binding Login}" Text="登入" TextColor="White"  
-                        FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                        BackgroundColor="#F6A723" />
+                        FontAttributes="Bold" HorizontalOptions="FillAndExpand"  
+                        BackgroundColor="#F6A723" HeightRequest="60"/>
                 
                     <Button Text="註冊" TextColor="#F6A723"  
-                        FontAttributes="Bold" FontSize="Large" 
+                        FontAttributes="Bold" HeightRequest="60" 
                             HorizontalOptions="FillAndExpand"
                             Command="{Binding Signup}"/>
                 
