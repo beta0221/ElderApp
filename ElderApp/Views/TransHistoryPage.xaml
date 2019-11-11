@@ -14,13 +14,13 @@
             <Label Margin="0,20,0,0" Text="我的帳簿" TextColor="White" FontSize="Large" HorizontalOptions="Center"/> 
             
             
-            <ListView Margin="0,20,0,20" ItemsSource="{Binding Transactions}" BackgroundColor="#F6A723" SeparatorVisibility="None" RowHeight="120">
+            <ListView Margin="0,20,0,20" ItemsSource="{Binding Transactions}" BackgroundColor="#F6A723" SeparatorVisibility="None" RowHeight="160">
                 
                <ListView.ItemTemplate>
                     <DataTemplate>
                         
                         <ViewCell IsEnabled="false">
-                            <ContentView Margin="0,5,0,5" Padding="8" HeightRequest="120">
+                            <ContentView Margin="0,5,0,5" Padding="8" HeightRequest="150">
                                 
                                 
                                 

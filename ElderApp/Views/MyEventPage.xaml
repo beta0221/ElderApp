@@ -25,54 +25,57 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <AbsoluteLayout>
-                        <BoxView BackgroundColor="#F6A723" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
-                        <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#F6A723">
-                            
-                            <ContentView Padding="0,5,0,5">
-                                <AbsoluteLayout>
-                                    <BoxView BackgroundColor="White" CornerRadius="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
-                                    <Grid Padding="6,6,6,6" Margin="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height=".2*"></RowDefinition>
-                                            <RowDefinition Height=".2*"></RowDefinition>
-                                            <RowDefinition Height=".2*"></RowDefinition>
-                                            <RowDefinition Height=".2*"></RowDefinition>
-                                            <RowDefinition Height=".2*"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="24"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
+                                    <AbsoluteLayout>
+                                    <BoxView BackgroundColor="#F6A723" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                                    <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#F6A723">
                                         
-                                        <ContentView Grid.Row="1"
-                                            Grid.Column="0"
-                                            Grid.RowSpan="3"
-                                            Padding="6.0">
-                                            
-                                            <circleImg:CircleImage
-                                               Source="{Binding Image_Url}"
-                                               Aspect="AspectFill"/>    
+                                        <ContentView Padding="0,5,0,5">
+                                            <AbsoluteLayout>
+                                                <BoxView BackgroundColor="White" CornerRadius="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                                                <Grid Padding="6,6,6,6" Margin="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height=".2*"></RowDefinition>
+                                                        <RowDefinition Height=".2*"></RowDefinition>
+                                                        <RowDefinition Height=".2*"></RowDefinition>
+                                                        <RowDefinition Height=".2*"></RowDefinition>
+                                                        <RowDefinition Height=".2*"></RowDefinition>
+                                                       
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="96"></ColumnDefinition>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        <!--<ColumnDefinition Width="24"></ColumnDefinition>-->
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <ContentView Grid.Row="0"
+                                                        Grid.Column="0"
+                                                        Grid.RowSpan="5"
+                                                        Padding="0">
+
+                                                        <circleImg:CircleImage
+                                                           Source="{Binding Image_Url}"   
+                                                           Aspect="AspectFill">
+                                                        </circleImg:CircleImage>
+                                                        
+                                                    </ContentView>
+                                                    
+                                                    
+                                                    <Label Text="{Binding title}" Grid.Row="0" Grid.Column="1" VerticalOptions="Start" />
+                                                    <Label Text="{Binding catAndDic}" Grid.Row="1" Grid.Column="1" VerticalOptions="Start" />
+                                                    <Label Text="{Binding location}" Grid.Row="2" Grid.Column="1" VerticalOptions="Start" />
+                                                    <Label Text="{Binding people}" Grid.Row="3" Grid.Column="1" VerticalOptions="Start" />
+                                                    <Label Text="{Binding dateTime}" Grid.Row="4" Grid.Column="1" VerticalOptions="Start" TextColor="Gray"/>
+                                                    
+                                                    <!--<Label Text="＞" TextColor="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>-->
+                                                </Grid>
+                                            </AbsoluteLayout>        
                                         </ContentView>
+                                            
                                         
-                                        
-                                        <Label Text="{Binding title}" Grid.Row="0" Grid.Column="1" VerticalOptions="Start" />
-                                        <Label Text="{Binding catAndDic}" Grid.Row="1" Grid.Column="1" VerticalOptions="Start" />
-                                        <Label Text="{Binding location}" Grid.Row="2" Grid.Column="1" VerticalOptions="Start" />
-                                        <Label Text="{Binding people}" Grid.Row="3" Grid.Column="1" VerticalOptions="Start" />
-                                        <Label Text="{Binding dateTime}" Grid.Row="4" Grid.Column="1" VerticalOptions="Start" TextColor="Gray"/>
-                                        
-                                        <Label Text="＞" TextColor="Gray" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
-                                    </Grid>
-                                </AbsoluteLayout>        
-                            </ContentView>
-                                
-                            
-                        </ContentView>
-                        </AbsoluteLayout>
-                        
-                    </ViewCell>
+                                    </ContentView>
+                                    </AbsoluteLayout>
+                                    
+                                </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
