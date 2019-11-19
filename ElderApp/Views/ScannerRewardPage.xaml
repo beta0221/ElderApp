@@ -19,7 +19,8 @@
                 IsScanning="{Binding IsScanning,Mode=TwoWay}"
                 WidthRequest="300" HeightRequest="300" />
             
-            <Label WidthRequest="300" FontSize="Large" Margin="0,40,0,0" XAlign="Center" Text="對準行動條碼，掃描後即可獲得樂幣。" TextColor="White"/>
+            <Label WidthRequest="300" Margin="0,40,0,0" XAlign="Center" Text="對準行動條碼，掃描後即可獲得樂幣。" TextColor="White" IsVisible="{Binding Reward,Mode=TwoWay}"/>
+            <Label WidthRequest="300" Margin="0,40,0,0" XAlign="Center" Text="對準行動條碼進行簽到。" TextColor="White" IsVisible="{Binding Arrive,Mode=TwoWay}"/>
             <Label WidthRequest="300" Margin="0,8,0,0" XAlign="Center" Text="無效的條碼" TextColor="Red" IsVisible="{Binding IsNotValidCode,Mode=TwoWay}"/>
             </StackLayout>    
         

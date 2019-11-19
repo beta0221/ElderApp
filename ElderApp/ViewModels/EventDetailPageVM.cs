@@ -61,6 +61,8 @@ namespace ElderApp.ViewModels
 
         public ICommand back { get; set; }
 
+        public ICommand getPassPermit { get; set; }
+
         public double HeadImageHeight { get; set; }
 
         private ApiServices service;
@@ -73,6 +75,7 @@ namespace ElderApp.ViewModels
             ButtonClick2 = new Command(ButtonClickFunction2);
 
             DrawReward = new DelegateCommand(ScanReward);
+            getPassPermit = new DelegateCommand(GetPassPermit);
 
             //設定圖片高度比例4:3
             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
@@ -134,10 +137,58 @@ namespace ElderApp.ViewModels
 
         }
 
+        private async void GetPassPermit()
+        {
+
+            
+
+
+            var response = await service.isUserArrive(Select_event.slug);
+            switch (response.Item1)
+            {
+                case 1:
+
+                    var res = response.Item2;
+                    if (res["s"].ToString() == "1")
+                    {
+                        //已完成報到
+                        //可以顯示通行證
+                        var paremeter = new NavigationParameters();
+                        paremeter.Add("name", Select_event.title);
+                        await _navigationService.NavigateAsync("PassPermitPage",paremeter);
+                    }
+                    else if (res["s"].ToString() == "2")
+                    {
+                        //未完成報到
+                        //掃描qrcode 進行報到
+                        var paremeter = new NavigationParameters();
+                        paremeter.Add("scan", "arrive");
+                        await _navigationService.NavigateAsync("ScannerRewardPage",paremeter);
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("錯誤", res["m"].ToString(), "確定");
+                    }
+
+
+                    break;
+                case 2:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤", "確定");
+                    break;
+                case 3:
+                    await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
+                    break;
+                default:
+                    break;
+            }
+
+        }
 
         private async void ScanReward()
         {
-            await _navigationService.NavigateAsync("ScannerRewardPage");
+            var paremeter = new NavigationParameters();
+            paremeter.Add("scan", "reward");
+            await _navigationService.NavigateAsync("ScannerRewardPage",paremeter);
         }
 
         public void OnNavigatedTo(INavigationParameters parameters)

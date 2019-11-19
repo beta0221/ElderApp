@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElderApp.Views.PassPermitPage"
+             BackgroundColor="White">
+    <ContentPage.Content>
+
+        <StackLayout>
+
+            <Label Text="{Binding Title}" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Margin="8,40,8,40"/>
+
+            <Image Source="passpermit.png" HorizontalOptions="FillAndExpand"/>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -18,7 +18,7 @@
             <StackLayout Grid.Row="1" Orientation="Vertical" Padding="30" Spacing="10" >  
             
                     <Entry Text="{Binding Email,Mode=TwoWay}"
-                           Placeholder="Email"   
+                           Placeholder="帳號"   
                            PlaceholderColor="White" BackgroundColor="Gray" Opacity="0.3" HeightRequest="60"   
                            TextColor="White"/>  
                     <Entry Text="{Binding Password,Mode=TwoWay}"

@@ -271,7 +271,7 @@ namespace ElderApp.ViewModels
                         }
                         else
                         {
-                            Valid = "無效";
+                            Valid = "待付費";
                             Valid_color = "#E22600";
                             Extend = true;
                         }

@@ -10,10 +10,34 @@ using ZXing;
 
 namespace ElderApp.ViewModels
 {
-    public class ScannerRewardPageVM: INotifyPropertyChanged
+    public class ScannerRewardPageVM: INotifyPropertyChanged,INavigatedAware
     {
 
         INavigationService _navigationService;
+
+        private bool reward;
+        public bool Reward
+        {
+            get { return reward; }
+            set
+            {
+                reward = value;
+                OnPropertyChanged("Reward");
+            }
+        }
+
+        private bool arrive;
+        public bool Arrive
+        {
+            get { return arrive; }
+            set
+            {
+                arrive = value;
+                OnPropertyChanged("Arrive");
+            }
+        }
+
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
@@ -22,7 +46,24 @@ namespace ElderApp.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            
+        }
 
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters["scan"].ToString() == "reward")
+            {
+                Arrive = false;
+                Reward = true;
+            }
+            else
+            {
+                Arrive = true;
+                Reward = false;
+            }
+        }
 
         private bool isScanning;
         public bool IsScanning
@@ -65,24 +106,81 @@ namespace ElderApp.ViewModels
 
                         IsScanning = false;
                         IsNotValidCode = false;
-                        var slug = Result.Text;
 
-                        var response = await service.RrawEventReward(slug);
+                        string[] str = Result.Text.Split(',');
 
-                        switch (response.Item1)
+                        if (str.Length == 2)
                         {
-                            case 1:
-                                await App.Current.MainPage.DisplayAlert("成功", "您已成功領取活動獎勵", "確定");
-                                await _navigationService.GoBackAsync();
-                                break;
-                            case 2:
-                            case 3:
-                                await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
-                                await _navigationService.GoBackAsync();
-                                break;
-                            default:
-                                break;
+
+                            if (str[0] == "reward")
+                            {
+                                var response = await service.RrawEventReward(str[1]);
+
+                                switch (response.Item1)
+                                {
+                                    case 1:
+                                        await App.Current.MainPage.DisplayAlert("成功", "您已成功領取活動獎勵", "確定");
+                                        await _navigationService.GoBackAsync();
+                                        break;
+                                    case 2:
+                                    case 3:
+                                        await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
+                                        await _navigationService.GoBackAsync();
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            else if (str[0] == "arrive")
+                            {
+                                var response = await service.ArriveEvent(str[1]);
+                                switch(response.Item1)
+                                {
+                                    case 1:
+
+                                        var res = response.Item2;
+                                        if(res["s"].ToString() == "1")
+                                        {
+
+                                            //已完成報到
+                                            //可以顯示通行證
+
+                                            var name = res["name"].ToString();
+                                            var paremeter = new NavigationParameters();
+                                            paremeter.Add("name", name);
+
+
+                                            await _navigationService.NavigateAsync("PassPermitPage",paremeter);
+                                        }
+                                        else
+                                        {
+                                            await App.Current.MainPage.DisplayAlert("錯誤", res["m"].ToString(), "確定");
+                                        }
+
+
+                                        break;
+                                    case 2:
+                                        await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤", "確定");
+                                        break;
+                                    case 3:
+                                        await App.Current.MainPage.DisplayAlert("錯誤", "伺服器無回應，網路連線錯誤。", "確定");
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+
+                            }
+                            
+
                         }
+                        else
+                        {
+                            IsScanning = false;
+                            IsNotValidCode = true;
+                        }
+
+                        
 
 
                     });

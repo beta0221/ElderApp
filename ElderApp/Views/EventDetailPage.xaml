@@ -25,9 +25,9 @@
                             <Label Text="{Binding Select_event.title}" FontSize="Large" Margin="0,0,0,12"/>
                             <Label Text="{Binding Select_event.dateTime}" FontSize="Default" TextColor="Gray" Margin="0,0,0,8"/>
                             <Label Text="{Binding Select_event.deadline}" FontSize="Default" TextColor="Gray" Margin="0,0,0,8"/>
-                            <Label Margin="0,0,0,80" Text="{Binding Select_event.body}" FontSize="Medium"/>
+                            <Label Margin="0,0,0,112" Text="{Binding Select_event.body}" FontSize="Medium"/>
                             
-                            <Button Text="領取活動獎勵" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Green" Command="{Binding DrawReward}"/>
+                            
                             
                         </StackLayout>
                         
@@ -36,29 +36,85 @@
                 </ScrollView>
         
             </ContentView>
+
+
+            <ContentView AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
+                         AbsoluteLayout.LayoutBounds="0,1,1,112">
+
+                <Grid ColumnSpacing="0" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="領取活動獎勵"
+                        BorderRadius="0"
+                        TextColor="White"
+                        BackgroundColor="Green"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding DrawReward}"/>
+
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="簽到（取得通行證）"
+                        BorderRadius="0"
+                        TextColor="White"
+                        BackgroundColor="Purple"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding getPassPermit}"/>
+
+                    <Button 
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Text="參加"
+                        BorderRadius="0"
+                        TextColor="White"
+                        Command="{Binding ButtonClick1}"
+                        BackgroundColor="#F6A723"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding Par_show}"
+                        />
+
+                    <Button 
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Text="取消參加"
+                        TextColor="White"
+                        BorderRadius="0"
+                        Command="{Binding ButtonClick2}"
+                        BackgroundColor="Gray"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding Cal_show}"
+                        />
+
+                </Grid>
+
+
+                
+
+
+
+
             
-            <Button 
-                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
-                AbsoluteLayout.LayoutBounds="0,1,1,56"
-                Text="參加"
-                BorderRadius="0"
-                TextColor="White"
-                FontSize="Large"
-                Command="{Binding ButtonClick1}"
-                BackgroundColor="#F6A723"
-                IsVisible="{Binding Par_show}"
-                />
-            <Button 
-                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
-                AbsoluteLayout.LayoutBounds="0,1,1,56"
-                Text="取消參加"
-                TextColor="White"
-                BorderRadius="0"
-                FontSize="Large"
-                Command="{Binding ButtonClick2}"
-                BackgroundColor="Gray"
-                IsVisible="{Binding Cal_show}"
-                />
+
+            </ContentView>
+
+
+            
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

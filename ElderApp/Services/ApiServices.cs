@@ -659,6 +659,60 @@ namespace ElderApp.Services
             return ((int)Result.responseError, "伺服器無回應，網路連線錯誤。");
         }
 
+        //檢查是否已簽到
+        public async Task<(int, JObject)> isUserArrive(string slug)
+        {
+            var client = new RestClient($"{ApiHost}/api/isUserArrive/{slug}");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("token", App.CurrentUser.Token);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    JObject res = JObject.Parse(response.Content);
+                    return ((int)Result.success, res);
+
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "draw event reward request" } });
+                    return ((int)Result.decodeError, null);
+                }
+            }
+
+            return ((int)Result.responseError, null);
+        }
+
+        //活動 簽到
+        public async Task<(int, JObject)> ArriveEvent(string slug)
+        {
+            var client = new RestClient($"{ApiHost}/api/arriveEvent/{slug}");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("token", App.CurrentUser.Token);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    JObject res = JObject.Parse(response.Content);
+                    return ((int)Result.success, res);
+                    
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "draw event reward request" } });
+                    return ((int)Result.decodeError, null);
+                }
+            }
+
+            return ((int)Result.responseError, null);
+        }
+
 
         //付錢
         public async Task<(int, string)> TransactionRequest(int take_id,string take_email,int amount,string eventName)
