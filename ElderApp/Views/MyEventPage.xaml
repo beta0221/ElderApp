@@ -17,7 +17,7 @@
         <ListView x:Name="listview" ItemsSource="{Binding My_Events}"
                       SeparatorVisibility="None"
                       SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
-                      RowHeight="198"
+                      RowHeight="218"
                       BackgroundColor="#F6A723">
 
                 

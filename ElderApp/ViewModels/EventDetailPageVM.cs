@@ -93,23 +93,26 @@ namespace ElderApp.ViewModels
             var eve_data = Select_event;
         
             var result = await App.Current.MainPage.DisplayAlert("參加活動確認", $"是否確認參加活動:{eve_data.title}?", "是", "否");
-
-            var response = await service.JoinEventRequest(eve_data.slug);
-
-            switch (response.Item1)
+            if (result)
             {
-                case 1:
-                    Select_event.Participate = true;
-                    Par_show = !Par_show;
-                    Cal_show = !Cal_show;
-                    break;
-                case 2:
-                case 3:
-                    await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
-                    break;
-                default:
-                    break;
+                var response = await service.JoinEventRequest(eve_data.slug);
+
+                switch (response.Item1)
+                {
+                    case 1:
+                        Select_event.Participate = true;
+                        Par_show = !Par_show;
+                        Cal_show = !Cal_show;
+                        break;
+                    case 2:
+                    case 3:
+                        await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
+                        break;
+                    default:
+                        break;
+                }
             }
+            
 
         }
 
@@ -117,31 +120,30 @@ namespace ElderApp.ViewModels
         {
             var eve_data = Select_event;
             var result = await App.Current.MainPage.DisplayAlert("取消參加活動確認", $"是否確認取消參加活動:{eve_data.title}？", "是", "否");
-
-            var response = await service.CancelEventRequest(eve_data.slug);
-
-            switch (response.Item1)
+            if (result)
             {
-                case 1:
-                    Select_event.Participate = false;
-                    Par_show = !Par_show;
-                    Cal_show = !Cal_show;
-                    break;
-                case 2:
-                case 3:
-                    await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
-                    break;
-                default:
-                    break;
+                var response = await service.CancelEventRequest(eve_data.slug);
+
+                switch (response.Item1)
+                {
+                    case 1:
+                        Select_event.Participate = false;
+                        Par_show = !Par_show;
+                        Cal_show = !Cal_show;
+                        break;
+                    case 2:
+                    case 3:
+                        await App.Current.MainPage.DisplayAlert("錯誤", response.Item2, "確定");
+                        break;
+                    default:
+                        break;
+                }
             }
 
         }
 
         private async void GetPassPermit()
         {
-
-            
-
 
             var response = await service.isUserArrive(Select_event.slug);
             switch (response.Item1)

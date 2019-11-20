@@ -72,13 +72,11 @@
                         <Label HeightRequest="60"  Text="{Binding Id_number,Mode=TwoWay}"></Label>
                         <BoxView HeightRequest="1" BackgroundColor="#c8c8c8" Margin="0,0,0,24"/>
                         
-                        
-                        <ContentView Margin="0,0,0,24">
-                            <AbsoluteLayout>
-                                <Label AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,.5" HeightRequest="60"  TextColor="#919191" Text="會員資格"></Label>
-                                <Label AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,.5" HeightRequest="60"  TextColor="{Binding Valid_color,Mode=TwoWay}" Text="{Binding Valid,Mode=TwoWay}"></Label>
-                            </AbsoluteLayout>
-                        </ContentView>
+
+                        <Label HeightRequest="40" TextColor="#919191" Text="會員資格"></Label>
+                        <Label HeightRequest="60"  Text="{Binding IsValid,Mode=TwoWay}" TextColor="{Binding Valid_color,Mode=TwoWay}"></Label>
+                        <BoxView HeightRequest="1" BackgroundColor="#c8c8c8" Margin="0,0,0,24"/>
+
 
                         <zxing:ZXingBarcodeImageView
                              x:Name="UserIdCode"

@@ -57,9 +57,10 @@
                         Text="領取活動獎勵"
                         BorderRadius="0"
                         TextColor="White"
-                        BackgroundColor="Green"
+                        BackgroundColor="#cc99a2"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding Cal_show}"
                         Command="{Binding DrawReward}"/>
 
                     <Button
@@ -68,9 +69,10 @@
                         Text="簽到（取得通行證）"
                         BorderRadius="0"
                         TextColor="White"
-                        BackgroundColor="Purple"
+                        BackgroundColor="#6F9DAB"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding Cal_show}"
                         Command="{Binding getPassPermit}"/>
 
                     <Button 

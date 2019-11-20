@@ -127,14 +127,14 @@ namespace ElderApp.ViewModels
             }
         }
 
-        private string valid;
-        public string Valid
+        private string isValid;
+        public string IsValid
         {
-            get { return valid; }
+            get { return isValid; }
             set
             {
-                valid = value;
-                OnPropertyChanged("Valid");
+                isValid = value;
+                OnPropertyChanged("IsValid");
             }
         }
 
@@ -170,7 +170,6 @@ namespace ElderApp.ViewModels
                 OnPropertyChanged("Id_code");
             }
         }
-
 
 
         public ICommand Edit { get; set; }
@@ -265,16 +264,16 @@ namespace ElderApp.ViewModels
 
                         if (res["valid"].ToString() == "1")
                         {
-                            Valid = "有效";
+                            IsValid = "有效";
                             Valid_color = "Green";
                             Extend = false;
                         }
                         else
                         {
-                            Valid = "待付費";
+                            IsValid = "待付費";
                             Valid_color = "#E22600";
                             Extend = true;
-                        }
+                        }                        
 
                         Id_code = res["id_code"].ToString();
 

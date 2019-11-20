@@ -10,7 +10,7 @@
     
     
     <ContentPage.ToolbarItems> 
-        <ToolbarItem Text="我的活動" Command="{Binding My_events}"/>
+        <ToolbarItem Text="已報名活動" Command="{Binding My_events}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -24,7 +24,7 @@
                 
                 <StackLayout>
                     
-                    <ContentView>
+                    <!--<ContentView>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="60"/>    
@@ -56,7 +56,7 @@
                                 SelectedItem="{Binding SelectCategory}"/>
                         </Grid>
                         
-                    </ContentView>
+                    </ContentView>-->
                 
                 
                 
