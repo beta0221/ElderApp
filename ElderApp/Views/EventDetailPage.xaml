@@ -83,7 +83,7 @@
                         BorderRadius="0"
                         TextColor="White"
                         Command="{Binding ButtonClick1}"
-                        BackgroundColor="#F6A723"
+                        BackgroundColor="#FEA735"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         IsVisible="{Binding Par_show}"

@@ -29,9 +29,9 @@
                 
                     <Button Command="{Binding Login}" Text="登入" TextColor="White"  
                         FontAttributes="Bold" HorizontalOptions="FillAndExpand"  
-                        BackgroundColor="#F6A723" HeightRequest="60"/>
+                        BackgroundColor="#FEA735" HeightRequest="60"/>
                 
-                    <Button Text="註冊" TextColor="#F6A723"  
+                    <Button Text="註冊" TextColor="#FEA735"  
                         FontAttributes="Bold" HeightRequest="60" 
                             HorizontalOptions="FillAndExpand"
                             Command="{Binding Signup}"/>

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="ElderApp.Views.EventPage"
     xmlns:circleImg="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-    BackgroundColor="#F6A723"
+    BackgroundColor="#FEA735"
     Title="活動行事曆">
     
     
@@ -67,19 +67,19 @@
                           IsRefreshing="{Binding IsRefreshing}"
                           SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
                           RowHeight="218"
-                          BackgroundColor="#F6A723">
+                          BackgroundColor="#FEA735">
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
                                     <AbsoluteLayout>
-                                    <BoxView BackgroundColor="#F6A723" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
-                                    <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#F6A723">
+                                    <BoxView BackgroundColor="#FEA735" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                                    <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#FEA735">
                                         
-                                        <ContentView Padding="0,5,0,5">
+                                        <ContentView Padding="0,4,0,4">
                                             <AbsoluteLayout>
                                                 <BoxView BackgroundColor="White" CornerRadius="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
-                                                <Grid Padding="6,6,6,6" Margin="5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                                                <Grid Padding="4,4,4,4" Margin="4" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height=".2*"></RowDefinition>
                                                         <RowDefinition Height=".2*"></RowDefinition>

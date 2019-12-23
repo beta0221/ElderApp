@@ -16,7 +16,7 @@
             <StackLayout Spacing="0">
                 <ContentView HeightRequest="240">
                     <AbsoluteLayout>
-                        <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#F6A723"/>
+                        <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#FEA735"/>
                     
                         <Label Text="個人檔案" TextColor="White" 
                                AbsoluteLayout.LayoutFlags="XProportional"
@@ -90,8 +90,8 @@
                         
                         
                         <Button Text="修改資料" BackgroundColor="Gray" TextColor="White" Margin="0,0,0,12" Command="{Binding Edit}" HeightRequest="60"/>
-                        <Button Text="申請續會" BackgroundColor="#F6A723" TextColor="White" Margin="0,0,0,12" HeightRequest="60" IsVisible="{Binding Extend,Mode=TwoWay}" Command="{Binding ExtendMembership}"/>
-                        <Button Text="登出" TextColor="#F6A723" Margin="0,0,0,12" HeightRequest="60" Command="{Binding Logout}"/>
+                        <Button Text="申請續會" BackgroundColor="#FEA735" TextColor="White" Margin="0,0,0,12" HeightRequest="60" IsVisible="{Binding Extend,Mode=TwoWay}" Command="{Binding ExtendMembership}"/>
+                        <Button Text="登出" TextColor="#FEA735" Margin="0,0,0,12" HeightRequest="60" Command="{Binding Logout}"/>
                     </StackLayout>
                 </ContentView>
                 

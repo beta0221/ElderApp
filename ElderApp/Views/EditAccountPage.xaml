@@ -29,7 +29,7 @@
             
             
             
-                <Button Text="確定修改" BackgroundColor="#F6A723" TextColor="White" Margin="0,0,0,12" HeightRequest="60" Command="{Binding Submit}"/>
+                <Button Text="確定修改" BackgroundColor="#FEA735" TextColor="White" Margin="0,0,0,12" HeightRequest="60" Command="{Binding Submit}"/>
                 <Button Text="取消" BackgroundColor="Gray" TextColor="White" Margin="0,0,0,12" HeightRequest="60" Command="{Binding Cancel}"/>
             
             </StackLayout>

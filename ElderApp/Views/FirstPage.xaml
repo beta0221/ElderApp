@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:ElderApp.Views"
              x:Class="ElderApp.Views.FirstPage"
-            SelectedTabColor="#F6A723"
+            SelectedTabColor="#FE7235"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
@@ -16,7 +16,7 @@
       <NavigationPage.BarBackgroundColor>
           <OnPlatform x:TypeArguments="Color">
               <OnPlatform.iOS>WHITE</OnPlatform.iOS>
-              <OnPlatform.Android>#C8C8C8</OnPlatform.Android>
+              <OnPlatform.Android>#FE7235</OnPlatform.Android>
           </OnPlatform>
       </NavigationPage.BarBackgroundColor>
                   
@@ -31,7 +31,7 @@
     <NavigationPage.BarBackgroundColor>
           <OnPlatform x:TypeArguments="Color">
               <OnPlatform.iOS>WHITE</OnPlatform.iOS>
-              <OnPlatform.Android>#C8C8C8</OnPlatform.Android>
+              <OnPlatform.Android>#FE7235</OnPlatform.Android>
           </OnPlatform>
     </NavigationPage.BarBackgroundColor>
         <x:Arguments>
@@ -44,7 +44,7 @@
     <NavigationPage.BarBackgroundColor>
           <OnPlatform x:TypeArguments="Color">
               <OnPlatform.iOS>WHITE</OnPlatform.iOS>
-              <OnPlatform.Android>#C8C8C8</OnPlatform.Android>
+              <OnPlatform.Android>#FE7235</OnPlatform.Android>
           </OnPlatform>
      </NavigationPage.BarBackgroundColor>
         

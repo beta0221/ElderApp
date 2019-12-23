@@ -5,7 +5,7 @@
     x:Class="ElderApp.Views.MyEventPage"
     xmlns:circleImg="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
     Padding="12"
-    BackgroundColor="#F6A723"
+    BackgroundColor="#FEA735"
     Title="我的活動">
     
     <ContentPage.Content>
@@ -18,7 +18,7 @@
                       SeparatorVisibility="None"
                       SelectedItem="{Binding SelectEvent,Mode=TwoWay}"
                       RowHeight="218"
-                      BackgroundColor="#F6A723">
+                      BackgroundColor="#FEA735">
 
                 
 
@@ -26,8 +26,8 @@
                 <DataTemplate>
                     <ViewCell>
                                     <AbsoluteLayout>
-                                    <BoxView BackgroundColor="#F6A723" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
-                                    <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#F6A723">
+                                    <BoxView BackgroundColor="#FEA735" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                                    <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#FEA735">
                                         
                                         <ContentView Padding="0,5,0,5">
                                             <AbsoluteLayout>

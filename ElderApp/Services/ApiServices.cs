@@ -15,7 +15,7 @@ namespace ElderApp.Services
 
         enum Result {success=1,decodeError=2,responseError=3};
 
-
+        public static string Host = "https://www.happybi.com.tw";
         public string ApiHost
         { get; set; }
 
@@ -736,16 +736,131 @@ namespace ElderApp.Services
             return ((int)Result.responseError, "伺服器無回應，網路連線錯誤。");
         }
 
+        //所有商品
+        public async Task<(int, ProductAndCat)> GetAllProducts()
+        {
+            var client = new RestClient($"{ApiHost}/api/getAllProduct");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Accept", "application/json");
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    
+                    var res = JsonConvert.DeserializeObject<ProductAndCat>(response.Content);
+                    return ((int)Result.success, res);
+
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "draw event reward request" } });
+                    return ((int)Result.decodeError, null);
+                }
+            }
+
+            return ((int)Result.responseError, null);
+        }
 
 
+        //產品據點&庫存
+        public async Task<(int, List<LocationQuantity>)> GetLocationAndQuantity(string slug)
+        {
+            var client = new RestClient($"{ApiHost}/api/getLocationAndQuantity/{slug}");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Accept", "application/json");
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    List<LocationQuantity> res = JsonConvert.DeserializeObject<List<LocationQuantity>>(response.Content);
+                    return ((int)Result.success, res);
+
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "draw event reward request" } });
+                    return ((int)Result.decodeError, null);
+                }
+            }
+
+            return ((int)Result.responseError, null);
+        }
 
 
+        //所有經銷據點
+        public async Task<(int, List<Location>)> GetLocation()
+        {
+            var client = new RestClient($"{ApiHost}/api/location");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Accept", "application/json");
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                try
+                {
+                    
+                    List<Location> res = JsonConvert.DeserializeObject<List<Location>>(response.Content);
+                    return ((int)Result.success, res);
+
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "draw event reward request" } });
+                    return ((int)Result.decodeError, null);
+                }
+            }
+
+            return ((int)Result.responseError, null);
+        }
 
 
+        //購買商品
+        public async Task<(int, string)> PurchaseProduct(int location_id, string product_slug)
+        {
+            var client = new RestClient($"{ApiHost}/api/purchase/{product_slug}");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("token", App.CurrentUser.Token);
+            request.AddParameter("location_id", location_id);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                return ((int)Result.success, response.Content.ToString());
+            }
+
+            return ((int)Result.responseError, "伺服器無回應，網路連線錯誤。");
+        }
 
 
+        //我的兌換清單
+        public async Task<(int, List<Order>)> MyOrderList()
+        {
+            var client = new RestClient($"{ApiHost}/api/my-order-list");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("token", App.CurrentUser.Token);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
+            if (response.Content != null)
+            {
+                try
+                {
 
+                    List<Order> res = JsonConvert.DeserializeObject<List<Order>>(response.Content);
+                    return ((int)Result.success, res);
 
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex, new Dictionary<string, string> { { "decode", "draw event reward request" } });
+                    return ((int)Result.decodeError, null);
+                }
+            }
+
+            return ((int)Result.responseError, null);
+        }
 
 
     }

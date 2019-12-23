@@ -2,25 +2,124 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ElderApp.Views.PromocodePage"
-             BackgroundColor="#ffffff">
+             BackgroundColor="#FEA735">
     <ContentPage.Content>
         
-        <!--<StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="12,0,12,0">
-            <Entry Text="{Binding Promocode,Mode=TwoWay}"
-                  HorizontalOptions="FillAndExpand"
-                   HorizontalTextAlignment="Center"
-                           Placeholder="兌換卷代碼"   
-                           PlaceholderColor="White" BackgroundColor="Gray" Opacity="0.3" HeightRequest="40"   
-                           TextColor="White"
-                   Margin="0,0,0,4"/>
-            <Button Text="確認領取" TextColor="White"  
-                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                        BackgroundColor="#F6A723" Command="{Binding Submit}"/>
-        </StackLayout>-->
+        
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ContentView Grid.Row="0" Grid.Column="0">
+                <Button Text="所有商品" Command="{Binding showAllProduct}" TextColor="White" BackgroundColor="{Binding LeftBtnColor}" Margin="6"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Button>
+            </ContentView>
+            <ContentView Grid.Row="0" Grid.Column="1">
+                <Button Text="已兌換" Command="{Binding showMyList}" TextColor="White" BackgroundColor="{Binding RightBtnColor}" Margin="6"
+                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Button>
+            </ContentView>
+
+            <ContentView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <AbsoluteLayout>
+
+                
+                <ListView SeparatorVisibility="None"
+                          AbsoluteLayout.LayoutFlags="All"
+                          AbsoluteLayout.LayoutBounds="0,0,1,1"
+                          RowHeight="224"
+                          IsPullToRefreshEnabled="False"
+                          ItemsSource="{Binding products}"
+                          SelectedItem="{Binding SelectProduct,Mode=TwoWay}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ContentView Margin="5">
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="56"/>
+                                            <RowDefinition Height="56"/>
+                                        </Grid.RowDefinitions>
+
+                                        <BoxView Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" BackgroundColor="White" CornerRadius="4"></BoxView>
+                                        <Image Aspect="AspectFit" Grid.Column="0" Grid.Row="0" Source="{Binding Image_Url}"/>
+                                    
+                                        <Label Text="{Binding Pname}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="1"></Label>
+                                        <Label Text="{Binding Pprice}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="2"></Label>
+                                    </Grid>
+                                </ContentView>
+                                
+
+                                
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+                
+
+                <ListView IsVisible="{Binding IsMyListVisable,Mode=TwoWay}" BackgroundColor="#FEA735"
+                          SeparatorVisibility="None"
+                          AbsoluteLayout.LayoutFlags="All"
+                          AbsoluteLayout.LayoutBounds="0,0,1,1"
+                          RowHeight="224"
+                          IsPullToRefreshEnabled="False"
+                          ItemsSource="{Binding orders}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ContentView Margin="5">
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <BoxView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="4" BackgroundColor="White" CornerRadius="4"></BoxView>
+                                        <Image Aspect="AspectFit" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Source="{Binding Oimg}"/>
+                                        <Image Aspect="AspectFit" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Source="receive.png" IsVisible="{Binding Oreceive}"/>
+
+                                        <Label Text="{Binding Oproduct}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0"></Label>
+                                        <Label Text="{Binding Olocation}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="1"></Label>
+                                        <Label Text="{Binding Oaddress}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="2"></Label>
+                                        <Label Text="{Binding Ocreated_at}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="3"></Label>
+                                    </Grid>
+                                </ContentView>
+                                
+
+                                
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+
+                </AbsoluteLayout>
+            </ContentView>
 
 
 
-        <Image Source="construction.png" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+
+        </Grid>
 
 
     </ContentPage.Content>

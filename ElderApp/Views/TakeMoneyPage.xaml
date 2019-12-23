@@ -5,7 +5,7 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              xmlns:zx="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable"
-             BackgroundColor="#F6A723"
+             BackgroundColor="#FEA735"
              >
     
     <ContentPage.ToolbarItems>

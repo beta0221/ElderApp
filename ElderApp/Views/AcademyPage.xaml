@@ -12,12 +12,12 @@
                 </ContentView>
                 
                 <ContentView Padding="12,12,12,0" HeightRequest="180">
-                    <Button Text="活動行事曆" BackgroundColor="#F6A723" TextColor="White"
+                    <Button Text="活動行事曆" BackgroundColor="#FEA735" TextColor="White"
                             Command="{Binding Events}"/>
                 </ContentView>
                 
                 <ContentView Padding="12,12,12,0" HeightRequest="180">
-                    <Button Text="我的活動" BackgroundColor="#F6A723" TextColor="White"
+                    <Button Text="我的活動" BackgroundColor="#FEA735" TextColor="White"
                             Command="{Binding My_events}"/>
                 </ContentView>
             </StackLayout>

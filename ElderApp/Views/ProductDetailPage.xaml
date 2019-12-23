@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElderApp.Views.ProductDetailPage"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+        <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <ScrollView Grid.Column="0" Grid.Row="0">
+                <StackLayout>
+                    <Image HeightRequest="240" Source="{Binding SelectProduct.Image_Url}"></Image>
+                    <Label Margin="8,4" HeightRequest="56" Text="{Binding SelectProduct.Pname}"></Label>
+                    <Label Margin="8,4" HeightRequest="56" Text="{Binding SelectProduct.Pprice}"></Label>
+                    <Label Margin="8,4" HeightRequest="56" Text="兌換據點："></Label>
+
+                    <ContentView Margin="8,4" HeightRequest="{Binding LocationViewHeight,Mode=TwoWay}">
+                        <ListView
+                              SeparatorVisibility="None"
+                              IsPullToRefreshEnabled="False"
+                              RowHeight="56"
+                              ItemsSource="{Binding Locations,Mode=TwoWay}"
+                              SelectedItem="{Binding SelectLocationDetail,Mode=TwoWay}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0" Text="{Binding name}"/>
+                                            <Label HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0" Text="詳細資訊"/>
+                                        </Grid>
+                                        
+                                        
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ContentView>
+                    <Picker HeightRequest="56" Title="選擇兌換據點" BackgroundColor="#ffffff" Margin="8,4"
+                                ItemsSource="{Binding Locations}"
+                                ItemDisplayBinding="{Binding name}"
+                                SelectedItem="{Binding SelectLocation}"
+                                />
+
+                    <Label Margin="8,4" HeightRequest="56" Text="商品資訊："></Label>
+                    <Label Margin="8,4,8,56" Text="{Binding SelectProduct.info}"></Label>
+                </StackLayout>
+            </ScrollView>
+
+            <Button Text="確定兌換" BackgroundColor="#FE7235" TextColor="White"
+                    Grid.Column="0" Grid.Row="1" Command="{Binding Purchase}">
+            </Button>
+
+
+        </Grid>
+
+        <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                 BackgroundColor="Black" Opacity="0.5" IsVisible="{Binding IsLocationVisable,Mode=TwoWay}">
+        </BoxView>
+        <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5,.5,.8,.4"
+                     IsVisible="{Binding IsLocationVisable,Mode=TwoWay}">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <BoxView Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" BackgroundColor="White" CornerRadius="4"></BoxView>
+                <Label VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0" Text="{Binding Lname,Mode=TwoWay}"/>
+                <Label VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="1" Text="{Binding Laddress,Mode=TwoWay}"/>
+                <Button Grid.Column="0" Grid.Row="2" Text="地圖連結" Command="{Binding ShowOnMap}"/>
+                <Button Grid.Column="0" Grid.Row="3" Text="關閉" Command="{Binding HideLocationDetail}"/>
+            </Grid>
+        </ContentView>
+
+
+        </AbsoluteLayout>
+
+    </ContentPage.Content>
+</ContentPage>
