@@ -46,8 +46,7 @@ namespace ElderApp.ViewModels
                         IsScanning = false;
 
                         var paremeter = new NavigationParameters();
-                        //paremeter.Add("Id", Result.Text);
-                        paremeter.Add("Id", "H190815327");
+                        paremeter.Add("Id", Result.Text);
 
                         //await _navigationService.NavigateAsync("/NavigationPage/GiveMoneyPage", paremeter);
 
