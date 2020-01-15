@@ -19,7 +19,7 @@ using ImageCircle.Forms.Plugin.Droid;
 namespace ElderApp.Droid
 {
 
-    [Activity(Label = "ElderApp", Icon = "@mipmap/app", Theme = "@style/MyTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "銀髮學院", Icon = "@mipmap/app", Theme = "@style/MyTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
 
