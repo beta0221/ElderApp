@@ -13,6 +13,19 @@ namespace ElderApp.Models
         public object created_at { get; set; }
         public object updated_at { get; set; }
 
+        private int _quantity;
+        public int quantity {
+            get {
+                return _quantity;
+            }
+            set {
+                _quantity = value;
+                Qname = $"{name}(數量:{value})";
+            }
+        }
+
+        public string Qname { get; set; }
+
         public string Lname {
             get
             {

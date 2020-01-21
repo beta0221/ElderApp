@@ -39,7 +39,7 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
-                                            <Label VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0" Text="{Binding name}"/>
+                                            <Label VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0" Text="{Binding Qname}"/>
                                             <Label HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0" Text="詳細資訊"/>
                                         </Grid>
                                         

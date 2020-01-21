@@ -41,7 +41,7 @@ namespace ElderApp.ViewModels
             }
         }
 
-        private Dictionary<int,Boolean> LocationDic { get; set; }
+        private Dictionary<int,int> LocationDic { get; set; }
 
         private ObservableCollection<Location> locations { get; set; }
         public ObservableCollection<Location> Locations
@@ -92,7 +92,7 @@ namespace ElderApp.ViewModels
                     var res = response.Item2;
                     foreach (var item in res)
                     {
-                        LocationDic.Add(item.location_id, true);
+                        LocationDic.Add(item.location_id, item.quantity);
                     }
                     GetAllLocation();
                     break;
@@ -114,6 +114,7 @@ namespace ElderApp.ViewModels
                     {
                         if (LocationDic.ContainsKey(item.id))
                         {
+                            item.quantity = LocationDic[item.id];
                             Locations.Add(item);
                             LocationViewHeight += 56;
                         }
@@ -123,6 +124,17 @@ namespace ElderApp.ViewModels
                 case 3:
                     break;
             }
+        }
+
+        private void ReloadQuantity()
+        {
+            var newLocations = new ObservableCollection<Location>();
+            foreach(var item in Locations)
+            {
+                item.quantity = LocationDic[item.id];
+                newLocations.Add(item);
+            }
+            Locations = newLocations;
         }
 
         public ICommand Purchase { get; set; }
@@ -172,7 +184,7 @@ namespace ElderApp.ViewModels
         {
             _navigationService = navigationService;
             service = new ApiServices();
-            LocationDic = new Dictionary<int, bool>();
+            LocationDic = new Dictionary<int, int>();
             Locations = new ObservableCollection<Location>();
             LocationViewHeight = 0;
 
@@ -211,25 +223,33 @@ namespace ElderApp.ViewModels
             }
             else
             {
-                var response = await service.PurchaseProduct(SelectLocation.id, SelectProduct.slug);
-                switch (response.Item1)
+                var result = await App.Current.MainPage.DisplayAlert("確定兌換", SelectProduct.name, "是", "否");
+                if (result == true)
                 {
-                    case 1:
-                        var res = response.Item2;
-                        if (res != "success")
-                        {
-                            await App.Current.MainPage.DisplayAlert("訊息", res, "確定");
-                        }
-                        else
-                        {
-                            await App.Current.MainPage.DisplayAlert("訊息", "兌換成功", "確定");
-                        }
-                        break;
-                    case 2:
-                    case 3:
-                        await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤", "確定");
-                        break;
+                    var response = await service.PurchaseProduct(SelectLocation.id, SelectProduct.slug);
+                    switch (response.Item1)
+                    {
+                        case 1:
+                            var res = response.Item2;
+                            if (res != "success")
+                            {
+                                await App.Current.MainPage.DisplayAlert("訊息", res, "確定");
+                            }
+                            else
+                            {
+                                await App.Current.MainPage.DisplayAlert("訊息", "兌換成功", "確定");
+                                var q = LocationDic[SelectLocation.id];
+                                q--;
+                                LocationDic[SelectLocation.id] = q;
+                                ReloadQuantity();
+                            }
+                            break;
+                        case 2:
+                        case 3:
+                            await App.Current.MainPage.DisplayAlert("錯誤", "系統錯誤", "確定");
+                            break;
 
+                    }
                 }
             }
             
